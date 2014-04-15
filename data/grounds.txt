@@ -1,0 +1,15 @@
+stadium;city;address;capacity;length;width
+Melbourne Cricket Ground;Melbourne;Yarra Park, Jolimont, Vic, 3002; 100021;160;141
+Etihad Stadium;Melbourne;740 Bourke St, Docklands, Vic, 3008;53355;159.5;128.8
+Skilled Stadium;Geelong;La Trobe Terrace, Geelong, Vic;28300;170;115
+Sydney Cricket Ground;Sydney;Driver Avenue, Moore Park, NSW, 2021;43386;149;136
+ANZ Stadium;Sydney; Olympic Boulevard, Sydney Olympic Park, NSW, 2140;81000;160;118
+Skoka Stadium;Sydney;Showground Road, Sydney Olympic Park, NSW, 2140;25000;164;123
+Blacktown International Sportspark;Sydney;Eastern Road, Rooty Hill, NSW, 2766;10000;NA;NA
+AAMI Stadium;Adelaide;Turner Dve, West Lakes, SA 5021;51515;165;133
+Patersons Stadium;Perth;Subiaco Road, Subiaco, WA, 6904;42885;175.6;122.4
+Gabba;Brisbane;Brisbane Cricket Ground, Vulture Street, Woolloongabba, QLD, 4105;41000;156;138
+Metricon Stadium;Carrara;Nerang-Broadbeach Road, Carrara, Gold Coast, QLD, 4211;25000;160;134
+Manuka Oval;Canberra;Manuka Circle, Griffith, ACT, 2603;14000;162.5;138.4
+Aurora Stadium;Launceston;Launceston, TAS, 7250;21000;165;135
+TIO Stadium;Darwin;Darwin, NT;17000;175;135
