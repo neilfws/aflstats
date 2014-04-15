@@ -19,10 +19,10 @@ for(team in teams) {
   team.games$Percent  <- allGamesPercent(team.games)
   team.games$Convert  <- allGamesConversion(team.games)
   team.games$Finals   <- allGamesFinals(team.games)
+  team.games <- team.games[order(team.games$date, decreasing = T),]
   save(team.games, file = paste("data/", team, ".RData", sep = ""))
   
   team.games$Finals   <- ifelse(team.games$Finals > 0, 1, 0)
-  team.games <- team.games[order(team.games$date, decreasing = T),]
   team.games <- allGamesHalfWay(team.games)
   team.games <- subset(team.games, Year > 1981)
 
