@@ -28,7 +28,7 @@ for(team in teams) {
   team.games <- subset(team.games, Year > 1981)
 
   if(nrow(team.games) > 0) {
-    pdf(file = paste("data/", team, ".pdf", sep = ""), width = 11, height = 8)
+    pdf(file = paste("output/", team, ".pdf", sep = ""), width = 11, height = 8)
     team.title <- paste("Half-way Percentage 1982-2014: ", team, sep = "")
     print(ggplot(team.games) + geom_boxplot(aes(factor(Year), Percent, fill = factor(Finals))) 
           + theme_bw() + geom_hline(yintercept = median(team.games$Percent), color = "red") 
