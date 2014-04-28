@@ -1,5 +1,6 @@
 setwd("~/Dropbox/projects/aflstats/")
 source("code/R/afltables.R")
+require(ggplot2)
 
 # university 1908-1914
 # and yes it is "bullldogs" with 3x "l"
