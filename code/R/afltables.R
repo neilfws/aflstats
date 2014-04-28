@@ -71,12 +71,18 @@ allGamesFinals <- function(games) {
 # sample the first half of the season
 allGamesHalfWay <- function(games) {
   require(plyr)
-  halfway <- list()
-  years   <- unique(games$Year)
+  halfway  <- list()
+  year.now <- 1900 + as.POSIXlt(Sys.time())$year
+  years    <- unique(games$Year)
   for(i in 1:length(years)) {
     y <- subset(games, Year == years[i])
     y <- y[grep("^R", y$Rnd), ]
-    n <- round(nrow(y) / 2)
+    if(years[i] < year.now) {
+      n <- round(nrow(y) / 2)
+    }
+    else {
+      n <- nrow(y)
+    }
     halfway[[i]] <- tail(y, n)
   }
   halfway <- do.call(rbind, halfway)
