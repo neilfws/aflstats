@@ -3,6 +3,10 @@ allGames <- function(team) {
   require(XML)
   require(plyr)
   games <- readHTMLTable(paste("http://afltables.com/afl/teams/", team, "/allgames.html", sep = ""))
+  # fix for 2 "Scoring" columns
+  for(i in 1:length(games)) {
+    colnames(games[[i]])[c(4,6)] <- c("Scoring.F", "Scoring.A")
+    }
   games <- ldply(games, rbind)
   games$.id <- NULL
   games$F <- as.numeric(as.character(games$F))
@@ -33,14 +37,14 @@ allGamesYear <- function(games) {
 
 # Goals
 allGamesGoals <- function(games) {
-  final <- sapply(strsplit(as.character(games$Scoring), " "), function(x) x[[4]])
+  final <- sapply(strsplit(as.character(games$Scoring.F), " "), function(x) x[[4]])
   goals <- sapply(strsplit(final, "\\."), function(x) x[1])
   return(as.numeric(goals))
 }
 
 # Behinds
 allGamesBehinds <- function(games) {
-  final   <- sapply(strsplit(as.character(games$Scoring), " "), function(x) x[[4]])
+  final   <- sapply(strsplit(as.character(games$Scoring.F), " "), function(x) x[[4]])
   behinds <- sapply(strsplit(final, "\\."), function(x) x[2])
   return(as.numeric(behinds))
 }
