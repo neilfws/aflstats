@@ -92,3 +92,13 @@ allGamesHalfWay <- function(games) {
   halfway <- do.call(rbind, halfway)
   return(halfway)
 }
+
+# get the total score for or against for a quarter
+allGamesQuarterScore <- function(games, quarter = 4, who = "Scoring.F") {
+  stopifnot(who == "Scoring.F" || who == "Scoring.A")
+  score    <- games[[who]]
+  quarters <- strsplit(as.character(score), " ")
+  qchoose  <- sapply(quarters, function(x) x[quarter])
+  total    <- sapply(strsplit(qchoose, "\\."), function(x) 6 * as.numeric(x[1]) + as.numeric(x[2]))
+  return(total)
+}
