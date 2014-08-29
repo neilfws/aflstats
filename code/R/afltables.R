@@ -2,16 +2,16 @@
 allGames <- function(team) {
   require(XML)
   require(plyr)
-  games <- readHTMLTable(paste("http://afltables.com/afl/teams/", team, "/allgames.html", sep = ""))
+  games <- readHTMLTable(paste("http://afltables.com/afl/teams/", team, "/allgames.html", sep = ""), stringsAsFactors = FALSE)
   # fix for 2 "Scoring" columns
   for(i in 1:length(games)) {
     colnames(games[[i]])[c(4,6)] <- c("Scoring.F", "Scoring.A")
     }
   games <- ldply(games, rbind)
   games$.id <- NULL
-  games$F <- as.numeric(as.character(games$F))
-  games$A <- as.numeric(as.character(games$A))
-  games$Crowd <- as.numeric(as.character(games$Crowd))
+  games$F <- as.numeric(games$F)
+  games$A <- as.numeric(games$A)
+  games$Crowd <- as.numeric(games$Crowd)
   return(games)
 }
 
@@ -37,14 +37,14 @@ allGamesYear <- function(games) {
 
 # Goals
 allGamesGoals <- function(games) {
-  final <- sapply(strsplit(as.character(games$Scoring.F), " "), function(x) x[[4]])
+  final <- sapply(strsplit(games$Scoring.F, " "), function(x) x[[4]])
   goals <- sapply(strsplit(final, "\\."), function(x) x[1])
   return(as.numeric(goals))
 }
 
 # Behinds
 allGamesBehinds <- function(games) {
-  final   <- sapply(strsplit(as.character(games$Scoring.F), " "), function(x) x[[4]])
+  final   <- sapply(strsplit(games$Scoring.F, " "), function(x) x[[4]])
   behinds <- sapply(strsplit(final, "\\."), function(x) x[2])
   return(as.numeric(behinds))
 }
@@ -97,7 +97,7 @@ allGamesHalfWay <- function(games) {
 allGamesQuarterScore <- function(games, quarter = 4, who = "Scoring.F") {
   stopifnot(who == "Scoring.F" || who == "Scoring.A")
   score    <- games[[who]]
-  quarters <- strsplit(as.character(score), " ")
+  quarters <- strsplit(score, " ")
   qchoose  <- sapply(quarters, function(x) x[quarter])
   total    <- sapply(strsplit(qchoose, "\\."), function(x) 6 * as.numeric(x[1]) + as.numeric(x[2]))
   return(total)
