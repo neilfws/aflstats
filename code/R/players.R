@@ -8,6 +8,8 @@ setwd("~/Dropbox/projects/aflstats/")
 getDOB <- function(u) {
   p <- htmlTreeParse(u, useInternalNodes = TRUE)
   d <- str_match(xpathSApply(p, "//body", xmlValue), "Born:(.*?) ")[,2]
+  # sleep for multiple requests
+  Sys.sleep(3)
   return(d)
 }
 
