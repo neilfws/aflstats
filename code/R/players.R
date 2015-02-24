@@ -25,7 +25,6 @@ players <- xpathSApply(doc, "//a[@href]", xmlAttrs)
 players <- ldply(players, rbind)
 players <- players[grep("players", players$href), ]
 baseurl <- "http://afltables.com/afl/stats"
-p1 <- htmlTreeParse(paste(baseurl, players$href[1], sep = "/"), useInternalNodes = TRUE)
 players$target <- paste(baseurl, players$href, sep = "/")
 players$dob <- sapply(players$target, function(x) getDOB(x))
 players.2014.df <- ldply(players.2014, rbind)
