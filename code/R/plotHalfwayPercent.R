@@ -24,6 +24,8 @@ for(team in teams) {
   save(team.games, file = paste("data/", team, ".RData", sep = ""))
   
   team.games$Finals   <- ifelse(team.games$Finals > 0, 1, 0)
+  # fix for never finals (all NA)
+  team.games$Finals   <- ifelse(is.na(team.games$Finals), 0, team.games$Finals)
   team.games <- allGamesHalfWay(team.games)
   team.games <- subset(team.games, Year > 1981)
 
