@@ -85,7 +85,7 @@ allGamesHalfWay <- function(games) {
       n <- round(nrow(y) / 2)
     }
     else {
-      n <- nrow(y)
+      n <- 11
     }
     halfway[[i]] <- tail(y, n)
   }
