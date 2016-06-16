@@ -17,7 +17,7 @@ allGames <- function(team) {
 
 # convert game date to POSIXlt/POSIXt class
 allGamesDateTime <- function(games) {
-  datetime <- strptime(games$Date, format = "%d-%b-%Y %I:%M %p")
+  datetime <- strptime(games$Date, format = "%a,%d-%b-%Y %I:%M %p")
   return(datetime)
 }
 
