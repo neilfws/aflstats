@@ -13,6 +13,14 @@ getDOB <- function(u) {
   return(d)
 }
 
+getHeight <- function(u) {
+  p <- htmlTreeParse(u, useInternalNodes = TRUE)
+  d <- str_match(xpathSApply(p, "//body", xmlValue), "Height:(.*?) ")[,2]
+  # sleep for multiple requests
+  Sys.sleep(2)
+  return(d)
+}
+
 getAges <- function(year) {
   players.y <- readHTMLTable(paste("http://afltables.com/afl/stats/", year, ".html", sep = ""))
   players.y <- players.y[2:19]
@@ -28,9 +36,11 @@ getAges <- function(year) {
   baseurl <- "http://afltables.com/afl/stats"
   players$target <- paste(baseurl, players$href, sep = "/")
   players$dob <- sapply(players$target, function(x) getDOB(x))
+  players$ht <- sapply(players$target, function(x) getHeight(x))
   players.y.df <- ldply(players.y, rbind)
   players$age <- as.Date(Sys.Date(), "%Y-%m-%d") - as.Date(players$dob, "%e-%b-%Y")
   players.y.df$age <- as.numeric(players$age)
+  players.y.df$ht <- as.numeric(players$ht)
   return(players.y.df)
 }
 
