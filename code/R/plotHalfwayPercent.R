@@ -31,10 +31,10 @@ for(team in teams) {
 
   if(nrow(team.games) > 0) {
     pdf(file = paste("output/", team, ".pdf", sep = ""), width = 11, height = 8)
-    team.title <- paste("Half-way Percentage 1982-2014: ", team, sep = "")
+    team.title <- paste("Half-way Percentage 1982-2016: ", team, sep = "")
     print(ggplot(team.games) + geom_boxplot(aes(factor(Year), Percent, fill = factor(Finals))) 
           + theme_bw() + geom_hline(yintercept = median(team.games$Percent), color = "red") 
-          + scale_x_discrete(breaks = seq(1982, 2014, by = 2)) 
+          + scale_x_discrete(breaks = seq(1982, 2016, by = 2)) 
           + labs(title = team.title) + xlab("Year")
           + scale_fill_manual(name = "Finals", labels = c("no", "yes"), values = c("orange", "skyblue")))
     dev.off()
