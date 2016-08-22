@@ -50,5 +50,5 @@ png(file = "output/playerAges.png", width = 800, height = 760)
 ggplot(players) + geom_violin(aes(reorder(team, age, median), age/365), fill = "darkorange", linetype = 0) +
   theme_bw() + ylab("Current players age (years)") +
   theme(axis.text.x = element_text(angle = 90)) +
-  labs(title = ("Player age distribution by team 2016 sorted by median age"), x = "Team") + geom_hline(yintercept = median(players$age/365), linetype = "dashed") + stat_summary(aes(team, as.numeric(age) / 365), fun.y = "median", geom = "point")
+  labs(title = ("2016 AFL senior players age distribution sorted by median age"), x = "Team") + geom_hline(yintercept = median(players$age/365), linetype = "dashed") + stat_summary(aes(team, as.numeric(age) / 365), fun.y = "median", geom = "point")
 dev.off()
