@@ -5,7 +5,7 @@ This repository contains code to analyse AFL data from a number of online source
 The repository is currently a bit of a mess; reorganisation is on my to-do list. Here's a brief description of the files currently in `code/R`.
 
 1. afl_members.R - plots membership number using data from [this site](http://www.aflmembershipnumbers.com/index.html)
-2. aflblues.R - plots Carlton's percentage by season under Ratten and Malthouse (to do: Bolton)
+2. aflblues.R - plots Carlton's percentage by season under different coaches
 3. afltables.R - functions for getting data from afltables.com into data frames
 4. clubpayments.R - plots club payments using data extracted from the AFL 2013 report
 5. players.R - plots age distribution of players in a given season (currently 2014)
