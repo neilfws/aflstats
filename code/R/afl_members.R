@@ -4,7 +4,7 @@ library(plyr)
 library(directlabels)
 library(RColorBrewer)
 
-setwd("~/Dropbox/projects/aflstats/")
+setwd("~/Dropbox/projects/github_projects/aflstats/")
 u <- "http://www.aflmembershipnumbers.com/index.html"
 doc <- htmlTreeParse(u, useInternalNodes = TRUE)
 teams <- data.frame(team = xpathSApply(doc, "//a[@href]", xmlValue),
