@@ -1,0 +1,628 @@
+Club,Year,Members
+Adelaide,2016,63920
+Brisbane,2016,23262
+Carlton,2016,50202
+Collingwood,2016,55000
+Essendon,2016,55428
+Fitzroy,2016,NA
+Fremantle,2016,51639
+Geelong,2016,52040
+Gold Coast,2016,12853
+Greater Western Sydney,2016,15311
+Hawthorn,2016,75352
+Melbourne,2016,39211
+North Melbourne,2016,45105
+Port Adelaide,2016,60000
+Richmond,2016,72330
+St Kilda,2016,38067
+Sydney,2016,56523
+West Coast,2016,65253
+Western Bulldogs,2016,40032
+Adelaide,2015,52920
+Brisbane,2015,25408
+Carlton,2015,47305
+Collingwood,2015,75037
+Essendon,2015,60818
+Fitzroy,2015,NA
+Fremantle,2015,51433
+Geelong,2015,44312
+Gold Coast,2015,13643
+Greater Western Sydney,2015,13480
+Hawthorn,2015,72924
+Melbourne,2015,35953
+North Melbourne,2015,41012
+Port Adelaide,2015,54057
+Richmond,2015,70809
+St Kilda,2015,32746
+Sydney,2015,48836
+West Coast,2015,60221
+Western Bulldogs,2015,35222
+Adelaide,2014,54249
+Brisbane,2014,24012
+Carlton,2014,47485
+Collingwood,2014,79347
+Essendon,2014,60626
+Fitzroy,2014,NA
+Fremantle,2014,48777
+Geelong,2014,43803
+Gold Coast,2014,13478
+Greater Western Sydney,2014,13040
+Hawthorn,2014,68650
+Melbourne,2014,35911
+North Melbourne,2014,39060
+Port Adelaide,2014,48968
+Richmond,2014,66122
+St Kilda,2014,30739
+Sydney,2014,40126
+West Coast,2014,58529
+Western Bulldogs,2014,31538
+Adelaide,2013,46405
+Brisbane,2013,24130
+Carlton,2013,50564
+Collingwood,2013,78427
+Essendon,2013,56173
+Fitzroy,2013,NA
+Fremantle,2013,43880
+Geelong,2013,42884
+Gold Coast,2013,12502
+Greater Western Sydney,2013,12681
+Hawthorn,2013,63353
+Melbourne,2013,33177
+North Melbourne,2013,34607
+Port Adelaide,2013,39838
+Richmond,2013,60321
+St Kilda,2013,32707
+Sydney,2013,36358
+West Coast,2013,58501
+Western Bulldogs,2013,30209
+Adelaide,2012,46005
+Brisbane,2012,20762
+Carlton,2012,45440
+Collingwood,2012,72688
+Essendon,2012,47708
+Fitzroy,2012,NA
+Fremantle,2012,42918
+Geelong,2012,40205
+Gold Coast,2012,11204
+Greater Western Sydney,2012,10241
+Hawthorn,2012,60841
+Melbourne,2012,35459
+North Melbourne,2012,33423
+Port Adelaide,2012,35543
+Richmond,2012,53027
+St Kilda,2012,35440
+Sydney,2012,29873
+West Coast,2012,57377
+Western Bulldogs,2012,30007
+Adelaide,2011,46520
+Brisbane,2011,22338
+Carlton,2011,43971
+Collingwood,2011,71796
+Essendon,2011,50275
+Fitzroy,2011,NA
+Fremantle,2011,43975
+Geelong,2011,39426
+Gold Coast,2011,11270
+Greater Western Sydney,2011,NA
+Hawthorn,2011,59142
+Melbourne,2011,36937
+North Melbourne,2011,29914
+Port Adelaide,2011,36624
+Richmond,2011,47655
+St Kilda,2011,39276
+Sydney,2011,34679
+West Coast,2011,54040
+Western Bulldogs,2011,32026
+Adelaide,2010,45515
+Brisbane,2010,26779
+Carlton,2010,40480
+Collingwood,2010,48408
+Essendon,2010,40589
+Fitzroy,2010,NA
+Fremantle,2010,39854
+Geelong,2010,40326
+Gold Coast,2010,NA
+Greater Western Sydney,2010,NA
+Hawthorn,2010,53978
+Melbourne,2010,33358
+North Melbourne,2010,26953
+Port Adelaide,2010,29092
+Richmond,2010,32960
+St Kilda,2010,39021
+Sydney,2010,28671
+West Coast,2010,44160
+Western Bulldogs,2010,32077
+Adelaide,2009,46472
+Brisbane,2009,24873
+Carlton,2009,42408
+Collingwood,2009,45972
+Essendon,2009,40412
+Fitzroy,2009,NA
+Fremantle,2009,39206
+Geelong,2009,37160
+Gold Coast,2009,NA
+Greater Western Sydney,2009,NA
+Hawthorn,2009,52496
+Melbourne,2009,31506
+North Melbourne,2009,28340
+Port Adelaide,2009,30605
+Richmond,2009,36981
+St Kilda,2009,31906
+Sydney,2009,26269
+West Coast,2009,43927
+Western Bulldogs,2009,28215
+Adelaide,2008,48720
+Brisbane,2008,22737
+Carlton,2008,39360
+Collingwood,2008,42498
+Essendon,2008,41947
+Fitzroy,2008,NA
+Fremantle,2008,43366
+Geelong,2008,36850
+Gold Coast,2008,NA
+Greater Western Sydney,2008,NA
+Hawthorn,2008,41436
+Melbourne,2008,29619
+North Melbourne,2008,32600
+Port Adelaide,2008,34185
+Richmond,2008,30820
+St Kilda,2008,30063
+Sydney,2008,26721
+West Coast,2008,44863
+Western Bulldogs,2008,28306
+Adelaide,2007,50976
+Brisbane,2007,21976
+Carlton,2007,35431
+Collingwood,2007,38587
+Essendon,2007,32759
+Fitzroy,2007,NA
+Fremantle,2007,43343
+Geelong,2007,30169
+Gold Coast,2007,NA
+Greater Western Sydney,2007,NA
+Hawthorn,2007,31064
+Melbourne,2007,27777
+North Melbourne,2007,22366
+Port Adelaide,2007,34073
+Richmond,2007,30044
+St Kilda,2007,30394
+Sydney,2007,28764
+West Coast,2007,45949
+Western Bulldogs,2007,28725
+Adelaide,2006,50138
+Brisbane,2006,26459
+Carlton,2006,28756
+Collingwood,2006,38038
+Essendon,2006,32511
+Fitzroy,2006,NA
+Fremantle,2006,35666
+Geelong,2006,32290
+Gold Coast,2006,NA
+Greater Western Sydney,2006,NA
+Hawthorn,2006,28003
+Melbourne,2006,24698
+North Melbourne,2006,24624
+Port Adelaide,2006,35648
+Richmond,2006,29406
+St Kilda,2006,32327
+Sydney,2006,30382
+West Coast,2006,44138
+Western Bulldogs,2006,26042
+Adelaide,2005,43256
+Brisbane,2005,28913
+Carlton,2005,33534
+Collingwood,2005,38612
+Essendon,2005,32734
+Fitzroy,2005,NA
+Fremantle,2005,34178
+Geelong,2005,30821
+Gold Coast,2005,NA
+Greater Western Sydney,2005,NA
+Hawthorn,2005,29261
+Melbourne,2005,24805
+North Melbourne,2005,24154
+Port Adelaide,2005,36834
+Richmond,2005,28029
+St Kilda,2005,32043
+Sydney,2005,24955
+West Coast,2005,42406
+Western Bulldogs,2005,21974
+Adelaide,2004,45642
+Brisbane,2004,30221
+Carlton,2004,32095
+Collingwood,2004,41128
+Essendon,2004,32998
+Fitzroy,2004,NA
+Fremantle,2004,32780
+Geelong,2004,25021
+Gold Coast,2004,NA
+Greater Western Sydney,2004,NA
+Hawthorn,2004,31255
+Melbourne,2004,20647
+North Melbourne,2004,23420
+Port Adelaide,2004,36340
+Richmond,2004,27133
+St Kilda,2004,30534
+Sydney,2004,25010
+West Coast,2004,40792
+Western Bulldogs,2004,19295
+Adelaide,2003,47097
+Brisbane,2003,24365
+Carlton,2003,33525
+Collingwood,2003,40455
+Essendon,2003,31970
+Fitzroy,2003,NA
+Fremantle,2003,25368
+Geelong,2003,24017
+Gold Coast,2003,NA
+Greater Western Sydney,2003,NA
+Hawthorn,2003,31500
+Melbourne,2003,20555
+North Melbourne,2003,21403
+Port Adelaide,2003,35425
+Richmond,2003,25101
+St Kilda,2003,23626
+Sydney,2003,21270
+West Coast,2003,36234
+Western Bulldogs,2003,21260
+Adelaide,2002,46620
+Brisbane,2002,22288
+Carlton,2002,26385
+Collingwood,2002,32549
+Essendon,2002,35219
+Fitzroy,2002,NA
+Fremantle,2002,23775
+Geelong,2002,23756
+Gold Coast,2002,NA
+Greater Western Sydney,2002,NA
+Hawthorn,2002,33319
+Melbourne,2002,20152
+North Melbourne,2002,20831
+Port Adelaide,2002,36229
+Richmond,2002,27251
+St Kilda,2002,17696
+Sydney,2002,27755
+West Coast,2002,34880
+Western Bulldogs,2002,20838
+Adelaide,2001,42014
+Brisbane,2001,18330
+Carlton,2001,27725
+Collingwood,2001,31455
+Essendon,2001,36227
+Fitzroy,2001,NA
+Fremantle,2001,23898
+Geelong,2001,25420
+Gold Coast,2001,NA
+Greater Western Sydney,2001,NA
+Hawthorn,2001,30140
+Melbourne,2001,21409
+North Melbourne,2001,22940
+Port Adelaide,2001,33296
+Richmond,2001,26501
+St Kilda,2001,22248
+Sydney,2001,28022
+West Coast,2001,38649
+Western Bulldogs,2001,19085
+Adelaide,2000,42896
+Brisbane,2000,20295
+Carlton,2000,27571
+Collingwood,2000,28932
+Essendon,2000,34278
+Fitzroy,2000,NA
+Fremantle,2000,24925
+Geelong,2000,25595
+Gold Coast,2000,NA
+Greater Western Sydney,2000,NA
+Hawthorn,2000,26879
+Melbourne,2000,18227
+North Melbourne,2000,22156
+Port Adelaide,2000,34925
+Richmond,2000,26869
+St Kilda,2000,17855
+Sydney,2000,30177
+West Coast,2000,38868
+Western Bulldogs,2000,18056
+Adelaide,1999,42120
+Brisbane,1999,16931
+Carlton,1999,25719
+Collingwood,1999,32358
+Essendon,1999,29858
+Fitzroy,1999,NA
+Fremantle,1999,24896
+Geelong,1999,21032
+Gold Coast,1999,NA
+Greater Western Sydney,1999,NA
+Hawthorn,1999,32120
+Melbourne,1999,19713
+North Melbourne,1999,22080
+Port Adelaide,1999,37166
+Richmond,1999,29047
+St Kilda,1999,20793
+Sydney,1999,31175
+West Coast,1999,36212
+Western Bulldogs,1999,20491
+Adelaide,1998,41985
+Brisbane,1998,16108
+Carlton,1998,25402
+Collingwood,1998,27099
+Essendon,1998,27099
+Fitzroy,1998,NA
+Fremantle,1998,22186
+Geelong,1998,19971
+Gold Coast,1998,NA
+Greater Western Sydney,1998,NA
+Hawthorn,1998,27649
+Melbourne,1998,17870
+North Melbourne,1998,20196
+Port Adelaide,1998,38305
+Richmond,1998,27092
+St Kilda,1998,23204
+Sydney,1998,31089
+West Coast,1998,37496
+Western Bulldogs,1998,20064
+Adelaide,1997,41395
+Brisbane,1997,16769
+Carlton,1997,24984
+Collingwood,1997,22761
+Essendon,1997,28063
+Fitzroy,1997,NA
+Fremantle,1997,19949
+Geelong,1997,18858
+Gold Coast,1997,NA
+Greater Western Sydney,1997,NA
+Hawthorn,1997,27005
+Melbourne,1997,15336
+North Melbourne,1997,19368
+Port Adelaide,1997,35809
+Richmond,1997,24975
+St Kilda,1997,16610
+Sydney,1997,22109
+West Coast,1997,33286
+Western Bulldogs,1997,15054
+Adelaide,1996,42283
+Brisbane,1996,10267
+Carlton,1996,23276
+Collingwood,1996,20752
+Essendon,1996,24324
+Fitzroy,1996,7268
+Fremantle,1996,19622
+Geelong,1996,17346
+Gold Coast,1996,NA
+Greater Western Sydney,1996,NA
+Hawthorn,1996,12484
+Melbourne,1996,12964
+North Melbourne,1996,14438
+Port Adelaide,1996,NA
+Richmond,1996,20308
+St Kilda,1996,14375
+Sydney,1996,9525
+West Coast,1996,26663
+Western Bulldogs,1996,10650
+Adelaide,1995,41645
+Brisbane,1995,6158
+Carlton,1995,18308
+Collingwood,1995,20843
+Essendon,1995,19720
+Fitzroy,1995,8086
+Fremantle,1995,18456
+Geelong,1995,15922
+Gold Coast,1995,NA
+Greater Western Sydney,1995,NA
+Hawthorn,1995,12728
+Melbourne,1995,9544
+North Melbourne,1995,14027
+Port Adelaide,1995,NA
+Richmond,1995,14647
+St Kilda,1995,8870
+Sydney,1995,6088
+West Coast,1995,26821
+Western Bulldogs,1995,12212
+Adelaide,1994,40611
+Brisbane,1994,6158
+Carlton,1994,18308
+Collingwood,1994,20843
+Essendon,1994,19720
+Fitzroy,1994,8164
+Fremantle,1994,NA
+Geelong,1994,14312
+Gold Coast,1994,NA
+Greater Western Sydney,1994,NA
+Hawthorn,1994,11245
+Melbourne,1994,10648
+North Melbourne,1994,10296
+Port Adelaide,1994,NA
+Richmond,1994,8229
+St Kilda,1994,12009
+Sydney,1994,3327
+West Coast,1994,24265
+Western Bulldogs,1994,9339
+Adelaide,1993,40100
+Brisbane,1993,5750
+Carlton,1993,14445
+Collingwood,1993,21882
+Essendon,1993,11546
+Fitzroy,1993,6853
+Fremantle,1993,NA
+Geelong,1993,15500
+Gold Coast,1993,NA
+Greater Western Sydney,1993,NA
+Hawthorn,1993,11388
+Melbourne,1993,10097
+North Melbourne,1993,6851
+Port Adelaide,1993,NA
+Richmond,1993,9918
+St Kilda,1993,12956
+Sydney,1993,3097
+West Coast,1993,25779
+Western Bulldogs,1993,11478
+Adelaide,1992,38673
+Brisbane,1992,5401
+Carlton,1992,12354
+Collingwood,1992,18921
+Essendon,1992,10034
+Fitzroy,1992,5177
+Fremantle,1992,NA
+Geelong,1992,13535
+Gold Coast,1992,NA
+Greater Western Sydney,1992,NA
+Hawthorn,1992,12368
+Melbourne,1992,8681
+North Melbourne,1992,6083
+Port Adelaide,1992,NA
+Richmond,1992,8158
+St Kilda,1992,11650
+Sydney,1992,3020
+West Coast,1992,29302
+Western Bulldogs,1992,9311
+Adelaide,1991,NA
+Brisbane,1991,NA
+Carlton,1991,12736
+Collingwood,1991,18469
+Essendon,1991,11593
+Fitzroy,1991,NA
+Fremantle,1991,NA
+Geelong,1991,11356
+Gold Coast,1991,NA
+Greater Western Sydney,1991,NA
+Hawthorn,1991,10006
+Melbourne,1991,10153
+North Melbourne,1991,6683
+Port Adelaide,1991,NA
+Richmond,1991,NA
+St Kilda,1991,9785
+Sydney,1991,2907
+West Coast,1991,NA
+Western Bulldogs,1991,NA
+Adelaide,1990,NA
+Brisbane,1990,NA
+Carlton,1990,10978
+Collingwood,1990,14808
+Essendon,1990,11046
+Fitzroy,1990,NA
+Fremantle,1990,NA
+Geelong,1990,15087
+Gold Coast,1990,NA
+Greater Western Sydney,1990,NA
+Hawthorn,1990,9882
+Melbourne,1990,10111
+North Melbourne,1990,5201
+Port Adelaide,1990,NA
+Richmond,1990,NA
+St Kilda,1990,11361
+Sydney,1990,2624
+West Coast,1990,NA
+Western Bulldogs,1990,NA
+Adelaide,1989,NA
+Brisbane,1989,NA
+Carlton,1989,10060
+Collingwood,1989,13620
+Essendon,1989,7958
+Fitzroy,1989,NA
+Fremantle,1989,NA
+Geelong,1989,7760
+Gold Coast,1989,NA
+Greater Western Sydney,1989,NA
+Hawthorn,1989,8520
+Melbourne,1989,8184
+North Melbourne,1989,3411
+Port Adelaide,1989,NA
+Richmond,1989,NA
+St Kilda,1989,8360
+Sydney,1989,2631
+West Coast,1989,NA
+Western Bulldogs,1989,NA
+Adelaide,1988,NA
+Brisbane,1988,NA
+Carlton,1988,11936
+Collingwood,1988,11985
+Essendon,1988,8432
+Fitzroy,1988,NA
+Fremantle,1988,NA
+Geelong,1988,9667
+Gold Coast,1988,NA
+Greater Western Sydney,1988,NA
+Hawthorn,1988,7099
+Melbourne,1988,10078
+North Melbourne,1988,4415
+Port Adelaide,1988,NA
+Richmond,1988,NA
+St Kilda,1988,5799
+Sydney,1988,2516
+West Coast,1988,NA
+Western Bulldogs,1988,NA
+Adelaide,1987,NA
+Brisbane,1987,NA
+Carlton,1987,9227
+Collingwood,1987,9500
+Essendon,1987,8129
+Fitzroy,1987,NA
+Fremantle,1987,NA
+Geelong,1987,6981
+Gold Coast,1987,NA
+Greater Western Sydney,1987,NA
+Hawthorn,1987,6516
+Melbourne,1987,3122
+North Melbourne,1987,3430
+Port Adelaide,1987,NA
+Richmond,1987,NA
+St Kilda,1987,3924
+Sydney,1987,3594
+West Coast,1987,NA
+Western Bulldogs,1987,NA
+Adelaide,1986,NA
+Brisbane,1986,NA
+Carlton,1986,14905
+Collingwood,1986,13971
+Essendon,1986,12607
+Fitzroy,1986,NA
+Fremantle,1986,NA
+Geelong,1986,6985
+Gold Coast,1986,NA
+Greater Western Sydney,1986,NA
+Hawthorn,1986,7335
+Melbourne,1986,4511
+North Melbourne,1986,5318
+Port Adelaide,1986,NA
+Richmond,1986,NA
+St Kilda,1986,4321
+Sydney,1986,4927
+West Coast,1986,NA
+Western Bulldogs,1986,NA
+Adelaide,1985,NA
+Brisbane,1985,NA
+Carlton,1985,13317
+Collingwood,1985,16857
+Essendon,1985,11376
+Fitzroy,1985,NA
+Fremantle,1985,NA
+Geelong,1985,7718
+Gold Coast,1985,NA
+Greater Western Sydney,1985,NA
+Hawthorn,1985,7713
+Melbourne,1985,5801
+North Melbourne,1985,6520
+Port Adelaide,1985,NA
+Richmond,1985,NA
+St Kilda,1985,5708
+Sydney,1985,2777
+West Coast,1985,NA
+Western Bulldogs,1985,NA
+Adelaide,1984,NA
+Brisbane,1984,NA
+Carlton,1984,12774
+Collingwood,1984,16313
+Essendon,1984,10231
+Fitzroy,1984,NA
+Fremantle,1984,NA
+Geelong,1984,7709
+Gold Coast,1984,NA
+Greater Western Sydney,1984,NA
+Hawthorn,1984,8051
+Melbourne,1984,6297
+North Melbourne,1984,6374
+Port Adelaide,1984,NA
+Richmond,1984,NA
+St Kilda,1984,4930
+Sydney,1984,2750
+West Coast,1984,NA
+Western Bulldogs,1984,NA
