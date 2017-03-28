@@ -1,4 +1,4 @@
-source('~/Dropbox/projects/github_projects/aflstats/code/R/afltables.R')
+source('~/Dropbox/projects/github_projects/aflstats/code/R/scripts/afltables.R')
 
 blues         <- allGames("carlton")
 blues$Year    <- allGamesYear(blues)
