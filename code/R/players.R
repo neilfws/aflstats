@@ -3,7 +3,7 @@ library(stringr)
 library(plyr)
 library(XML)
 
-setwd("~/Dropbox/projects/aflstats/")
+setwd("~/Dropbox/projects/github_projects/aflstats/")
 
 getDOB <- function(u) {
   p <- htmlTreeParse(u, useInternalNodes = TRUE)
