@@ -4,7 +4,7 @@ library(RColorBrewer)
 library(scales)
 
 options(scipen = 10000)
-setwd("~/Dropbox/projects/aflstats")
+setwd("~/Dropbox/projects/github_projects/aflstats")
 
 # read and fix up the data
 club_payments_2013 <- read.delim("data/club_payments_2013.tsv", header=FALSE, dec=",")
