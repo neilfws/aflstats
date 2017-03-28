@@ -1,8 +1,10 @@
 ---
 title: "Sydney Swans versus the rest"
 author: "Neil Saunders"
-date: "24/02/2015"
-output: html_document
+date: "`r Sys.time()`"
+output: 
+  html_document: 
+    keep_md: yes
 ---
 
 ```{r echo=FALSE, ref.label="setup", message=FALSE}
@@ -48,13 +50,13 @@ We fetch membership numbers from [this site](http://www.aflmembershipnumbers.com
 ```{r echo=FALSE, ref.label="members", warning=FALSE}
 ```
 
-```{r cache=TRUE, tidy=TRUE, warning=FALSE}
+```{r cache=TRUE, tidy=TRUE, warning=FALSE, eval=FALSE}
 members <- getMembers()
 ```
 
 Note that there is often more to these numbers to meet the eye; for example, the rapid rise in Collingwood's numbers occurred when they changed how members were counted.
 
-```{r tidy=TRUE, cache=TRUE, fig.height=9, fig.width=7, warning=FALSE}
+```{r tidy=TRUE, cache=TRUE, fig.height=9, fig.width=7, warning=FALSE, eval=FALSE}
 pal <- colorRampPalette(brewer.pal(8, "Dark2"))(18)
 ggplot(members, aes(x = Year, y = Members, col = Team)) + 
   geom_line() + scale_color_manual(values = pal) + 
@@ -87,7 +89,7 @@ cpother.melt <- melt(cp.other)
 ggplot(subset(cpother.melt, variable != "total"), aes(club, value, fill = variable)) + 
   geom_bar(stat = "identity") + theme_bw() + scale_fill_brewer(palette = "Reds") + 
   labs(title = "Club payments 2013 sorted by \"other\"") + coord_flip() + 
-  geom_hline(y = median(club_payments_2013$total)) + scale_y_continuous(breaks = seq(0, 20000000, by = 4000000))
+  geom_hline(yintercept  = median(club_payments_2013$total)) + scale_y_continuous(breaks = seq(0, 20000000, by = 4000000))
 ```
 
 ## 4. Coaches
