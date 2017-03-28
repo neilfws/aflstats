@@ -2,7 +2,9 @@
 title: "Sydney Swans Home Game Crowds"
 author: "Neil Saunders"
 date: "19/05/2015"
-output: html_document
+output: 
+  html_document: 
+    keep_md: yes
 ---
 
 ## Introduction
