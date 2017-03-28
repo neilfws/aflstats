@@ -1,6 +1,7 @@
-setwd("~/Dropbox/projects/aflstats/")
-source("code/R/afltables.R")
-require(ggplot2)
+library(ggplot2)
+
+setwd("~/Dropbox/projects/github_projects/aflstats/")
+source("code/scripts/R/afltables.R")
 
 # university 1908-1914
 # and yes it is "bullldogs" with 3x "l"
