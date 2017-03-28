@@ -16,7 +16,7 @@ First we get the data for all South Melbourne/Sydney Swans games. For these anal
 
 ```{r tidy=TRUE, cache=TRUE, warning=FALSE}
 swans <- allGames("swans")
-swans.date  <- strptime(swans$Date, format = "%d-%b-%Y %I:%M %p")
+swans.date  <- strptime(swans$Date, format = "%a %d-%b-%Y %I:%M %p")
 swans$Year  <- swans.date$year + 1900
 swans.mod   <- subset(swans, Year > 1981)
 ```
