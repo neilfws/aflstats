@@ -1,0 +1,112 @@
+---
+title: "Sydney Swans/South Melbourne greatest (and worst) Q4 turnarounds"
+author: "Neil Saunders"
+date: "compiled `r Sys.time()`"
+output: html_document
+---
+
+```{r echo = FALSE, eval = FALSE}
+library(codetools)
+load("~/Dropbox/projects/github_projects/aflstats/data/swans.RData")
+```
+
+## Introduction
+
+How many times have the Swans come from behind going into the last quarter to win? Or been in front, but then gone on to lose? In each case, what were the biggest swings in the scoreline?
+
+## Getting the data
+
+First, we define a function to download and process Swans game data from [AFL Tables](http://afltables.com).
+
+```{r}
+allGames <- function(team) {
+  require(XML)
+  require(plyr)
+  games <- readHTMLTable(paste("http://afltables.com/afl/teams/", team, "/allgames.html", sep = ""), stringsAsFactors = FALSE)
+  # fix for 2 "Scoring" columns
+  for(i in 1:length(games)) {
+    colnames(games[[i]])[c(4,6)] <- c("Scoring.F", "Scoring.A")
+    }
+  games <- ldply(games, rbind)
+  games$.id <- NULL
+  games$F <- as.numeric(games$F)
+  games$A <- as.numeric(games$A)
+  games$Crowd <- as.numeric(games$Crowd)
+  return(games)
+}
+```
+
+Now we can fetch all Swans games.
+
+```{r}
+team.games <- allGames("swans")
+```
+
+There are currently `r nrow(team.games)` of them.
+
+## Scores for Q3 and Q4
+
+We need 4 values: total score (for and against) at the end of Q3 and the same for the end of Q4. Another function:
+
+```{r}
+allGamesQuarterScore <- function(games, quarter = 4, who = "Scoring.F") {
+  stopifnot(who == "Scoring.F" || who == "Scoring.A")
+  score    <- games[[who]]
+  quarters <- strsplit(score, " ")
+  qchoose  <- sapply(quarters, function(x) x[quarter])
+  total    <- sapply(strsplit(qchoose, "\\."), function(x) 6 * as.numeric(x[1]) + as.numeric(x[2]))
+  return(total)
+}
+```
+
+Let's make a new data frame, q34, with 4 columns: Q3 scores for/against, Q4 scores for/against.
+
+```{r}
+q34 <- data.frame(q3.f = allGamesQuarterScore(team.games, 3, "Scoring.F"),
+                  q3.a = allGamesQuarterScore(team.games, 3, "Scoring.A"),
+                  q4.f = allGamesQuarterScore(team.games, 4, "Scoring.F"),
+                  q4.a = allGamesQuarterScore(team.games, 4, "Scoring.A")
+                  )
+```
+
+To calculate turnarounds, we subtract the difference (Q3.F - Q3.A) from (Q4.F - Q4.A).
+
+```{r}
+q34$diff <- (q34$q4.f - q34$q4.a) - (q34$q3.f - q34$q3.a)
+head(q34)
+```
+
+## Come from behind at Q3 to win
+
+We select the subset of cases where the score "for" is less than the score "against" at the end of Q3, but greater than the score "against" at the end of Q4. Then we sort by the diff column.
+
+```{r}
+wins <- subset(q34, q3.f < q3.a & q4.f > q4.a)
+wins <- wins[order(wins$diff, decreasing = TRUE),]
+```
+
+They've come from behind to win `r nrow(wins)` times. Now we can use the row names of wins as indexes to extract the top 10 comebacks of all time from the games data.
+
+```{r}
+library(knitr)
+wins.10 <- team.games[as.numeric(rownames(wins)[1:10]),]
+#print(xtable(wins.10, digits = 0, align = "lllllrlrllrr"), type = "html", include.rownames = FALSE)
+kable(wins.10, row.names = FALSE)
+```
+
+## Slip from in front at Q3 to lose
+
+The procedure is very similar, except that we select the cases where score "for" is greater than "against" in Q3, but less than "against" in Q4.
+
+```{r}
+losses <- subset(q34, q3.f > q3.a & q4.f < q4.a)
+losses <- losses[order(losses$diff, decreasing = FALSE),]
+```
+
+They've thrown it away in the last quarter `r nrow(losses)` times.
+
+```{r}
+losses.10 <- team.games[as.numeric(rownames(losses)[1:10]),]
+#print(xtable(losses.10, digits = 0, align = "lllllrlrllrr"), type = "html", include.rownames = FALSE)
+kable(losses.10, row.names = FALSE)
+```

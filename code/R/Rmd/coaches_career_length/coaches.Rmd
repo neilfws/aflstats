@@ -1,0 +1,104 @@
+---
+title: "Career length of senior AFL coaches: R versus The Age"
+author: "Neil Saunders"
+date: "12/03/2015"
+output: html_document
+---
+
+## 1. Introduction
+This report was inspired by an article in The Age titled [Black hole looms for sacked senior coaches](http://www.theage.com.au/afl/afl-news/black-hole-looms-for-sacked-senior-coaches-20141001-10otho.html). It claims that the average career length of senior coaches has fallen in recent years.
+
+There are some serious problems with the article.
+
+First, it opens with 2 bar charts, average career length and average clubs coaches, overlayed with linear regression lines. There are no clear linear trends in these charts and their appearance suggests that whoever did the analysis lacks basic skills.
+
+Second and more seriously: the article includes an embedded table generated using Tableau. It is clear from manual inspection that the table contains many errors. For example:
+
+- in the first row, teams listed for Percy Parratt are "RI SK", yet clubs coached = 3.0
+- Percy Parratt did not coach those teams; at [AFL Tables](http://afltables.com/afl/stats/coaches/Percy_Parratt.html) they are listed as "FI CA GE"
+- Debut and last seasons for Percy Parratt are listed as 1900 and 1935 respectively; at AFL Tables the dates are 1913 - 1935
+- Career length should not be measured as (last season year) - (debut season year) as many coaches have had interrupted careers with breaks between positions
+
+These errors are apparent for many other coaches in the Tableau table. Presumably the data were obtained from the AFL Tables website and something has gone very wrong during import.
+
+![tableau errors](tableau-errors.png)
+
+## 2. Getting the data
+Getting the data using R is quite simple.
+
+```{r coaches, tidy=TRUE, cache=TRUE}
+library(ggplot2)
+getCoaches <- function() {
+  require(XML)
+  coaches <- readHTMLTable("http://afltables.com/afl/stats/coaches/coaches_idx.html", stringsAsFactors = FALSE)
+  return(coaches[[1]])
+}
+coaches <- getCoaches()
+head(coaches)
+```
+
+We add a new column to count the number of clubs coached.
+
+```{r clubs, tidy=TRUE, cache=TRUE}
+coaches$clubs <- sapply(coaches$Teams, function(x) length(strsplit(x, " ")[[1]]))
+```
+
+We create a column indicating debut decade; _e.g._ 1977 becomes 197.
+
+```{r decade, tidy=TRUE, cache=TRUE}
+coaches$debut <- substr(coaches$Seas, 1, 3)
+```
+
+We can also create a column indicating whether the coach is currently active, based on whether their final season was before 2014.
+
+```{r current, tidy=TRUE, cache=TRUE}
+coaches$current <- ifelse(as.numeric(substr(coaches$Seas, nchar(coaches$Seas) - 3, nchar(coaches$Seas))) < 2014, 0, 1)
+```
+
+To examine years, we could parse data from the website page for each individual coach. However, an easier measure of career length is total games coached.
+The same column names appear several times for home & away games, finals and total games, so we rename column 17 which contains total games.
+
+```{r total, tidy=TRUE, cache=TRUE}
+colnames(coaches)[17] <- "total"
+```
+
+
+## 3. Analysis
+### 3.1 Career length
+Mean career length is not a very useful statistic, particularly given the skewed distribution of career length: most careers are short, a few are very long.
+
+```{r density, tidy=TRUE, cache=TRUE}
+ggplot(coaches) + geom_density(aes(x = as.numeric(total)), fill = "skyblue3") + theme_bw() + labs(title = "Density plot of VFL/AFL senior coach career length (total games)", x = "Total Games Coached")
+```
+
+Instead we plot the distribution of career length by decade. If anything, this shows a steady rise in the median total games coached since the 1970s.
+
+```{r length-all, tidy=TRUE, cache=TRUE}
+ggplot(coaches) + geom_boxplot(aes(debut, as.numeric(total)), fill = "skyblue3") + theme_bw() + labs(title = "VFL/AFL senior coach career length by debut decade (all)", x = "Decade of Debut", y = "Total Games")
+```
+
+However, we should exclude current coaches since they have generally coached fewer games because they debuted more recently. Now there is a decline in median total games coached from the 2000s onwards.
+
+```{r length-past, tidy=TRUE, cache=TRUE}
+coaches$current <- ifelse(as.numeric(substr(coaches$Seas, nchar(coaches$Seas) - 3, nchar(coaches$Seas))) < 2014, 0, 1)
+ggplot(subset(coaches, current == 0)) + geom_boxplot(aes(debut, as.numeric(total)), fill = "skyblue3") + theme_bw() + labs(title = "VFL/AFL senior coach career length by debut decade (non-current)", x = "Decade of Debut", y = "Total Games")
+```
+
+### 3.2 Clubs coached
+Once again, average clubs coached is not a useful statistic given the skewed distribution; most coaches coach 1 or 2 clubs. Plotting distributions is less useful given the small ranges, so we plot number of clubs coached by decade as jittered points.
+
+First for all coaches.
+
+```{r clubs-all, tidy=TRUE, cache=TRUE, message=FALSE}
+ggplot(coaches) + geom_jitter(aes(debut, clubs), position = position_jitter(height = 0)) + theme_bw() + labs(title = "VFL/AFL senior coach clubs coached by debut decade (all)", x = "Decade of Debut", y = "Total Games") + geom_smooth(aes(debut, clubs, group = 1))
+```
+
+And then for non-current coaches. In this and the previous plot, there is some indication that coaches who debuted from the 2000s onwards are less likely to have coached more than one club.
+
+```{r clubs-past, tidy=TRUE, cache=TRUE, message=FALSE}
+ggplot(subset(coaches, current == 0)) + geom_jitter(aes(debut, clubs), position = position_jitter(height = 0)) + theme_bw() + labs(title = "VFL/AFL senior coach clubs coached by debut decade (non-current)", x = "Decade of Debut", y = "Total Games") + geom_smooth(aes(debut, clubs, group = 1))
+```
+
+## 4. Summary
+1. There is some substance to the claim made by the Age article that both coaching career length (total games) and total clubs coached have declined for coaches debuting since 2000. 
+2. This is despite the apparent poor data quality of the Tableau table used in the article - is it just displayed incorrectly by the news website or are the findings coincidentally valid despite the poor data?
