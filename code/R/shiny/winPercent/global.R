@@ -1,0 +1,22 @@
+getAllGames <- function() {
+  games <- readLines("http://afltables.com/afl/stats/biglists/bg3.txt")
+  # games <- readLines("data/bg3.txt")
+  games.1 <- gsub("\\s{2,}", "\t", games, perl = TRUE)
+  games.2 <- gsub("\\.\\s+", "\t", games.1, perl = TRUE)
+  games <- read.table(textConnection(games.2), skip = 2, sep = "\t", quote = "", stringsAsFactors = FALSE)
+  colnames(games) <- c("number", "date", "round", "team1", "score1", "team2", "score2", "venue")
+  games$f1 <- sapply(games$score1, function(x) as.numeric(strsplit(x, "\\.")[[1]][3]))
+  games$f2 <- sapply(games$score2, function(x) as.numeric(strsplit(x, "\\.")[[1]][3]))
+  games$winner <- ifelse(games$f1 > games$f2, games$team1, games$team2)
+  games$winner <- ifelse(games$f1 == games$f2, NA, games$winner)
+  games$Date <- as.Date(games$date, "%d-%b-%Y")
+  return(games)
+}
+
+games <- read.table("data/games.csv", sep = ",", header = TRUE, stringsAsFactors = FALSE)
+games$f1 <- sapply(games$score1, function(x) as.numeric(strsplit(x, "\\.")[[1]][3]))
+games$f2 <- sapply(games$score2, function(x) as.numeric(strsplit(x, "\\.")[[1]][3]))
+games$winner <- ifelse(games$f1 > games$f2, games$team1, games$team2)
+games$winner <- ifelse(games$f1 == games$f2, NA, games$winner)
+games$Date <- as.Date(games$date, "%d-%b-%Y")
+teams <- sort(unique(games$team1))
