@@ -1,0 +1,119 @@
+---
+title: "AFL/VFL Drawn Games"
+author: "Neil Saunders"
+date: "compiled `r Sys.time()`"
+output: 
+  html_document: 
+    keep_md: yes
+    number_sections: yes
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE, cache=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyr)
+library(dplyr)
+library(knitr)
+library(lubridate)
+
+games <- readLines("http://afltables.com/afl/stats/biglists/bg8.txt") %>%
+  gsub("([[:alpha:]]+) +([[:alpha:]]+)","'\\1 \\2'", .) %>%
+  gsub("'([SPGQE]F) (.*?)' ", "\\1  \\2", .) %>%
+  gsub("Cazaly''s Stadium'", "'Cazalys Stadium'", .) %>%
+  textConnection() %>%
+  read.table(stringsAsFactors = FALSE, skip = 2, header = FALSE) %>%
+  rename("game" = V1, "Date" = V2, "round" = V3, "team1" = V4, "score1" = V5, "team2" = V6, "score2" = V7, "venue" = V8) %>%
+  mutate(Year = as.numeric(substring(Date, nchar(Date) - 3, nchar(Date))),
+         team1 = gsub("([a-z])([A-Z])", "\\1 \\2", team1),
+         team2 = gsub("([a-z])([A-Z])", "\\1 \\2", team2))
+```
+
+# Questions
+Compiled by user *Thunder Shaker* on the [RWO Swans Fan Forum](http://www.redandwhiteonline.com/forum/showthread.php/43085-Lies-damned-lies-and-statistics?p=732150&viewfull=1#post732150).
+
+## How many drawn games have there been?
+`r games %>% nrow()`.
+
+## Which club has been involved in the greatest number of drawn games?
+```{r q2}
+games %>% 
+  select(team1, team2)  %>% 
+  gather(team, name) %>% 
+  count(name)  %>% 
+  arrange(desc(n)) %>% 
+  slice(1:10) %>%
+  kable()
+```
+
+## Which two clubs have been involved in the most draws with each other? (Two correct answers)
+```{r q3}
+games %>% 
+  mutate(teams = apply(games[, c("team1", "team2")], 1, function(x) paste(sort(x), collapse = "/"))) %>% 
+  count(teams) %>% 
+  arrange(desc(n)) %>% 
+  slice(1:10) %>%
+  kable()
+```
+
+## Which current club has played the most games since their last draw?
+```{r q4}
+games %>% 
+  mutate(Date = as_date(Date, "%d-%b-%Y")) %>% 
+  select(team1, team2, round, Date) %>% 
+  gather(team, name, -round, -Date) %>% 
+  arrange(name, Date) %>% 
+  mutate(diff = as_date(Sys.Date()) - Date) %>% 
+  filter(diff >= 0) %>% 
+  group_by(name) %>% 
+  summarise(mindiff = min(diff)) %>%
+  arrange(desc(mindiff)) %>%
+  kable()
+```
+
+## GWS has played two draws in a row. How many times has this happened in the same season?
+```{r q5}
+games %>% 
+  mutate(Date = as_date(Date, "%d-%b-%Y")) %>% 
+  select(team1, team2, round, Date) %>% 
+  gather(team, name, -round, -Date) %>% 
+  arrange(name, Date) %>% 
+  mutate(diff = Date - lag(Date)) %>% 
+  filter(diff >= 0, diff <= 8) %>% 
+  arrange(name, diff) %>%
+  kable()
+```
+
+## Which season has had the greatest number of drawn games?
+```{r q6}
+games %>% 
+  count(Year) %>% 
+  arrange(desc(n)) %>%
+  slice(1) %>%
+  kable()
+```
+
+## What was the highest score in a drawn game?
+```{r q7}
+games %>% 
+  mutate(total = as.numeric(sapply(strsplit(score1, "\\."), function(x) x[3]))) %>%
+  arrange(desc(total)) %>% 
+  slice(1) %>% kable()
+```
+
+## How many drawn finals have there been?
+```{r q8}
+games %>%
+  filter(grepl("F", round)) %>%
+  kable()
+```
+
+## Which two clubs were involved in the first draw in the 1897 season?
+```{r q9}
+games %>% 
+  slice(1) %>%
+  kable()
+```
+
+## In what season did South Melbourne make the finals because they had drawn a game?
+ [1977](http://australianfootball.com/articles/view/Drawing%2Bthe%2Bbest%2Bconclusion/177)
