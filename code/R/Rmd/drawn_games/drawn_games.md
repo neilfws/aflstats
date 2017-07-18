@@ -7,6 +7,8 @@ compiled `r Sys.time()`
 # Questions
 Compiled by user *Thunder Shaker* on the [RWO Swans Fan Forum](http://www.redandwhiteonline.com/forum/showthread.php/43085-Lies-damned-lies-and-statistics?p=732150&viewfull=1#post732150).
 
+[Published report at RPubs](http://rpubs.com/neilfws/292080).
+
 ## How many drawn games have there been?
 156.
 
