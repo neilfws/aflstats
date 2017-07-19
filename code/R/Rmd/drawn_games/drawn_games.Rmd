@@ -15,20 +15,15 @@ knitr::opts_chunk$set(echo = FALSE)
 library(tidyr)
 library(dplyr)
 library(knitr)
+library(plyr)
 library(lubridate)
 
-# games <- bg8[3:length(bg8)] %>% strsplit("\\s{2,}", perl = TRUE) %>% plyr::ldply()
-
 games <- readLines("http://afltables.com/afl/stats/biglists/bg8.txt") %>%
-  gsub("([[:alpha:]]+) +([[:alpha:]]+)","'\\1 \\2'", .) %>%
-  gsub("'([SPGQE]F) (.*?)' ", "\\1  \\2", .) %>%
-  gsub("Cazaly''s Stadium'", "'Cazalys Stadium'", .) %>%
-  textConnection() %>%
-  read.table(stringsAsFactors = FALSE, skip = 2, header = FALSE) %>%
+  .[3:length(.)] %>% 
+  strsplit("\\s{2,}", perl = TRUE) %>%
+  ldply() %>%
   rename("game" = V1, "Date" = V2, "round" = V3, "team1" = V4, "score1" = V5, "team2" = V6, "score2" = V7, "venue" = V8) %>%
-  mutate(Year = as.numeric(substring(Date, nchar(Date) - 3, nchar(Date))),
-         team1 = gsub("([a-z])([A-Z])", "\\1 \\2", team1),
-         team2 = gsub("([a-z])([A-Z])", "\\1 \\2", team2))
+  mutate(Year = as.numeric(substring(Date, nchar(Date) - 3, nchar(Date))))
 ```
 
 # Questions
