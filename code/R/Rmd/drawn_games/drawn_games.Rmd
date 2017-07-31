@@ -13,16 +13,16 @@ output:
 ```{r setup, include=FALSE, cache=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyr)
+library(plyr)
 library(dplyr)
 library(knitr)
-library(plyr)
 library(lubridate)
 
 games <- readLines("http://afltables.com/afl/stats/biglists/bg8.txt") %>%
   .[3:length(.)] %>% 
   strsplit("\\s{2,}", perl = TRUE) %>%
   ldply() %>%
-  rename("game" = V1, "Date" = V2, "round" = V3, "team1" = V4, "score1" = V5, "team2" = V6, "score2" = V7, "venue" = V8) %>%
+  dplyr::rename("game" = V1, "Date" = V2, "round" = V3, "team1" = V4, "score1" = V5, "team2" = V6, "score2" = V7, "venue" = V8) %>%
   mutate(Year = as.numeric(substring(Date, nchar(Date) - 3, nchar(Date))))
 ```
 
