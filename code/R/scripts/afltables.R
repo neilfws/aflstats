@@ -2,7 +2,7 @@
 allGames <- function(team) {
   require(XML)
   require(plyr)
-  games <- readHTMLTable(paste("http://afltables.com/afl/teams/", team, "/allgames.html", sep = ""), stringsAsFactors = FALSE)
+  games <- readHTMLTable(paste("https://afltables.com/afl/teams/", team, "/allgames.html", sep = ""), stringsAsFactors = FALSE)
   # fix for 2 "Scoring" columns
   for(i in 1:length(games)) {
     colnames(games[[i]])[c(4,6)] <- c("Scoring.F", "Scoring.A")
