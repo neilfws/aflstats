@@ -1,5 +1,6 @@
 library(ggplot2)
 library(XML)
+library(RCurl)
 library(reshape2)
 
 source("helpers.R")

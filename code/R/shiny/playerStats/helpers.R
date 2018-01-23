@@ -1,6 +1,6 @@
 plotPlayerStats <- function(href) {
-  u <- paste("http://afltables.com/afl/stats/", href, sep = "")
-  player <- readHTMLTable(u, header = TRUE, stringsAsFactors = FALSE)
+  u <- paste("https://afltables.com/afl/stats/", href, sep = "")
+  player <- readHTMLTable(getURL(u), header = TRUE, stringsAsFactors = FALSE)
   player <- player[[2]]
   player[, 3:27] <- sapply(player[, 3:27], function(x) as.numeric(x))
   player <- melt(player[, c(1:2, 4, 6:27)])

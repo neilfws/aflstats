@@ -1,54 +1,59 @@
-library(ggplot2)
-library(stringr)
-library(plyr)
-library(XML)
-
-setwd("~/Dropbox/projects/github_projects/aflstats/")
-
-getDOB <- function(u) {
-  p <- htmlTreeParse(u, useInternalNodes = TRUE)
-  d <- str_match(xpathSApply(p, "//body", xmlValue), "Born:(.*?) ")[,2]
-  # sleep for multiple requests
-  Sys.sleep(2)
-  return(d)
+age_to_date <- function(born, age) {
+  age <- str_split(age, "\\s+")
+  age_year <- age[[1]][1] %>%
+    gsub("y", "", .) %>%
+    as.numeric()
+  age_day <- age[[1]][2] %>%
+    gsub("d", "", .) %>%
+    as.numeric() %>%
+    ifelse(is.na(.), 0, .)
+  age <- born + years(age_year) + days(age_day)
+  age
 }
 
-getHeight <- function(u) {
-  p <- htmlTreeParse(u, useInternalNodes = TRUE)
-  d <- str_match(xpathSApply(p, "//body", xmlValue), "Height:(.*?) ")[,2]
-  # sleep for multiple requests
-  Sys.sleep(2)
-  return(d)
-}
+player_stats <- function(u) {
+  require(rvest)
+  require(stringr)
+  require(lubridate)
+  
+  page <- read_html(u)
+  main <- page %>%
+    html_nodes("body center") %>% 
+    html_text()
+  games <- page %>%
+    html_node("table.sortable") %>%
+    html_table()
+  
+  born <- main %>% 
+    str_match(., "Born:(.*?) ") %>% .[, 2] %>%
+    dmy()
+  debut <- main %>% 
+    str_match(., "Debut:(.*?)Last") %>% .[, 2]
+  last <- main %>% 
+    str_match(., "Last:(.*?)\\)") %>% .[, 2]
+  total_games <- games %>%
+    filter(Year == "Totals") %>%
+    .$GM
+  height <- main %>% 
+    str_match(., "Height:(.*?)Weight") %>% .[, 2] %>%
+    gsub("\\s+cm\\s+", "", .) %>%
+    as.numeric()
+  weight <- main %>% 
+    str_match(., "Weight:(.*?)\\n") %>% .[, 2] %>%
+    gsub(" kg", "", .) %>%
+    as.numeric()
+  
+  # debut to date
+  debut <- age_to_date(born, debut)
+  
+  # last to date
+  last <- age_to_date(born, last)
 
-getAges <- function(year) {
-  players.y <- readHTMLTable(paste("http://afltables.com/afl/stats/", year, ".html", sep = ""))
-  players.y <- players.y[2:19]
-  doc <- htmlTreeParse(paste("http://afltables.com/afl/stats/", year, ".html", sep = ""), useInternalNodes = TRUE)
-  teams <- xpathSApply(doc, "//th/a", xmlValue)
-  teams <- teams[seq(1, 36, 2)]
-  for(i in 1:18) {
-      players.y[[i]]$team <- teams[i]
-  }
-  players <- xpathSApply(doc, "//a[@href]", xmlAttrs)
-  players <- ldply(players, rbind)
-  players <- players[grep("players", players$href), ]
-  baseurl <- "http://afltables.com/afl/stats"
-  players$target <- paste(baseurl, players$href, sep = "/")
-  players$dob <- sapply(players$target, function(x) getDOB(x))
-  players$ht <- sapply(players$target, function(x) getHeight(x))
-  players.y.df <- ldply(players.y, rbind)
-  players$age <- as.Date(Sys.Date(), "%Y-%m-%d") - as.Date(players$dob, "%e-%b-%Y")
-  players.y.df$age <- as.numeric(players$age)
-  players.y.df$ht <- as.numeric(players$ht)
-  return(players.y.df)
+  tibble(url = u,
+         born = born, 
+         height = height, 
+         weight = weight, 
+         games = total_games,
+         debut = debut, 
+         last = last)
 }
-
-#plot
-players <- getAges(2016)
-png(file = "output/playerAges.png", width = 800, height = 760)
-ggplot(players) + geom_violin(aes(reorder(team, age, median), age/365), fill = "darkorange", linetype = 0) +
-  theme_bw() + ylab("Current players age (years)") +
-  theme(axis.text.x = element_text(angle = 90)) +
-  labs(title = ("2016 AFL senior players age distribution sorted by median age"), x = "Team") + geom_hline(yintercept = median(players$age/365), linetype = "dashed") + stat_summary(aes(team, as.numeric(age) / 365), fun.y = "median", geom = "point")
-dev.off()
