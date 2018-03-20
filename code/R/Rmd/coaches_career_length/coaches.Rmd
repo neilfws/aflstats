@@ -32,7 +32,7 @@ getCoaches <- function() {
 }
 ```
 
-## 1. Introduction
+# Introduction
 This report was inspired by an article in The Age titled [Black hole looms for sacked senior coaches](http://www.theage.com.au/afl/afl-news/black-hole-looms-for-sacked-senior-coaches-20141001-10otho.html). It claims that the average career length of senior coaches has fallen in recent years.
 
 There are some problems with the article.
@@ -50,7 +50,7 @@ These errors are apparent for many other coaches in the Tableau table. Presumabl
 
 ![tableau errors](tableau-errors.png)
 
-## 2. Getting the data
+# Getting the data
 Getting the data using R is quite simple.
 
 ```{r coaches}
@@ -64,8 +64,8 @@ coaches <- coaches %>%
 To examine years, we could parse data from the website page for each individual coach. However, an easier measure of career length is total games coached.
 
 
-## 3. Analysis
-### 3.1 Career length
+# Analysis
+## Career length
 Mean career length is not a very useful statistic, particularly given the skewed distribution of career length: most careers are short, a few are very long.
 
 ```{r density}
@@ -101,7 +101,7 @@ coaches %>%
          y = "Total Games")
 ```
 
-### 3.2 Clubs coached
+## Clubs coached
 Once again, average clubs coached is not a useful statistic given the skewed distribution; most coaches coach 1 or 2 clubs. Plotting distributions is less useful given the small ranges, so we plot number of clubs coached by decade as jittered points.
 
 First for all coaches.
@@ -130,6 +130,6 @@ coaches %>%
      geom_smooth(aes(debut, clubs, group = 1))
 ```
 
-## 4. Summary
+# Summary
 1. There is some substance to the claim made by the Age article that both coaching career length (total games) and total clubs coached have declined for coaches debuting since 2000. 
 2. This is despite the apparent poor data quality of the Tableau table used in the article - is it just displayed incorrectly by the news website or are the findings coincidentally valid despite the poor data?

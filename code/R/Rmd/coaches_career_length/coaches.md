@@ -1,17 +1,17 @@
 Career length of senior AFL coaches: R versus The Age
 ================
 Neil Saunders
-2018-03-21 07:33:59
+2018-03-21 07:39:29
 
--   [1. Introduction](#introduction)
--   [2. Getting the data](#getting-the-data)
--   [3. Analysis](#analysis)
-    -   [3.1 Career length](#career-length)
-    -   [3.2 Clubs coached](#clubs-coached)
--   [4. Summary](#summary)
+-   [Introduction](#introduction)
+-   [Getting the data](#getting-the-data)
+-   [Analysis](#analysis)
+    -   [Career length](#career-length)
+    -   [Clubs coached](#clubs-coached)
+-   [Summary](#summary)
 
-1. Introduction
----------------
+Introduction
+============
 
 This report was inspired by an article in The Age titled [Black hole looms for sacked senior coaches](http://www.theage.com.au/afl/afl-news/black-hole-looms-for-sacked-senior-coaches-20141001-10otho.html). It claims that the average career length of senior coaches has fallen in recent years.
 
@@ -30,17 +30,18 @@ These errors are apparent for many other coaches in the Tableau table. Presumabl
 
 ![tableau errors](tableau-errors.png)
 
-2. Getting the data
--------------------
+Getting the data
+================
 
 Getting the data using R is quite simple.
 
 To examine years, we could parse data from the website page for each individual coach. However, an easier measure of career length is total games coached.
 
-3. Analysis
------------
+Analysis
+========
 
-### 3.1 Career length
+Career length
+-------------
 
 Mean career length is not a very useful statistic, particularly given the skewed distribution of career length: most careers are short, a few are very long.
 
@@ -54,7 +55,8 @@ However, we should exclude current coaches since they have generally coached few
 
 ![](coaches_files/figure-markdown_github/length-past-1.png)
 
-### 3.2 Clubs coached
+Clubs coached
+-------------
 
 Once again, average clubs coached is not a useful statistic given the skewed distribution; most coaches coach 1 or 2 clubs. Plotting distributions is less useful given the small ranges, so we plot number of clubs coached by decade as jittered points.
 
@@ -66,8 +68,8 @@ And then for non-current coaches. In this and the previous plot, there is some i
 
 ![](coaches_files/figure-markdown_github/clubs-past-1.png)
 
-4. Summary
-----------
+Summary
+=======
 
 1.  There is some substance to the claim made by the Age article that both coaching career length (total games) and total clubs coached have declined for coaches debuting since 2000.
 2.  This is despite the apparent poor data quality of the Tableau table used in the article - is it just displayed incorrectly by the news website or are the findings coincidentally valid despite the poor data?
