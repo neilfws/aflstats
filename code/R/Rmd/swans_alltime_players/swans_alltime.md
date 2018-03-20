@@ -89,8 +89,39 @@ Only 4 players have played 300 or more games.
 
 To illustrate further what an achievement this is, note that 75% of players have played only 43 games or less.
 
-    ##   minimum q1 median    mean q3 maximum na
-    ## 1       1  4     13 33.8944 43     372  1
+<table style="width:71%;">
+<colgroup>
+<col width="13%" />
+<col width="6%" />
+<col width="12%" />
+<col width="11%" />
+<col width="6%" />
+<col width="13%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">minimum</th>
+<th align="center">q1</th>
+<th align="center">median</th>
+<th align="center">mean</th>
+<th align="center">q3</th>
+<th align="center">maximum</th>
+<th align="center">na</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">4</td>
+<td align="center">13</td>
+<td align="center">33.89</td>
+<td align="center">43</td>
+<td align="center">372</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
 
 Milestones
 ----------

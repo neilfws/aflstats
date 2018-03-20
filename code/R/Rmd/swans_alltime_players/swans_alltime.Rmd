@@ -72,7 +72,8 @@ To illustrate further what an achievement this is, note that 75% of players have
 ```{r}
 players$Games %>%
   summary() %>% 
-  tidy()
+  tidy() %>%
+  pander()
 ```
 
 ## Milestones
