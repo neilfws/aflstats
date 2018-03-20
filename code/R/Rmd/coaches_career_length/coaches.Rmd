@@ -2,7 +2,9 @@
 title: "Career length of senior AFL coaches: R versus The Age"
 author: "Neil Saunders"
 date: "`r Sys.time()`"
-output: 
+output:
+  github_document:
+    toc: true
   html_document: 
     keep_md: yes
 ---
@@ -32,7 +34,7 @@ Getting the data using R is quite simple.
 library(ggplot2)
 getCoaches <- function() {
   require(XML)
-  coaches <- readHTMLTable("http://afltables.com/afl/stats/coaches/coaches_idx.html", stringsAsFactors = FALSE)
+  coaches <- readHTMLTable("https://afltables.com/afl/stats/coaches/coaches_idx.html", stringsAsFactors = FALSE)
   return(coaches[[1]])
 }
 coaches <- getCoaches()

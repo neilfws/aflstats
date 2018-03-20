@@ -1,6 +1,11 @@
-# Career length of senior AFL coaches: R versus The Age
-Neil Saunders  
-`r Sys.time()`  
+---
+title: "Career length of senior AFL coaches: R versus The Age"
+author: "Neil Saunders"
+date: "2018-03-16 22:45:55"
+output: 
+  html_document: 
+    keep_md: yes
+---
 
 ## 1. Introduction
 This report was inspired by an article in The Age titled [Black hole looms for sacked senior coaches](http://www.theage.com.au/afl/afl-news/black-hole-looms-for-sacked-senior-coaches-20141001-10otho.html). It claims that the average career length of senior coaches has fallen in recent years.

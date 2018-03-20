@@ -2,7 +2,9 @@
 title: "Sydney Swans Home Game Crowds"
 author: "Neil Saunders"
 date: "19/05/2015"
-output: 
+output:
+  github_document:
+    toc: true
   html_document: 
     keep_md: yes
 ---
@@ -11,18 +13,17 @@ output:
 This document compares crowds for home games at the Sydney Cricket Ground ("S.C.G.") versus ANZ Stadium (formerly known as Stadium Australia, "Stad. Aust.").
 
 ## 1. Getting the data
-Data for all Swans games by season are obtained from [AFL Tables](http://afltables.com/afl/teams/swans/allgames.html). The functions used are shown at the end of this document.
+Data for all Swans games by season are obtained from [AFL Tables](https://afltables.com/afl/teams/swans/allgames.html). The functions used are shown at the end of this document.
 
 ```{r warning=FALSE, message=FALSE}
-setwd("~/Dropbox/projects/github_projects/aflstats/code/R")
-source("scripts/afltables.R")
+source("../../../R/scripts/afltables.R")
 
 swans <- allGames("swans")
 swans$DateTime <- allGamesDateTime(swans)
 swans$date     <- allGamesDate(swans)
 swans$Year     <- allGamesYear(swans)
 
-# get the home games since moving to Sydnet
+# get the home games since moving to Sydney
 swans.h <- subset(swans, T == "H" & Year > 1981)
 table(swans.h$Venue)
 ```
@@ -59,7 +60,7 @@ However, in recent years crowds have declined to levels comparable with the SCG.
 allGames <- function(team) {
   require(XML)
   require(plyr)
-  games <- readHTMLTable(paste("http://afltables.com/afl/teams/", team, "/allgames.html", sep = ""), stringsAsFactors = FALSE)
+  games <- readHTMLTable(paste("https://afltables.com/afl/teams/", team, "/allgames.html", sep = ""), stringsAsFactors = FALSE)
   # fix for 2 "Scoring" columns
   for(i in 1:length(games)) {
     colnames(games[[i]])[c(4,6)] <- c("Scoring.F", "Scoring.A")

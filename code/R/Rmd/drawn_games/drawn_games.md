@@ -1,6 +1,14 @@
-# AFL/VFL Drawn Games
-Neil Saunders  
-compiled `r Sys.time()`  
+---
+title: "AFL/VFL Drawn Games"
+author: "Neil Saunders"
+date: "compiled 2018-03-15 22:41:43"
+output: 
+  html_document: 
+    keep_md: yes
+    number_sections: yes
+    toc: yes
+    toc_float: yes
+---
 
 
 
@@ -44,40 +52,25 @@ Essendon/Richmond           4
 
 ## Which current club has played the most games since their last draw?
 
-name               mindiff    
------------------  -----------
-University         39412 days 
-South Melbourne    14688 days 
-Fitzroy            12910 days 
-Footscray          7772 days  
-Brisbane Bears     7723 days  
-Kangaroos          5224 days  
-Western Bulldogs   3389 days  
-North Melbourne    2934 days  
-Brisbane Lions     2914 days  
-Melbourne          2318 days  
-Port Adelaide      1793 days  
-Richmond           1793 days  
-Fremantle          1535 days  
-Sydney             1535 days  
-Carlton            1066 days  
-Essendon           1066 days  
-Gold Coast         730 days   
-West Coast         730 days   
-St Kilda           709 days   
-Geelong            30 days    
-GW Sydney          23 days    
-Hawthorn           23 days    
-Adelaide           1 days     
-Collingwood        1 days     
+```
+## Warning: All formats failed to parse. No formats found.
+```
+
+
+
+name   mindiff 
+-----  --------
 
 ## GWS has played two draws in a row. How many times has this happened in the same season?
 
-round   Date         team    name        diff   
-------  -----------  ------  ----------  -------
-R2      1911-05-06   team1   Carlton     7 days 
-R5      1921-06-04   team2   Carlton     7 days 
-R16     2017-07-08   team2   GW Sydney   7 days 
+```
+## Warning: All formats failed to parse. No formats found.
+```
+
+
+
+round   Date   team   name   diff 
+------  -----  -----  -----  -----
 
 ## Which season has had the greatest number of drawn games?
 
