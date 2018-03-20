@@ -3,73 +3,94 @@ title: "The Sydney Swans/SMFC all-time player list"
 author: "Neil Saunders"
 date: "21/01/2015"
 output:
+  github_document:
+    toc: true
   html_document:
     keep_md: yes
     toc: yes
 ---
 
-## Introduction
-A collection of "fun facts" derived from the South Melbourne and Sydney all-time player list at [AFL Tables](http://afltables.com/afl/stats/alltime/swans.html).
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      message = FALSE, 
+                      warning = FALSE,
+                      echo = FALSE)
+library(tidyverse)
+library(rvest)
+library(pander)
+library(broom)
 
-## 1. Getting the data
-Here's the function for reading the player list into a data frame.
+theme_set(theme_bw())
 
-```{r tidy=TRUE}
-library(xtable)
-library(ggplot2)
 getPlayers <- function(team) {
-  require(XML)
-  u <- paste("http://afltables.com/afl/stats/alltime/", team, ".html", sep = "")
-  players <- readHTMLTable(u, stringsAsFactors = FALSE)
-  players <- players[[1]]
-  # convert to numerics
-  players$HT <- gsub("cm", "", players$HT)
-  players$WT <- gsub("kg", "", players$WT)
-  players$HT <- as.numeric(players$HT)
-  players$WT <- as.numeric(players$WT)
-  players$Games <- as.numeric(players$Games)
-  players$Goals <- as.numeric(players$Goals)
-  # add year and decade of birth and debut
-  players$year.birth <- as.numeric(substr(players$DOB, 1, 4))
-  players$dec.birth  <- as.numeric(substr(players$DOB, 1, 3))
-  players$year.debut <- as.numeric(substr(players$Seasons, 1, 4))
-  players$dec.debut  <- as.numeric(substr(players$Seasons, 1, 3))
-  return(players)
+  require(rvest)
+  u <- paste("https://afltables.com/afl/stats/alltime/", team, ".html", sep = "")
+  players <- read_html(u) %>%
+    html_table() %>%
+    .[[1]] %>%
+    mutate(HT = gsub("cm", "", HT),
+           WT = gsub("kg", "", WT),
+           HT = as.numeric(HT),
+           WT = as.numeric(WT),
+           Games = str_extract(`Games (W-D-L)`, "^\\d+"),
+           Games = as.numeric(Games),
+           Goals = as.numeric(Goals),
+           year.birth = as.numeric(substring(DOB, 1, 4)),
+           dec.birth  = as.numeric(substring(DOB, 1, 3)),
+           year.debut = as.numeric(substring(Seasons, 1, 4)),
+           dec.debut  = as.numeric(substring(Seasons, 1, 3))
+)
+  players
 }
 ```
 
-```{r cache=TRUE, warning=FALSE, tidy=TRUE}
+# Introduction
+A collection of "fun facts" derived from the South Melbourne and Sydney all-time player list at [AFL Tables](https://afltables.com/afl/stats/alltime/swans.html).
+
+
+```{r}
 players <- getPlayers("swans")
 ```
+
 Since the inception of the VFL in 1897, `r nrow(players)` men have played for the team.
 
-## 2. Games & Goals
-### 2.1 Most, least and inbetween
+# Games & Goals
+## Most, least and inbetween
 
 Only `r nrow(subset(players, Games >= 300))` players have played 300 or more games.
 
-```{r results='asis', tidy=TRUE}
-games.10 <- head(players[order(players$Games, decreasing = TRUE), c("Player", "Games")], 10)
-print(xtable(games.10, digits = 0), type = "html", include.rownames = FALSE)
+```{r}
+players %>%
+  top_n(10, Games) %>%
+  arrange(desc(Games)) %>%
+  select(Player, Games) %>%
+  pander()
 ```
-<br />
+
 To illustrate further what an achievement this is, note that 75% of players have played only `r fivenum(players$Games)[4]` games or less.
 
-```{r results='asis', tidy=TRUE}
-games.summary <- as.matrix(summary(players$Games))
-colnames(games.summary)[1] <- "Value"
-print(xtable(games.summary), type = "html")
+```{r}
+players$Games %>%
+  summary() %>% 
+  tidy()
 ```
 
-### 2.2 Milestones
+## Milestones
 Players who have reached 50, 100, 150, 200, 250, 300 or 350 games.
 
-```{r, tidy=TRUE, fig.width=10, fig.height=7}
-milestones <- cut(players$Games, breaks = seq(50, 400, by = 50), right = FALSE, labels = c("50-99", "100-149", "150-199", "200-249", "250-299", "300-349", "350-399"))
-ggplot() + geom_bar(aes(x = na.omit(milestones)), fill = "red3") + theme_bw() + labs(x = "Games", y = "players", title = "Number of players who reached milestone (50+) games")
+```{r,, fig.width=10, fig.height=7}
+players %>%
+  mutate(milestones = cut(Games, breaks = seq(50, 400, by = 50), right = FALSE, labels = c("50-99", "100-149", "150-199", "200-249", "250-299", "300-349", "350-399"))) %>%
+  filter(!is.na(milestones)) %>%
+  count(milestones) %>%
+  ggplot(aes(milestones, n)) + 
+    geom_col(fill = "red3") + 
+    labs(x = "Games", 
+         y = "players", 
+         title = "Number of players who reached milestone (50+) games")
 ```
 
-### 2.3 Comebacks
+## Comebacks
 `r nrow(players[grep(",", players$Seasons),])` players have left the team or missed whole seasons, then returned to play in subsequent seasons.
 
 Of these, `r length(which(sapply(strsplit(players$Seasons, ","), function(x) length(x)) == 3))` left for a second time, then returned for a third career with the team.
@@ -77,144 +98,246 @@ Of these, `r length(which(sapply(strsplit(players$Seasons, ","), function(x) len
 We can define the most successful comeback players as those who played the most games overall, following 2 or 3 stints with the team.
 
 **Top 10 2-stint players**
-```{r results='asis', tidy=TRUE}
+```{r}
 stint2.10 <- head(players[which(sapply(strsplit(players$Seasons, ","), function(x) length(x)) == 2), 1:11], 10)
-print(xtable(stint2.10, digits = 0), type = "html", include.rownames = FALSE)
+
+stint2.10 %>%
+  select(Player, `Games (W-D-L)`, Seasons) %>%
+  pander()
 ```
-<br />
+
 **And - there are only 10 3-stint players**
-```{r results='asis', tidy=TRUE}
+```{r}
 stint3.10 <- head(players[which(sapply(strsplit(players$Seasons, ","), function(x) length(x)) == 3), 1:11], 10)
-print(xtable(stint3.10, digits = 0), type = "html", include.rownames = FALSE)
+
+stint3.10 %>%
+  select(Player, `Games (W-D-L)`, Seasons) %>%
+  pander()
 ```
 
 
-### 2.4 Goals
+## Goals
 Clearly, not every player is going to be a leading goal kicker. Here are the all-time top 10.
-```{r results='asis', tidy=TRUE}
-goals.10 <- head(players[order(players$Goals, decreasing = TRUE), c("Player", "Goals")], 10)
-print(xtable(goals.10, digits = 0), type = "html", include.rownames = FALSE)
+```{r}
+players %>%
+  top_n(10, Goals) %>%
+  arrange(desc(Goals)) %>%
+  select(Player, Goals) %>%
+  pander()
 ```
 
-## 3. Physical attributes
-### 3.1 Height and weight
+# Physical attributes
+## Height and weight
 It's no surprise that AFL players tend to be taller and heavier than most of us, but how do the Swans compare and how have they changed over time?
 
 Let's start with a boxplot of height by decade that players debuted.
-```{r warning=FALSE, message=FALSE, tidy=TRUE, fig.width=10, fig.height=7}
-ggplot(players, aes(factor(dec.debut * 10), HT)) + geom_boxplot(fill = "red3") + theme_bw() + labs(x = "Decade debuted", y = "Height (cm)", title = "Height distribution by decade of debut")
+```{r fig.width=10, fig.height=7}
+players %>%
+  mutate(dec.debut = factor(dec.debut * 10)) %>%
+  filter(!is.na(dec.debut)) %>%
+  ggplot(aes(dec.debut, HT)) + 
+    geom_boxplot(fill = "red3") + 
+    labs(x = "Decade debuted",
+         y = "Height (cm)", 
+         title = "Height distribution by decade of debut")
 ```
 
 Median height of players who debuted in the 1890s was `r median(subset(players, dec.debut == 189)$HT, na.rm = TRUE)` cm. Median height has increased with time to `r median(subset(players, dec.debut == 201)$HT, na.rm = TRUE)` cm for players who debuted this decade, the 2010s.
 
 The same analysis for weight. Obviously taller players are also heavier.
-```{r warning=FALSE, message=FALSE, tidy=TRUE, fig.width=10, fig.height=7}
-ggplot(players, aes(factor(dec.debut * 10), WT)) + geom_boxplot(fill = "red3") + theme_bw() + labs(x = "Decade debuted", y = "Weight (kg)", title = "Weight distribution by decade of debut")
+```{r fig.width=10, fig.height=7}
+players %>%
+  mutate(dec.debut = factor(dec.debut * 10)) %>%
+  filter(!is.na(dec.debut)) %>%
+  ggplot(aes(dec.debut, WT)) + 
+    geom_boxplot(fill = "red3") + 
+    labs(x = "Decade debuted",
+         y = "Weight (kg)", 
+         title = "Weight distribution by decade of debut")
 ```
 
 Median weight has increased from `r median(subset(players, dec.debut == 189)$WT, na.rm = TRUE)` kg for players debuting in the 1890s to `r median(subset(players, dec.debut == 201)$WT, na.rm = TRUE)` kg this decade.
 
 For a bit of fun, we can calculate body mass index (BMI). For normal people values greater than 25 are considered overweight, so we'll colour those values.
-```{r warning=FALSE, message=FALSE, tidy=TRUE, fig.width=10, fig.height=7}
-bmi <- players$WT / (players$HT/100) ^ 2
-bmi.cat <- cut(bmi, breaks = c(1, 15, 16, 18.5, 25, 30, 35, 40, 41), right = FALSE, labels = c("very severely underweight", "severely underweight", "underweight", "normal", "overweight", "moderately obese", "severely obese", "very severely obese"))
-ggplot(players, aes(factor(dec.debut * 10), y = bmi)) + geom_jitter(aes(color = bmi.cat)) + geom_smooth(aes(group = 1)) + theme_bw() + scale_color_manual(values = c("grey", "orange", "red"), name = "BMI category") + labs(x = "Decade debuted", y = "BMI", title = "Body mass index distribution by decade of debut")
+```{r fig.width=10, fig.height=7}
+players %>%
+  mutate(dec.debut = factor(dec.debut * 10),
+         bmi = WT/(HT/100) ^ 2,
+         bmi.cat = cut(bmi, breaks = c(1, 15, 16, 18.5, 25, 30, 35, 40, 41), right = FALSE, labels = c("very severely underweight", "severely underweight", "underweight", "normal", "overweight", "moderately obese", "severely obese", "very severely obese"))) %>%
+  filter(!is.na(dec.debut)) %>%
+  ggplot(aes(dec.debut, bmi)) + 
+    geom_jitter(aes(color = bmi.cat)) + 
+    geom_smooth(aes(group = 1)) + 
+    scale_color_manual(values = c("grey", "orange", "red"), 
+                       name = "BMI category") + 
+  labs(x = "Decade debuted", 
+       y = "BMI", 
+       title = "Body mass index distribution by decade of debut")
 ```
 
-Athlete are not normal people, since muscle contributes much more to their body mass. Several versions of a BMI calculation modified for athletes have been proposed, including this one.
-```{r warning=FALSE, message=FALSE, tidy=TRUE, fig.width=10, fig.height=7}
-bmi.ath <- 1.3 * players$WT / (players$HT/100) ^ 2.5
-bmi.cat <- cut(bmi.ath, breaks = c(1, 15, 16, 18.5, 25, 30, 35, 40, 41), right = FALSE, labels = c("very severely underweight", "severely underweight", "underweight", "normal", "overweight", "moderately obese", "severely obese", "very severely obese"))
-ggplot(players, aes(factor(dec.debut * 10), y = bmi.ath)) + geom_jitter(aes(color = bmi.cat)) + geom_smooth(aes(group = 1)) + theme_bw() + scale_color_manual(values = c("grey", "orange", "red"), name = "BMI category") + labs(x = "Decade debuted", y = "corrected BMI", title = "Corrected body mass index distribution by decade of debut")
+Athletes are not normal people, since muscle contributes much more to their body mass. Several versions of a BMI calculation modified for athletes have been proposed, including this one.
+```{r fig.width=10, fig.height=7}
+players %>%
+  mutate(dec.debut = factor(dec.debut * 10),
+         bmi.ath = 1.3 * players$WT / (players$HT/100) ^ 2.5,
+         bmi.cat = cut(bmi.ath, breaks = c(1, 15, 16, 18.5, 25, 30, 35, 40, 41), right = FALSE, labels = c("very severely underweight", "severely underweight", "underweight", "normal", "overweight", "moderately obese", "severely obese", "very severely obese"))) %>%
+  filter(!is.na(dec.debut)) %>%
+  ggplot(aes(dec.debut, bmi.ath)) + 
+    geom_jitter(aes(color = bmi.cat)) + 
+    geom_smooth(aes(group = 1)) + 
+    scale_color_manual(values = c("grey", "orange", "red"), 
+                       name = "BMI category") + 
+  labs(x = "Decade debuted", 
+       y = "corrected BMI", 
+       title = "Corrected body mass index distribution by decade of debut")
 ```
 
 The modified version removes "obese" players, but it's doubtful that many (or even any) players are or were truly overweight - the aim here is to highlight the deficiency of BMI for athletes. It does appear that the 1980s and 1990s were a "beefier" time.
 
 **Tallest...**
-```{r results='asis', tidy=TRUE}
-print(xtable(players[which(players$HT == max(players$HT, na.rm = T)), 1:11], digits = 0), type = "html", include.rownames = FALSE)
-```
-<br />
-**...and shortest**
-```{r results='asis', tidy=TRUE}
-print(xtable(players[which(players$HT == min(players$HT, na.rm = T)), 1:11], digits = 0), type = "html", include.rownames = FALSE)
-```
-<br />
-**Heaviest...**
-```{r results='asis', tidy=TRUE}
-print(xtable(players[which(players$WT == max(players$WT, na.rm = T)), 1:11], digits = 0), type = "html", include.rownames = FALSE)
-```
-<br />
-**...and lightest**
-```{r results='asis', tidy=TRUE}
-print(xtable(players[which(players$WT == min(players$WT, na.rm = T)), 1:11], digits = 0), type = "html", include.rownames = FALSE)
+```{r}
+players %>%
+  filter(HT == max(HT, na.rm = TRUE)) %>%
+  select(Player, HT) %>%
+  pander()
 ```
 
-### 3.2 Age
+**...and shortest**
+```{r}
+players %>%
+  filter(HT == min(HT, na.rm = TRUE)) %>%
+  select(Player, HT) %>%
+  pander()
+```
+
+**Heaviest...**
+```{r}
+players %>%
+  filter(WT == max(WT, na.rm = TRUE)) %>%
+  select(Player, WT) %>%
+  pander()
+```
+
+**...and lightest**
+```{r}
+players %>%
+  filter(WT == min(WT, na.rm = TRUE)) %>%
+  select(Player, WT) %>%
+  pander()
+```
+
+## Age
 Let's look at debut age by debut decade.
-```{r warning=FALSE, message=FALSE, tidy=TRUE, fig.width=10, fig.height=7}
-age <- sapply(strsplit(players$Debut, " "), function(x) {
+```{r fig.width=10, fig.height=7}
+players <- players %>%
+  mutate(age = sapply(strsplit(Debut, " "), function(x) {
   y <- as.numeric(gsub("y", "", x[1]))
   d <- as.numeric(gsub("d", "", x[2]))
   return(y + d/365)
-})
-ggplot(players, aes(factor(dec.debut * 10), y = age)) + geom_boxplot(fill = "red3") + geom_smooth(aes(group = 1)) + theme_bw() + labs(x = "Decade debuted", y = "Age at debut (years)", title = "Debut age distribution by decade of debut")
+}))
+
+players %>%
+  mutate(dec.debut = factor(dec.debut * 10)) %>%
+  ggplot(aes(dec.debut, age)) + 
+    geom_boxplot(fill = "red3") + 
+    geom_smooth(aes(group = 1)) + 
+    labs(x = "Decade debuted", 
+         y = "Age at debut (years)", 
+         title = "Debut age distribution by decade of debut")
 ```
 
 There may be a slight downwards trend. There's also an interesting dip in debut age from the 1950s to the 1970s.
 
 **The oldest on debut...**
-```{r results='asis', tidy=TRUE}
-print(xtable(players[which(age == max(age, na.rm = TRUE)), 1:11], digits = 0), type = "html", include.rownames = FALSE)
-```
-<br />
-**...and the youngest**
-```{r results='asis', tidy=TRUE}
-print(xtable(players[which(age == min(age, na.rm = TRUE)), 1:11], digits = 0), type = "html", include.rownames = FALSE)
+```{r}
+players %>%
+  filter(age == max(age, na.rm = TRUE)) %>%
+  select(Player, age) %>%
+  pander()
 ```
 
-## 4. Names & Numbers
-### 4.1 Common names
+**...and the youngest**
+```{r}
+players %>%
+  filter(age == min(age, na.rm = TRUE)) %>%
+  select(Player, age) %>%
+  pander()
+```
+
+# Names & Numbers
+## Common names
 We can split names into first names and surnames. Lots of simple, "old-fashioned" names in the top 10: Jack, Bill, John and Jim.
-```{r tidy=TRUE, warning=FALSE, message=FALSE, fig.width=10, fig.height=7}
-firstnames <- sapply(strsplit(players$Player, ", "), function(x) x[2])
-first.10 <- as.data.frame(rev(tail(sort(table(firstnames)), 10)))
-colnames(first.10)[1] <- "count"
-ggplot(first.10, aes(x = reorder(rownames(first.10), count), y = count)) + geom_bar(stat = "identity", fill = "red3") + theme_bw() + labs(x = "Name", title = "Top 10 player first names") + coord_flip()
+```{r}
+players %>% 
+  mutate(firstname = str_match(Player, ",\\s+(.*?)$")[, 2]) %>% 
+  count(firstname) %>% 
+  top_n(10, n) %>% 
+  arrange(desc(n)) %>% 
+  pander()
 ```
 
 I'd guess that the top 10 surnames are probably what you'd expect from the general populations of the time.
-```{r tidy=TRUE, warning=FALSE, message=FALSE, fig.width=10, fig.height=7}
-surnames <- sapply(strsplit(players$Player, ", "), function(x) x[1])
-last.10 <- as.data.frame(rev(tail(sort(table(surnames)), 10)))
-colnames(last.10)[1] <- "count"
-ggplot(last.10, aes(x = reorder(rownames(last.10), count), y = count)) + geom_bar(stat = "identity", fill = "red3") + theme_bw() + labs(x = "Name", title = "Top 10 player surnames") + coord_flip()
+```{r }
+players %>% 
+  mutate(surname = str_match(Player, "^(.*?),")[, 2]) %>% 
+  count(surname) %>% 
+  top_n(10, n) %>% 
+  arrange(desc(n)) %>%
+  pander()
 ```
 
 Just take care that when discussing the superstars Franklin, Goodes and Tippett, you're not talking about Bob/Tony, Reg or Peter.
 
-```{r tidy=TRUE, results='asis'}
-stars <- players[grep("Goodes|Franklin|Tippett", players$Player), 1:11]
-print(xtable(stars[order(stars$Player), 1:11], digits = 0), type = "html", include.rownames = FALSE)
+```{r, results='asis'}
+players %>%
+  filter(grepl("Goodes|Franklin|Tippett", Player)) %>%
+  select(Player, DOB, Seasons) %>%
+  arrange(Player) %>%
+  pander()
 ```
 
-### 4.2 Number usage
+## Number usage
 Who gets what number is clearly a complex business with many factors at play. We can see that most Swans numbers fall into two main blocks, with usage dropping away from around number 34 and up.
-```{r tidy=TRUE, warning=FALSE, message=FALSE, fig.width=10, fig.height=7}
-number <- as.numeric(players$`#`)
-ggplot(players, aes(number)) + geom_histogram(binwidth = 1, fill = "red3") + theme_bw()
+```{r fig.width=10, fig.height=7}
+players %>%
+  mutate(number = as.numeric(`#`)) %>%
+  ggplot(aes(x = number)) + 
+    geom_histogram(binwidth = 1, fill = "red3")
 ```
 
-The most used number is `r names(table(number)[which(table(number) == max(table(number)))])`, taken by `r max(table(number))` players. Numbers used only once: `r names(table(number)[which(table(number) == min(table(number)))])`.
+The most used number:
+```{r}
+players %>% 
+  mutate(number = as.numeric(`#`)) %>% 
+  filter(!is.na(number)) %>% 
+  count(number) %>% 
+  top_n(1, n) %>%
+  pander()
+```
 
-### 4.3 Last use of numbers
+Numbers used only once:
+```{r}
+players %>% 
+  mutate(number = as.numeric(`#`)) %>% 
+  filter(!is.na(number)) %>% 
+  count(number) %>% 
+  filter(n == 1) %>%
+  pander()
+```
+
+## Last use of numbers
 Ordering numbers by the season in which they were last used indicates the retired or "resting" numbers.
 
-```{r tidy=TRUE, message=FALSE, warning=FALSE, fig.width=10, fig.height=7}
+```{r fig.width=10, fig.height=7}
 season.end <- substr(players$Seasons, nchar(players$Seasons)-3, nchar(players$Seasons))
-n1 <- data.frame(number = number, end = season.end)
+n1 <- data.frame(number = as.numeric(players$`#`), end = season.end)
 n1.agg <- aggregate(as.numeric(as.character(end)) ~ number, n1, max)
 colnames(n1.agg)[2] <- "end"
 n1.agg$number <- with(n1.agg, reorder(number, end))
-ggplot(n1.agg, aes(number, end)) + geom_point(color = "red3") + theme_bw() + labs(y = "Season", title = "Player numbers by season last used")
+
+n1.agg %>%
+  ggplot(aes(number, end)) + 
+    geom_point(color = "red3") + 
+    labs(y = "Season", 
+         title = "Player numbers by season last used")
 ```
