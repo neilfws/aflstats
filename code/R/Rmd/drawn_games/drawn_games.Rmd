@@ -2,7 +2,9 @@
 title: "AFL/VFL Drawn Games"
 author: "Neil Saunders"
 date: "compiled `r Sys.time()`"
-output: 
+output:
+  github_document:
+    toc: true
   html_document: 
     keep_md: yes
     number_sections: yes
@@ -10,29 +12,31 @@ output:
     toc_float: yes
 ---
 
-```{r setup, include=FALSE, cache=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-library(tidyr)
-library(plyr)
-library(dplyr)
-library(knitr)
-library(lubridate)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      message = FALSE)
+library(tidyverse)
+library(pander)
 
-games <- readLines("http://afltables.com/afl/stats/biglists/bg8.txt") %>%
+games <- readLines("https://afltables.com/afl/stats/biglists/bg8.txt") %>%
   .[3:length(.)] %>% 
   strsplit("\\s{2,}", perl = TRUE) %>%
-  ldply() %>%
-  dplyr::rename("game" = V1, "Date" = V2, "round" = V3, "team1" = V4, "score1" = V5, "team2" = V6, "score2" = V7, "venue" = V8) %>%
+  do.call(rbind, .) %>%
+  as.tibble() %>%
+  rename("game" = V1, "Date" = V2, "round" = V3, "team1" = V4, "score1" = V5, "team2" = V6, "score2" = V7, "venue" = V8) %>%
   mutate(Year = as.numeric(substring(Date, nchar(Date) - 3, nchar(Date))))
 ```
 
 # Questions
 Compiled by user *Thunder Shaker* on the [RWO Swans Fan Forum](http://www.redandwhiteonline.com/forum/showthread.php/43085-Lies-damned-lies-and-statistics?p=732150&viewfull=1#post732150).
 
-[Published report at RPubs](http://rpubs.com/neilfws/292080).
 
 ## How many drawn games have there been?
-`r games %>% nrow()`.
+
+```{r q1}
+nrow(games)
+```
 
 ## Which club has been involved in the greatest number of drawn games?
 ```{r q2}
@@ -40,47 +44,47 @@ games %>%
   select(team1, team2)  %>% 
   gather(team, name) %>% 
   count(name)  %>% 
+  top_n(10, n) %>%
   arrange(desc(n)) %>% 
-  slice(1:10) %>%
-  kable()
+  pander()
 ```
 
 ## Which two clubs have been involved in the most draws with each other? (Two correct answers)
 ```{r q3}
 games %>% 
   mutate(teams = apply(games[, c("team1", "team2")], 1, function(x) paste(sort(x), collapse = "/"))) %>% 
-  count(teams) %>% 
+  count(teams) %>%
+  top_n(10) %>%
   arrange(desc(n)) %>% 
-  slice(1:10) %>%
-  kable()
+  pander()
 ```
 
 ## Which current club has played the most games since their last draw?
 ```{r q4}
 games %>% 
-  mutate(Date = as_date(Date, "%d-%b-%Y")) %>% 
+  mutate(Date = as.Date(Date, "%d-%b-%Y")) %>% 
   select(team1, team2, round, Date) %>% 
   gather(team, name, -round, -Date) %>% 
   arrange(name, Date) %>% 
-  mutate(diff = as_date(Sys.Date()) - Date) %>% 
+  mutate(diff = as.Date(Sys.Date()) - Date) %>% 
   filter(diff >= 0) %>% 
   group_by(name) %>% 
   summarise(mindiff = min(diff)) %>%
   arrange(desc(mindiff)) %>%
-  kable()
+  pander()
 ```
 
 ## GWS has played two draws in a row. How many times has this happened in the same season?
 ```{r q5}
 games %>% 
-  mutate(Date = as_date(Date, "%d-%b-%Y")) %>% 
+  mutate(Date = as.Date(Date, "%d-%b-%Y")) %>% 
   select(team1, team2, round, Date) %>% 
   gather(team, name, -round, -Date) %>% 
   arrange(name, Date) %>% 
   mutate(diff = Date - lag(Date)) %>% 
   filter(diff >= 0, diff <= 8) %>% 
   arrange(name, diff) %>%
-  kable()
+  pander()
 ```
 
 ## Which season has had the greatest number of drawn games?
@@ -89,7 +93,7 @@ games %>%
   count(Year) %>% 
   arrange(desc(n)) %>%
   slice(1) %>%
-  kable()
+  pander()
 ```
 
 ## What was the highest score in a drawn game?
@@ -97,22 +101,24 @@ games %>%
 games %>% 
   mutate(total = as.numeric(sapply(strsplit(score1, "\\."), function(x) x[3]))) %>%
   arrange(desc(total)) %>% 
-  slice(1) %>% kable()
+  slice(1) %>% pander()
 ```
 
 ## How many drawn finals have there been?
 ```{r q8}
 games %>%
   filter(grepl("F", round)) %>%
-  kable()
+  pander()
 ```
 
 ## Which two clubs were involved in the first draw in the 1897 season?
 ```{r q9}
 games %>% 
   slice(1) %>%
-  kable()
+  pander()
 ```
 
 ## In what season did South Melbourne make the finals because they had drawn a game?
+Can't calculate this one, you have to look it up.
+
  [1977](http://australianfootball.com/articles/view/Drawing%2Bthe%2Bbest%2Bconclusion/177)
