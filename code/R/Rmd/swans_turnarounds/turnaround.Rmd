@@ -9,108 +9,84 @@ output:
     keep_md: yes
 ---
 
-```{r echo = FALSE, eval = FALSE}
-library(codetools)
-load("~/Dropbox/projects/github_projects/aflstats/data/swans.RData")
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      message = FALSE)
+library(tidyverse)
+library(rvest)
+library(lubridate)
+library(pander)
+
+theme_set(theme_bw())
+
+swans <- read_html("https://afltables.com/afl/teams/swans/allgames.html") %>% 
+  html_table(fill = TRUE, header = FALSE) %>% 
+  bind_rows() %>% 
+  filter(!X1 %in% c("Rnd", "Totals", "Averages")) %>%
+  rename(rnd = X1, type = X2, opponent = X3, scoring_for = X4, points_for = X5, 
+         scoring_against = X6, points_against = X7, result = X8, margin = X9, wdl = X10, 
+         venue = X11, crowd = X12, date = X13) %>% 
+  mutate(points_for = as.numeric(points_for), 
+         points_against = as.numeric(points_against), 
+         margin = as.numeric(margin), 
+         crowd = as.numeric(crowd), 
+         date = dmy_hm(date))
 ```
 
-## Introduction
+# Introduction
 
 How many times have the Swans come from behind going into the last quarter to win? Or been in front, but then gone on to lose? In each case, what were the biggest swings in the scoreline?
 
-## Getting the data
+# Getting the data
 
-First, we define a function to download and process Swans game data from [AFL Tables](http://afltables.com).
+We download and process Swans game data from [AFL Tables](http://afltables.com).
 
-```{r}
-allGames <- function(team) {
-  require(XML)
-  require(plyr)
-  games <- readHTMLTable(paste("https://afltables.com/afl/teams/", team, "/allgames.html", sep = ""), stringsAsFactors = FALSE)
-  # fix for 2 "Scoring" columns
-  for(i in 1:length(games)) {
-    colnames(games[[i]])[c(4,6)] <- c("Scoring.F", "Scoring.A")
-    }
-  games <- ldply(games, rbind)
-  games$.id <- NULL
-  games$F <- as.numeric(games$F)
-  games$A <- as.numeric(games$A)
-  games$Crowd <- as.numeric(games$Crowd)
-  return(games)
-}
-```
+There are currently `r nrow(swans)` of them.
 
-Now we can fetch all Swans games.
-
-```{r}
-team.games <- allGames("swans")
-```
-
-There are currently `r nrow(team.games)` of them.
-
-## Scores for Q3 and Q4
-
-We need 4 values: total score (for and against) at the end of Q3 and the same for the end of Q4. Another function:
-
-```{r}
-allGamesQuarterScore <- function(games, quarter = 4, who = "Scoring.F") {
-  stopifnot(who == "Scoring.F" || who == "Scoring.A")
-  score    <- games[[who]]
-  quarters <- strsplit(score, " ")
-  qchoose  <- sapply(quarters, function(x) x[quarter])
-  total    <- sapply(strsplit(qchoose, "\\."), function(x) 6 * as.numeric(x[1]) + as.numeric(x[2]))
-  return(total)
-}
-```
-
-Let's make a new data frame, q34, with 4 columns: Q3 scores for/against, Q4 scores for/against.
-
-```{r}
-q34 <- data.frame(q3.f = allGamesQuarterScore(team.games, 3, "Scoring.F"),
-                  q3.a = allGamesQuarterScore(team.games, 3, "Scoring.A"),
-                  q4.f = allGamesQuarterScore(team.games, 4, "Scoring.F"),
-                  q4.a = allGamesQuarterScore(team.games, 4, "Scoring.A")
-                  )
-```
-
-To calculate turnarounds, we subtract the difference (Q3.F - Q3.A) from (Q4.F - Q4.A).
-
-```{r}
-q34$diff <- (q34$q4.f - q34$q4.a) - (q34$q3.f - q34$q3.a)
-head(q34)
-```
-
+# Analysis
 ## Come from behind at Q3 to win
+We select the subset of cases where the margin is negative at the end of Q3, but the result is a win. Then we sort by the difference between Q3 and Q4 margin.
 
-We select the subset of cases where the score "for" is less than the score "against" at the end of Q3, but greater than the score "against" at the end of Q4. Then we sort by the diff column.
-
+The top 10:
 ```{r}
-wins <- subset(q34, q3.f < q3.a & q4.f > q4.a)
-wins <- wins[order(wins$diff, decreasing = TRUE),]
+swans_win <- swans %>% 
+  mutate(q3gfor = str_match(scoring_for, "^(\\d+\\.\\d+\\s+){2}(\\d+)")[, 3], 
+         q3bfor = str_match(scoring_for, "^(\\d+\\.\\d+\\s+){2}\\d+\\.(\\d+)")[, 3], 
+         q3gagainst = str_match(scoring_against, "^(\\d+\\.\\d+\\s+){2}(\\d+)")[, 3], 
+         q3bagainst = str_match(scoring_against, "^(\\d+\\.\\d+\\s+){2}\\d+\\.(\\d+)")[, 3], 
+         q3margin = (6 * as.numeric(q3gfor) + as.numeric(q3bfor)) - (6 * as.numeric(q3gagainst) + as.numeric(q3bagainst)), 
+         turnaround = margin - q3margin) %>% 
+  filter(result == "W", 
+         q3margin < 0)
+
+swans_win %>% 
+  top_n(10, turnaround) %>% 
+  arrange(desc(turnaround)) %>%
+  select(date, rnd, type, opponent, q3margin, margin) %>%
+  pander()
 ```
 
-They've come from behind to win `r nrow(wins)` times. Now we can use the row names of wins as indexes to extract the top 10 comebacks of all time from the games data.
-
-```{r}
-library(knitr)
-wins.10 <- team.games[as.numeric(rownames(wins)[1:10]),]
-#print(xtable(wins.10, digits = 0, align = "lllllrlrllrr"), type = "html", include.rownames = FALSE)
-kable(wins.10, row.names = FALSE)
-```
+They've come from behind in Q3 to win `r nrow(swans_win)` times.
 
 ## Slip from in front at Q3 to lose
-
-The procedure is very similar, except that we select the cases where score "for" is greater than "against" in Q3, but less than "against" in Q4.
-
-```{r}
-losses <- subset(q34, q3.f > q3.a & q4.f < q4.a)
-losses <- losses[order(losses$diff, decreasing = FALSE),]
-```
-
-They've thrown it away in the last quarter `r nrow(losses)` times.
+The procedure is very similar, except that we select the cases where margin is positive at the end of Q3, but the result is a loss.
 
 ```{r}
-losses.10 <- team.games[as.numeric(rownames(losses)[1:10]),]
-#print(xtable(losses.10, digits = 0, align = "lllllrlrllrr"), type = "html", include.rownames = FALSE)
-kable(losses.10, row.names = FALSE)
+swans_loss <- swans %>% 
+  mutate(q3gfor = str_match(scoring_for, "^(\\d+\\.\\d+\\s+){2}(\\d+)")[, 3], 
+         q3bfor = str_match(scoring_for, "^(\\d+\\.\\d+\\s+){2}\\d+\\.(\\d+)")[, 3], 
+         q3gagainst = str_match(scoring_against, "^(\\d+\\.\\d+\\s+){2}(\\d+)")[, 3], 
+         q3bagainst = str_match(scoring_against, "^(\\d+\\.\\d+\\s+){2}\\d+\\.(\\d+)")[, 3], 
+         q3margin = (6 * as.numeric(q3gfor) + as.numeric(q3bfor)) - (6 * as.numeric(q3gagainst) + as.numeric(q3bagainst)), 
+         turnaround = margin - q3margin) %>% 
+  filter(result == "L", q3margin > 0)
+
+swans_loss %>% 
+  top_n(10, abs(turnaround)) %>% 
+  arrange(turnaround) %>%
+  select(date, rnd, type, opponent, q3margin, margin) %>% 
+  pander()
 ```
+
+They've thrown it away in the last quarter `r nrow(swans_loss)` times.
