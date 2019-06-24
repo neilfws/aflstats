@@ -1,0 +1,137 @@
+from,who,to
+Carlton,Shane McAdam,Adelaide
+Richmond,Tyson Stengle,Adelaide
+Adelaide,Mitch McGovern,Carlton
+Draft,8,Adelaide
+Draft,13,Adelaide
+Draft,16,Adelaide
+Draft,21,Adelaide
+Draft,73,Adelaide
+Draft,83,Adelaide
+Geelong,Lincoln McCarthy,Brisbane
+Fremantle,Lachie Neale,Brisbane
+Western Bulldogs,Marcus Adams,Brisbane
+Brisbane,Dayne Beams,Collingwood
+Brisbane,Sam Mayes,Port Adelaide
+Draft,18,Brisbane
+Draft,30,Brisbane
+Draft,35,Brisbane
+Draft,56,Brisbane
+Draft,78,Brisbane
+Collingwood,Alex Fasolo,Carlton
+GWS,Will Setterfield,Carlton
+Sydney,Nic Newman,Carlton
+Carlton,Nathan Kreuger,Geelong
+Draft,1,Carlton
+Draft,69,Carlton
+Draft,71,Carlton
+Draft,77,Carlton
+Western Bulldogs,Jordan Roughead,Collingwood
+Draft,41,Collingwood
+Draft,44,Collingwood
+Draft,51,Collingwood
+Draft,57,Collingwood
+Draft,93,Collingwood
+GWS,Dylan Shiel,Essendon
+Essendon,Travis Colyer,Fremantle
+Draft,34,Essendon
+Draft,66,Essendon
+Draft,84,Essendon
+Richmond,Reece Conca,Fremantle
+Melbourne,Jesse Hogan,Fremantle
+GWS,Rory Lobb,Fremantle
+Draft,14,Fremantle
+Draft,31,Fremantle
+Draft,43,Fremantle
+Draft,65,Fremantle
+Draft,81,Fremantle
+Western Bulldogs,Luke Dahlhaus,Geelong
+Sydney,Gary Rohan,Geelong
+Geelong,George Horlin-Smith,Gold Coast
+Geelong,Jackson Thurlow,Sydney
+Draft,12,Geelong
+Draft,50,Geelong
+Draft,59,Geelong
+Draft,60,Geelong
+Draft,87,Geelong
+Richmond,Anthony Miles,Gold Coast
+Richmond,Corey Ellis,Gold Coast
+Port Adelaide,Jack Hombsch, Gold Coast
+Gold Coast,Tom Lynch,Richmond
+Gold Coast,Aaron Hall,North Melbourne
+Gold Coast,Jack Scrimshaw,Hawthorn
+Gold Coast,Steven May,Melbourne
+Gold Coast,Kade Kolodjashnij,Melbourne
+Draft,2,Gold Coast
+Draft,3,Gold Coast
+Draft,6,Gold Coast
+Draft,24,Gold Coast
+Draft,29,Gold Coast
+Draft,80,Gold Coast
+GWS,Tom Scully,Hawthorn
+Draft,9,GWS
+Draft,11,GWS
+Draft,19,GWS
+Draft,25,GWS
+Draft,52,GWS
+Draft,89,GWS
+Port Adelaide,Chad Wingard,Hawthorn
+Hawthorn,Ryan Burton,Port Adelaide
+Draft,53,Hawthorn
+Draft,90,Hawthorn
+Draft,108,Hawthorn
+North Melbourne,Braydon Preuss,Melbourne
+Melbourne,Dom Tyson,North Melbourne
+Melbourne,Dean Kent,St Kilda
+Draft,23,Melbourne
+Draft,28,Melbourne
+Draft,54,Melbourne
+Draft,62,Melbourne
+Draft,91,Melbourne
+Port Adelaide,Jared Polec,North Melbourne
+Port Adelaide,Jasper Pittard,North Melbourne
+North Melbourne,Ryan Clarke,Sydney
+Draft,42,North Melbourne
+Draft,47,North Melbourne
+Draft,48,North Melbourne
+Draft,49,North Melbourne
+Draft,55,North Melbourne
+Draft,58,North Melbourne
+Draft,86,North Melbourne
+West Coast,Scott Lycett,Port Adelaide
+Draft,5,Port Adelaide
+Draft,10,Port Adelaide
+Draft,15,Port Adelaide
+Draft,85,Port Adelaide
+Richmond,Sam Lloyd,Western Bulldogs
+Draft,17,Richmond
+Draft,37,Richmond
+Draft,64,Richmond
+Draft,68,Richmond
+Draft,74,Richmond
+Draft,92,Richmond
+St Kilda,Tom Hickey,West Coast
+Draft,4,St Kilda
+Draft,36,St Kilda
+Draft,67,St Kilda
+Draft,79,St Kilda
+Draft,26,Sydney
+Draft,33,Sydney
+Draft,38,Sydney
+Draft,39,Sydney
+Draft,40,Sydney
+Draft,70,Sydney
+Draft,88,Sydney
+Draft,20,West Coast
+Draft,22,West Coast
+Draft,61,West Coast
+Draft,72,West Coast
+Draft,76,West Coast
+Draft,94,West Coast
+Draft,7,Western Bulldogs
+Draft,27,Western Bulldogs
+Draft,32,Western Bulldogs
+Draft,45,Western Bulldogs
+Draft,63,Western Bulldogs
+Draft,75,Western Bulldogs
+Draft,82,Western Bulldogs
