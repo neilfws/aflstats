@@ -1,3 +1,8 @@
+library(rvest)
+library(stringr)
+library(lubridate)
+
+
 age_to_date <- function(born, age) {
   age <- str_split(age, "\\s+")
   age_year <- age[[1]][1] %>%
@@ -12,9 +17,6 @@ age_to_date <- function(born, age) {
 }
 
 player_stats <- function(u) {
-  require(rvest)
-  require(stringr)
-  require(lubridate)
   
   page <- read_html(u)
   main <- page %>%
@@ -39,7 +41,7 @@ player_stats <- function(u) {
     gsub("\\s+cm\\s+", "", .) %>%
     as.numeric()
   weight <- main %>% 
-    str_match(., "Weight:(.*?)\\n") %>% .[, 2] %>%
+    str_match(., "Weight:(.+)") %>% .[, 2] %>%
     gsub(" kg", "", .) %>%
     as.numeric()
   
