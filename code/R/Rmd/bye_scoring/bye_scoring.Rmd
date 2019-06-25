@@ -167,6 +167,15 @@ results_bye %>%
          justify = c("right", "left", "left", "left", "right", "left", "left", "left", "left"))
 ```
 
+For comparison, the away games before byes:
+
+```{r away-losses-03}
+results_bye %>% 
+  filter(Team == "Geelong", bye == "before", Status == "Away.Team") %>% 
+  pander(split.table = Inf,
+         justify = c("right", "left", "left", "left", "right", "left", "left", "left", "left"))
+```
+
 ## Odds
 We might ask of the games lost after a bye - how many were Geelong expected to win?
 

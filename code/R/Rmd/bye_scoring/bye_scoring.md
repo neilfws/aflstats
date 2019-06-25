@@ -1,7 +1,7 @@
 AFL: wins and losses after the bye
 ================
 Neil Saunders
-2019-06-25 22:46:05
+2019-06-26 08:57:50
 
 # Introduction
 
@@ -125,6 +125,18 @@ home:
 |   2012 | R13   | 2012-06-22 | S.C.G.  |    \-6 | Away.Team | Geelong | after | L      |
 |   2014 | R9    | 2014-05-17 | Subiaco |   \-32 | Away.Team | Geelong | after | L      |
 |   2017 | R13   | 2017-06-15 | Subiaco |   \-13 | Away.Team | Geelong | after | L      |
+
+For comparison, the away games before
+byes:
+
+| Season | Round | Date       | Venue             | Margin | Status    | Team    | bye    | Result |
+| -----: | :---- | :--------- | :---------------- | -----: | :-------- | :------ | :----- | :----- |
+|   2011 | R5    | 2011-04-26 | M.C.G.            |     19 | Away.Team | Geelong | before | W      |
+|   2011 | R21   | 2011-08-14 | Football Park     |     11 | Away.Team | Geelong | before | W      |
+|   2012 | R11   | 2012-06-08 | Docklands         |     12 | Away.Team | Geelong | before | W      |
+|   2013 | R11   | 2013-06-08 | Sydney Showground |     59 | Away.Team | Geelong | before | W      |
+|   2016 | R14   | 2016-06-25 | Docklands         |    \-3 | Away.Team | Geelong | before | L      |
+|   2019 | R12   | 2019-06-07 | M.C.G.            |     67 | Away.Team | Geelong | before | W      |
 
 ## Odds
 
