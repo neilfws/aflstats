@@ -1,0 +1,193 @@
+---
+title: 'AFL: wins and losses after the bye'
+author: "Neil Saunders"
+date: "`r Sys.time()`"
+output:
+  github_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(readxl)
+library(broom)
+library(lubridate)
+library(fitzRoy)
+library(pander)
+
+theme_set(theme_bw())
+
+```
+
+# Introduction
+Geelong have not won a game after the bye since 2011. Is this unusual? Can we shed any light as to why?
+
+# Data
+Our data comes from two sources:
+
+- `fitzRoy::get_match_results()`
+- AFL historical odds in Excel format [available from here](http://www.aussportsbetting.com/data/historical-afl-results-and-odds-data/)
+
+```{r get-data, cache=TRUE}
+results <- get_match_results()
+
+afl_odds <- read_excel("../../../../data/afl.xlsx", 
+    col_types = c("date", "text", "text", 
+        "text", "text", "numeric", "numeric", 
+        "text", "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "text"), skip = 1) %>% 
+  select(Date, Home.Team = `Home Team`, Away.Team = `Away Team`, Venue, Home.Odds = `Home Odds`, Away.Odds = `Away Odds`)
+```
+
+# Processing
+First question: when asking whether wins/losses after the bye are unusual, we need to ask "compared with what?"
+
+For this study we'll compare the round before the bye with the week after.
+
+```{r results-to-bye}
+results_bye <- results %>% 
+  select(Season, Round, Date, Venue, Home.Team, Away.Team, Margin) %>% 
+  gather(Status, Team, -Season, -Round, -Margin, -Date, -Venue) %>% 
+  filter(Season > 2010, grepl("^R", Round)) %>% 
+  separate(Round, into = c("prefix", "suffix"), sep = 1) %>% 
+  mutate(suffix = as.numeric(suffix)) %>% 
+  arrange(Season, Team, suffix) %>%
+  group_by(Season, Team) %>% 
+  mutate(bye = case_when(
+    suffix - lead(suffix) == -2 ~ "before",
+    suffix - lag(suffix) == 2 ~ "after",
+    TRUE ~ as.character(suffix)
+  ),
+  Margin = ifelse(Status == "Away.Team", -Margin, Margin)) %>% 
+  ungroup() %>% 
+  filter(bye %in% c("before", "after")) %>% 
+  mutate(Result = case_when(
+    Margin > 0 ~ "W",
+    Margin < 0 ~ "L",
+    TRUE ~ "D"
+  )) %>% 
+  unite(Round, prefix, suffix, sep = "")
+```
+
+A very long dplyr/tidyr chain gives us the relevant games. `r results_bye %>% distinct(Date, Venue) %>% nrow()` games have been played either side of a bye since 2011. Of these, `r results_bye %>% group_by(Date, Venue) %>% filter(n() == 1) %>% nrow()` games involved one team in the bye, and `r results_bye %>% group_by(Date, Venue) %>% filter(n() == 2) %>% nrow()/2` involved both teams in the bye.
+
+# Analysis
+
+## Visualisation
+Let's confirm that Geelong have indeed not won a game after a bye since 2011:
+
+```{r plot-win-loss-01}
+results_bye %>% 
+  filter(Team == "Geelong") %>% 
+  pander(split.table = Inf,
+         justify = c("right", "left", "left", "left", "right", "left", "left", "left", "left"))
+```
+
+Various ways to visualise this:
+
+```{r plot-win-loss-02}
+results_bye %>% 
+  count(Team, Status, bye, Result) %>% 
+  mutate(bye = factor(bye, levels = c("before", "after"))) %>% 
+  ggplot(aes(bye, n)) + 
+  geom_col(aes(fill = Result)) + 
+  facet_wrap(~Team, ncol = 6) +
+  scale_fill_manual(values = c("yellow2", "steelblue3"))
+```
+
+## Fisher exact test
+We'll try a Fisher exact test to compare the win/loss count before the bye with the count after the bye.
+
+The result is significant for Geelong alone at _p_ < 0.05, albeit with a very wide confidence interval.
+
+```{r run-fisher-test}
+results_bye %>% 
+  count(Team, bye, Result) %>% 
+  nest(-Team) %>% 
+  mutate(data = map(data, . %>% spread(Result, n) %>% select(2:3)), 
+         fisher = map(data, fisher.test), 
+         summary = map(fisher, tidy)) %>% 
+  select(Team, summary) %>% 
+  unnest() %>% 
+  select(-method, -alternative) %>% 
+  arrange(p.value) %>% 
+  pander(split.table = Inf)
+```
+
+## Visualisation by home/away
+Splitting the results further by home/away is interesting: Geelong has lost all away games that occurred after a bye.
+
+The only comparable team in that respect is Port Adelaide. However, other teams have struggled to win away _before_ a bye (Brisbane), or _at home before_ a bye (Carlton, North Melbourne). Of course, some teams struggle to win regardless of venue, opponent or proximity to a bye (Gold Coast).
+
+```{r plot-win-loss-03}
+results_bye %>% 
+  count(Team, Status, bye, Result) %>% 
+  mutate(i = interaction(Status, bye, lex.order = TRUE)) %>% 
+  ggplot(aes(i, n)) + 
+  geom_col(aes(fill = Result)) +
+  facet_wrap(~Team, ncol = 6) + 
+  coord_flip() + 
+  scale_y_continuous(breaks = seq(1, 8, 2)) +
+  scale_fill_manual(values = c("yellow2", "steelblue3"))
+```
+
+Note that several of the lost post-bye away games were at venues traditionally viewed as being difficult to win at for an away team (Adelaide, Perth):
+
+```{r away-losses-01}
+results_bye %>% 
+  filter(Team == "Geelong", bye == "after", Status == "Away.Team") %>% 
+  pander(split.table = Inf,
+         justify = c("right", "left", "left", "left", "right", "left", "left", "left", "left"))
+```
+
+Also, three of the losses were against a side also coming off the bye, but playing at home:
+
+```{r away-losses-02}
+results_bye %>% 
+  group_by(Date, Venue) %>% 
+  filter(n() == 2) %>% 
+  ungroup() %>% 
+  filter(Team == "Geelong", bye == "after") %>% 
+  pander(split.table = Inf,
+         justify = c("right", "left", "left", "left", "right", "left", "left", "left", "left"))
+```
+
+## Odds
+We might ask of the games lost after a bye - how many were Geelong expected to win?
+
+For this we join the dataset with historical betting odds. Their accuracy is taken at face value.
+
+Note that Geelong have never won after a bye when expected to lose. Of their 8 losses after the bye, 2 were expected and 6 were not.
+```{r compare-expected-odds, message=FALSE}
+afl_odds %>% 
+  gather(Status, Team, 2:3) %>% 
+  filter(Team == "Geelong") %>% 
+  mutate(Date = ymd(Date)) %>% 
+  select(-Venue, -Status) %>% 
+  right_join(filter(results_bye, Team == "Geelong")) %>% 
+  mutate(Diff = ifelse(Status == "Home.Team", Home.Odds - Away.Odds, Away.Odds - Home.Odds), 
+         Expected = ifelse(Diff < 0, "W", "L")) %>% 
+  count(bye, Result, Expected) %>% 
+  pander(split.table = Inf,
+         justify = c("left", "left", "left", "right"))
+```
+
+# Conclusion
+Geelong's win/loss record after the bye does seem to be somewhat unusual. Losses after the bye compared with before are significant and unexpected.
+
+Six of the eight post-bye losses have been away games, three of which were against teams with strong records at home. Scheduling might therefore explain some of the results.
