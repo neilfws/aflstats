@@ -13,7 +13,7 @@ Located in `code/R/Rmd`.
 1. [Sydney Swans wet weather performance at the SCG](https://github.com/neilfws/aflstats/blob/master/code/R/Rmd/swans_scg_rain/scg_rain.md)
 1. [Sydney Swans/South Melbourne greatest (and worst) Q4 turnarounds](https://github.com/neilfws/aflstats/blob/master/code/R/Rmd/swans_turnarounds/turnaround.md)
 1. [Sydney Swans versus the rest](https://github.com/neilfws/aflstats/blob/master/code/R/Rmd/swans_versus_x/swans_versus_x.md)
-1. [Geelong and the bye](https://github.com/neilfws/aflstats/blob/master/code/R/Rmd/bye_scoring/bye_scoringmd)
+1. [Geelong and the bye](https://github.com/neilfws/aflstats/blob/master/code/R/Rmd/bye_scoring/bye_scoring.md)
 
 ## Scripts
 Located in `code/R/scripts`.
