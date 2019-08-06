@@ -34,7 +34,7 @@ player_stats <- function(u) {
   last <- main %>% 
     str_match(., "Last:(.*?)\\)") %>% .[, 2]
   total_games <- games %>%
-    filter(Year == "Totals") %>%
+    dplyr::filter(Year == "Totals") %>%
     .$GM
   height <- main %>% 
     str_match(., "Height:(.*?)Weight") %>% .[, 2] %>%
