@@ -4,8 +4,10 @@ library(fitzRoy)
 match_results <- lapply(2003:2021, function(x) fetch_results_afltables(x)) %>% 
   bind_rows()
 
-match_results %>% 
-  filter(Home.Team == "Carlton" | Away.Team == "Carlton") %>% 
+blues <- match_results %>% 
+  filter(Home.Team == "Carlton" | Away.Team == "Carlton")
+
+blues %>% 
   mutate(Percent = ifelse(Home.Team == "Carlton", 
                           100 * (Home.Points/Away.Points), 
                           100 * (Away.Points/Home.Points)),
