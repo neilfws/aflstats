@@ -23,7 +23,7 @@ match_results %>%
   ggplot(aes(factor(Season), Percent)) + 
     geom_boxplot(aes(fill = Coach))  + 
     geom_hline(aes(yintercept = median(Percent))) + 
-    scale_fill_brewer(palette = "Spectral") + 
+    scale_fill_brewer(palette = "Set3") + 
     labs(x = "Year", 
          y = "Percentage", 
          title = "Carlton game percentages by season under different coaches") +
