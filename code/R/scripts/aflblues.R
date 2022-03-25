@@ -42,5 +42,6 @@ blues %>%
   labs(x = "Date", 
        y = "Margin", 
        title = "Carlton game margins by coach 2003 - 2021", 
-       subtitle = "H&A season only, round 1 2003 - round 14 2021")
+       subtitle = "H&A season only, round 1 2003 - round 23 2021") +
+  theme_bw()
 
