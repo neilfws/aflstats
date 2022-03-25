@@ -1,0 +1,150 @@
+---
+title: "How often has the same team lineup played a game of V/AFL?"
+author: "Neil Saunders"
+date: "compiled `r Sys.time()`"
+output:
+  html_document:
+    number_sections: yes
+    toc: yes
+    toc_float: yes
+    keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+
+library(tidyverse)
+library(fitzRoy)
+library(lubridate)
+library(knitr)
+library(kableExtra)
+
+# get data
+afldata <- fitzRoy::get_fryzigg_stats()
+
+join_teams <- function(first_team, last_team) {
+
+  teams <- list(first_team, last_team)
+
+  teams <- lapply(teams, function(x) {
+    x %>% 
+    str_split(";") %>% 
+    .[[1]] %>% 
+    as.numeric() %>% 
+    sort()
+  }
+  )
+  
+  players <- teams %>% 
+    unlist() %>% 
+    sort() %>% 
+    paste(collapse = ";")
+  
+  players
+}
+
+theme_set(theme_bw())
+```
+
+# Summary
+
+There have been almost 16 000 V/AFL games. How many times has a team made up of the same players played in a game?
+
+# Generate and count the lineups
+
+We start with a dataset of `r n_distinct(afldata$match_id)` V/AFL games, obtained using `fitzRoy::get_fryzigg_stats()` (which is deprecated but does what we want - gets all games in one call).
+
+We group by game ID and team. This lets us create the team list by sorting player IDs and combining them into a string. We need to sort, otherwise the same players in a different order won't count as the same team.
+
+Now we can count the player lists and retain those that occur more than once.
+
+```{r}
+lineup_multiple_games <- afldata %>% 
+  group_by(match_id, player_team) %>% 
+  summarise(squad = paste(sort(player_id), collapse = ";")) %>% 
+  ungroup() %>% 
+  count(player_team, squad, sort = TRUE, name = "n_games") %>% 
+  filter(n_games > 1) %>% 
+  mutate(n_players = str_count(squad, ";") + 1)
+```
+
+# Join back to the original game data
+
+We repeat the procedure but group on more variables. Then we can join with the squads and their counts.
+
+```{r}
+games_same_lineup <- afldata %>% 
+  group_by(match_id, match_date, match_round, venue_name, player_team) %>% 
+  summarise(squad = paste(sort(player_id), collapse = ";")) %>% 
+  ungroup() %>% 
+  inner_join(lineup_multiple_games)
+```
+
+# Analysis
+
+## Most games
+
+What's the most games played by the same lineup of players?
+
+7, by South Melbourne (named Sydney here) in 1924.
+
+```{r}
+games_same_lineup %>% 
+  filter(n_games == max(n_games)) %>% 
+  select(-squad) %>% 
+  kable() %>% 
+  kable_styling(bootstrap_options = c("striped", "condensed"))
+```
+
+## Most games with 22 players
+
+How about the most games played by the same lineup of players in the 22 players per team era?
+
+5, which has happened for 3 teams: Sydney in 2005, Adelaide in 2016 and Brisbane in 2019.
+
+```{r}
+games_same_lineup %>% 
+  filter(n_players == 22) %>% 
+  filter(n_games == max(n_games)) %>% 
+  select(-squad) %>% 
+  kable() %>% 
+  kable_styling(bootstrap_options = c("striped", "condensed"))
+```
+
+## Games with the same lineup across seasons
+
+Has the same lineup ever played a game in more than one season?
+
+Just once: the same Western Bulldogs team played in 2005 and 2006.
+
+```{r}
+games_same_lineup %>% 
+  group_by(squad) %>% 
+  filter(n_distinct(year(match_date)) > 1) %>% 
+  ungroup() %>% 
+  select(-squad) %>% 
+  kable() %>% 
+  kable_styling(bootstrap_options = c("striped", "condensed"))
+```
+
+## Games with the same lineup for both teams
+
+Let's see if the logic is correct here.
+
+If two teams of the same players play each other, then the match ID appears twice in our dataset.
+
+If those teams play more than one game against each other then an ordered string composed of all players from both teams should be counted more than once.
+
+If we got this correct: it seems that 99 games have involved two teams of players which have played in other games, but never more than once against each other. In other words the same two opposing lineups have never played each other more than once.
+
+```{r}
+games_same_lineup %>% 
+  group_by(match_id) %>% 
+  filter(n() > 1) %>% 
+  summarise(players = join_teams(first(squad), last(squad))) %>% 
+  ungroup() %>% 
+  count(players, name = "n_games") %>% 
+  count(n_games) %>% 
+  kable() %>% 
+  kable_styling(bootstrap_options = c("striped", "condensed"))
+```
