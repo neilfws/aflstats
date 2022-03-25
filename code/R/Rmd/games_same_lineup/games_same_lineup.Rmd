@@ -3,11 +3,8 @@ title: "How often has the same team lineup played a game of V/AFL?"
 author: "Neil Saunders"
 date: "compiled `r Sys.time()`"
 output:
-  html_document:
-    number_sections: yes
-    toc: yes
-    toc_float: yes
-    keep_md: yes
+  github_document
+always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
