@@ -1,7 +1,7 @@
 How often has the same team lineup played a game of V/AFL?
 ================
 Neil Saunders
-compiled 2022-03-25 16:21:57
+compiled 2022-03-28 12:09:07
 
 # Summary
 
@@ -44,6 +44,8 @@ games_same_lineup <- afldata %>%
   ungroup() %>% 
   inner_join(lineup_multiple_games)
 ```
+
+There are 2408 games featuring the same lineup at least twice.
 
 # Analysis
 
@@ -253,6 +255,78 @@ Sydney
 </table>
 
 ## Most games with 22 players
+
+Games have involved between 18 and 23 players over the years.
+
+``` r
+games_same_lineup %>% 
+  count(n_players, name = "games") %>% 
+  kable() %>% 
+  kable_styling(bootstrap_options = c("striped", "condensed"))
+```
+
+<table class="table table-striped table-condensed" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+n_players
+</th>
+<th style="text-align:right;">
+games
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+388
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+178
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+684
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:right;">
+106
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+1029
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+23
+</td>
+</tr>
+</tbody>
+</table>
 
 How about the most games played by the same lineup of players in the 22
 players per team era?

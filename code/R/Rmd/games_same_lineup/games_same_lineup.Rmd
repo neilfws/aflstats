@@ -77,6 +77,8 @@ games_same_lineup <- afldata %>%
   inner_join(lineup_multiple_games)
 ```
 
+There are `r nrow(games_same_lineup)` games featuring the same lineup at least twice.
+
 # Analysis
 
 ## Most games
@@ -94,6 +96,15 @@ games_same_lineup %>%
 ```
 
 ## Most games with 22 players
+
+Games have involved between 18 and 23 players over the years.
+
+```{r}
+games_same_lineup %>% 
+  count(n_players, name = "games") %>% 
+  kable() %>% 
+  kable_styling(bootstrap_options = c("striped", "condensed"))
+```
 
 How about the most games played by the same lineup of players in the 22 players per team era?
 
