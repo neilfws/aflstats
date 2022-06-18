@@ -31,7 +31,8 @@ Our data comes from two sources:
 - AFL historical odds in Excel format [available from here](http://www.aussportsbetting.com/data/historical-afl-results-and-odds-data/)
 
 ```{r get-data, cache=TRUE}
-results <- get_match_results()
+results <- lapply(2011:2022, function(x) fetch_results_afltables(season = x)) %>% 
+  bind_rows()
 
 afl_odds <- read_excel("../../../../data/afl.xlsx", 
     col_types = c("date", "text", "text", 
@@ -107,7 +108,7 @@ results_bye %>%
   ggplot(aes(bye, n)) + 
   geom_col(aes(fill = Result)) + 
   facet_wrap(~Team, ncol = 6) +
-  scale_fill_manual(values = c("yellow2", "steelblue3"))
+  scale_fill_brewer(palette = "Set1")
 ```
 
 ## Fisher exact test
@@ -117,7 +118,8 @@ The result is significant for Geelong alone at _p_ < 0.05, albeit with a very wi
 
 ```{r run-fisher-test}
 results_bye %>% 
-  count(Team, bye, Result) %>% 
+  count(Team, bye, Result) %>%
+  filter(Result !=  "D") %>% 
   nest(-Team) %>% 
   mutate(data = map(data, . %>% spread(Result, n) %>% select(2:3)), 
          fisher = map(data, fisher.test), 
@@ -143,7 +145,7 @@ results_bye %>%
   facet_wrap(~Team, ncol = 6) + 
   coord_flip() + 
   scale_y_continuous(breaks = seq(1, 8, 2)) +
-  scale_fill_manual(values = c("yellow2", "steelblue3"))
+  scale_fill_brewer(palette = "Set1")
 ```
 
 Note that several of the lost post-bye away games were at venues traditionally viewed as being difficult to win at for an away team (Adelaide, Perth):
