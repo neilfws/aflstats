@@ -1,0 +1,249 @@
+---
+title: "Returning AFL coaches"
+author: "Neil Saunders"
+date: "`r Sys.time()`"
+output:
+  github_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      message = FALSE, 
+                      warning = FALSE)
+library(dplyr)
+library(stringr)
+library(tweetrmd)
+library(rvest)
+library(knitr)
+library(kableExtra)
+```
+
+# Introduction
+
+We might ask the question:
+
+```{r fetch-tweet, echo=FALSE}
+include_tweet("https://twitter.com/crow_data_sci/status/1580744416561856512")
+```
+
+Let's try to find out using data from [AFL Tables](https://afltables.com/afl/afl_index.html).
+
+# Data processing
+
+# Coaching data
+
+Coach names and links to their individual data are located [in this HTML table](https://afltables.com/afl/stats/coaches/coaches_idx.html).
+
+We can fetch and process it like so:
+
+```{r get-coaches}
+p <- read_html("https://afltables.com/afl/stats/coaches/coaches_idx.html")
+coaches <- tibble(name = p %>% 
+                    html_nodes("table a") %>% 
+                    html_text(), 
+                  link = p %>% 
+                    html_nodes("table a") %>% 
+                    html_attr("href")) %>% 
+  slice(1:378)
+```
+
+```{r preview-coaches}
+coaches %>% 
+  head(10) %>% 
+  kbl(format = "simple") %>% 
+    kable_styling(bootstrap_options = c("striped"))
+```
+
+## Counting clubs
+
+The function `count_coaches_teams()` does the following:
+
+1. Fetches the data page for a coach
+1. Extracts the names of each club coached and the years that the coach was at the club
+1. Determines whether the coach (1) left to coach another club and then returned or (2) had a break of one or more seasons then returned to the same club
+1. Returns the results
+
+```{r count-coaches-teams}
+count_coaches_teams <- function(coachhtml) {
+  coachurl <- paste0("https://afltables.com/afl/stats/coaches/", coachhtml) %>% 
+    URLencode()
+  coach_data <- coachurl %>% 
+    read_html() %>% 
+    html_table(header = FALSE) %>%
+    .[[1]] %>%
+    filter(str_detect(X1, "\\d{4}")) %>%
+    select(1:2) %>% 
+    setNames(c("year", "team"))
+  
+  team_count <- coach_data %>% 
+    mutate(from = lag(team, default = "None"), 
+           to = team,
+           year = as.numeric(year),
+           flag_same_club = ifelse(from == to, 1, 0),
+           flag_gap_year = ifelse(year - lag(year) > 1, 1, 0))
+  
+  diff_team_count <- team_count %>% 
+    filter(flag_same_club == 0) %>% 
+    count(to) %>% 
+    filter(n > 1) %>% 
+    mutate(link = coachhtml,
+           type = "return from other club")
+  
+  same_team_count <- team_count %>% 
+    filter(flag_same_club == 1,
+           flag_gap_year == 1) %>% 
+    count(to) %>% 
+    mutate(link = coachhtml,
+           type = "return to same club after break")
+  
+  output <- bind_rows(diff_team_count, same_team_count)
+  output
+}
+```
+
+## Worked examples
+
+### Mick Malthouse
+
+Coached 4 different clubs, consecutively with no breaks. Therefore `count_coaches_teams` returns no rows.
+
+```{r ex01}
+  coach_data <- "https://afltables.com/afl/stats/coaches/Mick_Malthouse.html" %>% 
+    read_html() %>% 
+    html_table(header = FALSE) %>%
+    .[[1]] %>%
+    filter(str_detect(X1, "\\d{4}")) %>%
+    select(1:2) %>% 
+    setNames(c("year", "team"))
+
+coach_data
+
+  team_count <- coach_data %>% 
+    mutate(from = lag(team, default = "None"), 
+           to = team,
+           year = as.numeric(year),
+           flag_same_club = ifelse(from == to, 1, 0),
+           flag_gap_year = ifelse(year - lag(year) > 1, 1, 0))
+
+team_count
+
+mm <- count_coaches_teams("Mick_Malthouse.html")
+
+mm
+```
+
+### Jock McHale
+
+Coached 1 club continuously with no breaks. Therefore `count_coaches_teams` returns no rows.
+
+```{r ex02}
+  coach_data <- "https://afltables.com/afl/stats/coaches/Jock_McHale.html" %>% 
+    read_html() %>% 
+    html_table(header = FALSE) %>%
+    .[[1]] %>%
+    filter(str_detect(X1, "\\d{4}")) %>%
+    select(1:2) %>% 
+    setNames(c("year", "team"))
+
+coach_data
+
+  team_count <- coach_data %>% 
+    mutate(from = lag(team, default = "None"), 
+           to = team,
+           year = as.numeric(year),
+           flag_same_club = ifelse(from == to, 1, 0),
+           flag_gap_year = ifelse(year - lag(year) > 1, 1, 0))
+
+team_count
+
+jm <- count_coaches_teams("Jock_McHale.html")
+
+jm
+```
+
+### Allan Jeans
+
+Coached 3 clubs, the first continuously, the second with a break.
+
+```{r ex03}
+  coach_data <- "https://afltables.com/afl/stats/coaches/Allan_Jeans.html" %>% 
+    read_html() %>% 
+    html_table(header = FALSE) %>%
+    .[[1]] %>%
+    filter(str_detect(X1, "\\d{4}")) %>%
+    select(1:2) %>% 
+    setNames(c("year", "team"))
+
+coach_data
+
+  team_count <- coach_data %>% 
+    mutate(from = lag(team, default = "None"), 
+           to = team,
+           year = as.numeric(year),
+           flag_same_club = ifelse(from == to, 1, 0),
+           flag_gap_year = ifelse(year - lag(year) > 1, 1, 0))
+
+team_count
+
+aj <- count_coaches_teams("Allan_Jeans.html")
+
+aj
+```
+
+### David Parkin
+
+Coached 3 clubs, returning to Carlton after a spell at Fitzroy.
+
+```{r ex04}
+  coach_data <- "https://afltables.com/afl/stats/coaches/David_Parkin.html" %>% 
+    read_html() %>% 
+    html_table(header = FALSE) %>%
+    .[[1]] %>%
+    filter(str_detect(X1, "\\d{4}")) %>%
+    select(1:2) %>% 
+    setNames(c("year", "team"))
+
+coach_data
+
+  team_count <- coach_data %>% 
+    mutate(from = lag(team, default = "None"), 
+           to = team,
+           year = as.numeric(year),
+           flag_same_club = ifelse(from == to, 1, 0),
+           flag_gap_year = ifelse(year - lag(year) > 1, 1, 0))
+
+team_count
+
+dp <- count_coaches_teams("David_Parkin.html")
+
+dp
+```
+
+These examples capture the possibilities.
+
+# Putting it all together
+
+Let's apply the function to all coaches.
+
+```{r process-all-coaches}
+teams_list <- lapply(coaches$link, count_coaches_teams)
+
+teams_list_df <- teams_list %>% 
+  bind_rows() %>% 
+  mutate(coach = gsub("(_|\\.html)", " ", link) %>% 
+           trimws()) %>% 
+  select(coach, returning_to = to, count = n, return_type = type)
+```
+
+The full list of coaches who returned to a club, either after a break or after time coaching another club.
+
+There are `r nrow(teams_list_df)` instances, involving `r n_distinct(teams_list_df$coach)` coaches, returning to `r n_distinct(teams_list_df$returning_to)` clubs.
+
+```{r finaloutput}
+teams_list_df %>% 
+  arrange(coach) %>% 
+  kbl(format = "simple") %>% 
+    kable_styling(bootstrap_options = c("striped"))
+```
+
