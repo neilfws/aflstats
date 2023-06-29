@@ -1,0 +1,251 @@
+Season,Team,Round,NextRound
+2011,Gold Coast,R1,R2
+2011,Adelaide,R2,R3
+2011,North Melbourne,R3,R4
+2011,Western Bulldogs,R4,R5
+2011,St Kilda,R4,R5
+2011,Brisbane Lions,R4,R5
+2011,Melbourne,R5,R6
+2011,Sydney,R5,R6
+2011,West Coast,R5,R6
+2011,Fremantle,R6,R7
+2011,Geelong,R6,R7
+2011,Hawthorn,R6,R7
+2011,Collingwood,R7,R8
+2011,Carlton,R8,R9
+2011,Gold Coast,R9,R10
+2011,Essendon,R10,R11
+2011,Richmond,R11,R12
+2011,Port Adelaide,R12,R13
+2011,Collingwood,R13,R14
+2011,St Kilda,R14,R15
+2011,West Coast,R15,R16
+2011,Adelaide,R16,R17
+2011,Fremantle,R16,R17
+2011,Melbourne,R16,R17
+2011,Hawthorn,R17,R18
+2011,Port Adelaide,R18,R19
+2011,Richmond,R19,R20
+2011,Sydney,R19,R20
+2011,Brisbane Lions,R19,R20
+2011,Western Bulldogs,R20,R21
+2011,North Melbourne,R21,R22
+2011,Geelong,R22,R23
+2011,Carlton,R23,R24
+2011,Essendon,R24,EF
+2012,Adelaide,R11,R12
+2012,Western Bulldogs,R11,R12
+2012,North Melbourne,R11,R12
+2012,West Coast,R11,R12
+2012,Brisbane Lions,R11,R12
+2012,GWS,R11,R12
+2012,Collingwood,R12,R13
+2012,Essendon,R12,R13
+2012,Fremantle,R12,R13
+2012,Geelong,R12,R13
+2012,Melbourne,R12,R13
+2012,Sydney,R12,R13
+2012,Carlton,R13,R14
+2012,Hawthorn,R13,R14
+2012,Port Adelaide,R13,R14
+2012,Richmond,R13,R14
+2012,St Kilda,R13,R14
+2012,Gold Coast,R13,R14
+2013,Western Bulldogs,R11,R12
+2013,Fremantle,R11,R12
+2013,Hawthorn,R11,R12
+2013,Port Adelaide,R11,R12
+2013,Richmond,R11,R12
+2013,Brisbane Lions,R11,R12
+2013,Geelong,R12,R13
+2013,Melbourne,R12,R13
+2013,North Melbourne,R12,R13
+2013,St Kilda,R12,R13
+2013,Sydney,R12,R13
+2013,West Coast,R12,R13
+2013,Adelaide,R13,R14
+2013,Carlton,R13,R14
+2013,Collingwood,R13,R14
+2013,Essendon,R13,R14
+2013,Gold Coast,R13,R14
+2013,GWS,R13,R14
+2014,Adelaide,R8,R9
+2014,Collingwood,R8,R9
+2014,Geelong,R8,R9
+2014,North Melbourne,R8,R9
+2014,Richmond,R8,R9
+2014,Gold Coast,R8,R9
+2014,Carlton,R9,R10
+2014,Western Bulldogs,R9,R10
+2014,Hawthorn,R9,R10
+2014,Port Adelaide,R9,R10
+2014,West Coast,R9,R10
+2014,GWS,R9,R10
+2014,Essendon,R10,R11
+2014,Fremantle,R10,R11
+2014,Melbourne,R10,R11
+2014,St Kilda,R10,R11
+2014,Sydney,R10,R11
+2014,Brisbane Lions,R10,R11
+2015,Adelaide,R11,R12
+2015,Carlton,R11,R12
+2015,Western Bulldogs,R11,R12
+2015,Hawthorn,R11,R12
+2015,Richmond,R11,R12
+2015,Brisbane Lions,R11,R12
+2015,Collingwood,R12,R13
+2015,Essendon,R12,R13
+2015,Fremantle,R12,R13
+2015,St Kilda,R12,R13
+2015,Sydney,R12,R13
+2015,Gold Coast,R12,R13
+2015,Geelong,R13,R15
+2015,Melbourne,R13,R14
+2015,North Melbourne,R13,R14
+2015,Port Adelaide,R13,R14
+2015,West Coast,R13,R14
+2015,GWS,R13,R14
+2016,Adelaide,R13,R14
+2016,Carlton,R13,R14
+2016,Collingwood,R13,R14
+2016,Richmond,R13,R14
+2016,St Kilda,R13,R14
+2016,Gold Coast,R13,R14
+2016,Essendon,R14,R15
+2016,Western Bulldogs,R14,R15
+2016,Melbourne,R14,R15
+2016,Port Adelaide,R14,R15
+2016,Sydney,R14,R15
+2016,West Coast,R14,R15
+2016,Fremantle,R15,R16
+2016,Geelong,R15,R16
+2016,Hawthorn,R15,R16
+2016,North Melbourne,R15,R16
+2016,Brisbane Lions,R15,R16
+2016,GWS,R15,R16
+2017,Port Adelaide,R9,R10
+2017,Gold Coast,R9,R10
+2017,Carlton,R11,R12
+2017,Western Bulldogs,R11,R12
+2017,Melbourne,R11,R12
+2017,St Kilda,R11,R12
+2017,Sydney,R11,R12
+2017,Brisbane Lions,R11,R12
+2017,Geelong,R12,R13
+2017,North Melbourne,R12,R13
+2017,Richmond,R12,R13
+2017,West Coast,R12,R13
+2017,Adelaide,R13,R14
+2017,Collingwood,R13,R14
+2017,Essendon,R13,R14
+2017,Fremantle,R13,R14
+2017,Hawthorn,R13,R14
+2017,GWS,R13,R14
+2018,Port Adelaide,R10,R11
+2018,Gold Coast,R10,R11
+2018,Carlton,R12,R13
+2018,Western Bulldogs,R12,R13
+2018,Hawthorn,R12,R13
+2018,West Coast,R12,R13
+2018,Collingwood,R13,R14
+2018,Essendon,R13,R14
+2018,Melbourne,R13,R14
+2018,North Melbourne,R13,R14
+2018,Brisbane Lions,R13,R14
+2018,GWS,R13,R14
+2018,Adelaide,R14,R15
+2018,Fremantle,R14,R15
+2018,Geelong,R14,R15
+2018,Richmond,R14,R15
+2018,St Kilda,R14,R15
+2018,Sydney,R14,R15
+2019,Essendon,R12,R13
+2019,Western Bulldogs,R12,R13
+2019,Fremantle,R12,R13
+2019,Hawthorn,R12,R13
+2019,Port Adelaide,R12,R13
+2019,St Kilda,R12,R13
+2019,Collingwood,R13,R14
+2019,Geelong,R13,R14
+2019,Melbourne,R13,R14
+2019,Sydney,R13,R14
+2019,West Coast,R13,R14
+2019,Brisbane Lions,R13,R14
+2019,Adelaide,R14,R15
+2019,Carlton,R14,R15
+2019,North Melbourne,R14,R15
+2019,Richmond,R14,R15
+2019,Gold Coast,R14,R15
+2019,GWS,R14,R15
+2020,Essendon,R3,R4
+2020,Melbourne,R3,R4
+2020,Carlton,R10,R11
+2020,Fremantle,R10,R11
+2020,Hawthorn,R10,R11
+2020,West Coast,R10,R11
+2020,Sydney,R11,R12
+2020,GWS,R11,R12
+2020,Adelaide,R14,R15
+2020,Brisbane Lions,R14,R15
+2020,Western Bulldogs,R15,R16
+2020,Geelong,R15,R16
+2020,North Melbourne,R15,R16
+2020,Port Adelaide,R15,R16
+2020,St Kilda,R15,R16
+2020,Gold Coast,R15,R16
+2020,Collingwood,R16,R17
+2020,Richmond,R16,R17
+2021,Geelong,R12,R13
+2021,Hawthorn,R12,R13
+2021,North Melbourne,R12,R13
+2021,Port Adelaide,R12,R13
+2021,Gold Coast,R12,R13
+2021,GWS,R12,R13
+2021,Carlton,R13,R14
+2021,Essendon,R13,R14
+2021,Western Bulldogs,R13,R14
+2021,Brisbane Lions,R13,R14
+2021,Adelaide,R14,R15
+2021,Collingwood,R14,R15
+2021,Fremantle,R14,R15
+2021,Melbourne,R14,R15
+2021,Richmond,R14,R15
+2021,St Kilda,R14,R15
+2021,Sydney,R14,R15
+2021,West Coast,R14,R15
+2022,Carlton,R12,R13
+2022,Essendon,R12,R13
+2022,Port Adelaide,R12,R13
+2022,Richmond,R12,R13
+2022,St Kilda,R12,R13
+2022,GWS,R12,R13
+2022,Adelaide,R13,R14
+2022,Western Bulldogs,R13,R14
+2022,Geelong,R13,R14
+2022,Sydney,R13,R14
+2022,West Coast,R13,R14
+2022,Gold Coast,R13,R14
+2022,Collingwood,R14,R15
+2022,Fremantle,R14,R15
+2022,Hawthorn,R14,R15
+2022,Melbourne,R14,R15
+2022,North Melbourne,R14,R15
+2022,Brisbane Lions,R14,R15
+2023,Brisbane Lions,R12,R13
+2023,Fremantle,R12,R13
+2023,St Kilda,R12,R13
+2023,Sydney,R12,R13
+2023,Geelong,R13,R14
+2023,Gold Coast,R13,R14
+2023,Adelaide,R14,R15
+2023,Collingwood,R14,R15
+2023,Essendon,R14,R15
+2023,Hawthorn,R14,R15
+2023,Melbourne,R14,R15
+2023,West Coast,R14,R15
+2023,Carlton,R15,R16
+2023,GWS,R15,R16
+2023,North Melbourne,R15,R16
+2023,Port Adelaide,R15,R16
+2023,Richmond,R15,R16
+2023,Western Bulldogs,R15,R16
