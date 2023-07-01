@@ -1,0 +1,245 @@
+Game,Season,Date,Round,Round.Number,Home.Points,Away.Points,HA.Name,Team,ByeRound,Margin,Result,Venue,Odds,Favourite,Opponent
+13775,2011,2011-04-02,R2,2,52,171,Home.Team,Gold Coast,R1,-119,L,Gabba,3.96,N,Carlton
+13782,2011,2011-04-09,R3,3,54,79,Home.Team,Adelaide,R2,-25,L,AAMI Stadium,1.49,Y,Fremantle
+13794,2011,2011-04-17,R4,4,127,98,Away.Team,North Melbourne,R3,-29,L,Domain Stadium,4.82,N,Fremantle
+13795,2011,2011-04-21,R5,5,76,89,Home.Team,Brisbane Lions,R4,-13,L,Gabba,3.66,N,St Kilda
+13795,2011,2011-04-21,R5,5,76,89,Away.Team,St Kilda,R4,13,W,Gabba,1.28,Y,Brisbane Lions
+13800,2011,2011-04-25,R5,5,85,78,Away.Team,Western Bulldogs,R4,-7,L,Domain Stadium,2.15,N,Fremantle
+13802,2011,2011-04-28,R6,6,106,52,Home.Team,West Coast,R5,54,W,Domain Stadium,1.56,Y,Melbourne
+13802,2011,2011-04-28,R6,6,106,52,Away.Team,Melbourne,R5,-54,L,Domain Stadium,2.41,N,West Coast
+13803,2011,2011-04-29,R6,6,71,87,Home.Team,Sydney,R5,-16,L,SCG,1.66,Y,Carlton
+13809,2011,2011-05-06,R7,7,72,104,Away.Team,Hawthorn,R6,32,W,AAMI Stadium,1.2,Y,Port Adelaide
+13811,2011,2011-05-07,R7,7,127,61,Home.Team,Geelong,R6,66,W,GMHBA Stadium,1.07,Y,North Melbourne
+13812,2011,2011-05-07,R7,7,148,99,Away.Team,Fremantle,R6,-49,L,MCG,1.64,Y,Richmond
+13817,2011,2011-05-13,R8,8,65,62,Away.Team,Collingwood,R7,-3,L,MCG,1.48,Y,Geelong
+13825,2011,2011-05-20,R9,9,100,102,Home.Team,Carlton,R8,-2,L,Marvel Stadium,2.74,N,Geelong
+13836,2011,2011-05-28,R10,10,73,139,Home.Team,Gold Coast,R9,-66,L,Metricon Stadium,12.5,N,Geelong
+13841,2011,2011-06-03,R11,11,68,101,Home.Team,Essendon,R10,-33,L,MCG,1.24,Y,Melbourne
+13854,2011,2011-06-12,R12,12,75,65,Away.Team,Richmond,R11,-10,L,SCG,3.86,N,Sydney
+13864,2011,2011-06-19,R13,13,110,88,Away.Team,Port Adelaide,R12,-22,L,Domain Stadium,8.45,N,West Coast
+13868,2011,2011-06-25,R14,14,93,99,Away.Team,Collingwood,R13,6,W,Accor Stadium,1.15,Y,Sydney
+13880,2011,2011-07-03,R15,15,70,79,Away.Team,St Kilda,R14,9,W,Marvel Stadium,1.79,Y,North Melbourne
+13881,2011,2011-07-08,R16,16,96,88,Home.Team,West Coast,R15,8,W,Domain Stadium,2.25,N,Geelong
+13888,2011,2011-07-15,R17,17,73,84,Home.Team,Adelaide,R16,-11,L,AAMI Stadium,2.05,N,Essendon
+13892,2011,2011-07-16,R17,17,113,92,Home.Team,Melbourne,R16,21,W,TIO Stadium,1.27,Y,Port Adelaide
+13893,2011,2011-07-17,R17,17,87,98,Away.Team,Fremantle,R16,11,W,SCG,3.61,N,Sydney
+13902,2011,2011-07-24,R18,18,78,132,Away.Team,Hawthorn,R17,54,W,MCG,1.21,Y,Melbourne
+13910,2011,2011-07-31,R19,19,111,79,Away.Team,Port Adelaide,R18,-32,L,AAMI Stadium,2.29,N,Adelaide
+13914,2011,2011-08-06,R20,20,100,99,Away.Team,Sydney,R19,-1,L,Marvel Stadium,1.89,N,Essendon
+13916,2011,2011-08-07,R20,20,105,110,Home.Team,Brisbane Lions,R19,-5,L,Gabba,1.68,Y,Adelaide
+13918,2011,2011-08-07,R20,20,147,90,Away.Team,Richmond,R19,-57,L,Domain Stadium,7.56,N,West Coast
+13922,2011,2011-08-13,R21,21,101,150,Home.Team,Western Bulldogs,R20,-49,L,Marvel Stadium,2.23,N,Essendon
+13931,2011,2011-08-20,R22,22,143,45,Home.Team,North Melbourne,R21,98,W,Marvel Stadium,1.34,Y,Fremantle
+13937,2011,2011-08-27,R23,23,86,99,Home.Team,Geelong,R22,-13,L,GMHBA Stadium,1.07,Y,Sydney
+13948,2011,2011-09-03,R24,24,66,86,Home.Team,Carlton,R23,-20,L,MCG,1.71,Y,St Kilda
+13954,2011,2011-09-11,EF,25,149,87,Away.Team,Essendon,R24,-62,L,MCG,2.94,N,Carlton
+14056,2012,2012-06-14,R12,12,79,69,Home.Team,West Coast,R11,10,W,Domain Stadium,1.28,Y,Carlton
+14057,2012,2012-06-15,R12,12,115,111,Home.Team,Adelaide,R11,4,W,AAMI Stadium,1.47,Y,St Kilda
+14058,2012,2012-06-16,R12,12,74,86,Home.Team,GWS,R11,-12,L,Giants Stadium,10.93,N,Richmond
+14059,2012,2012-06-16,R12,12,80,87,Away.Team,North Melbourne,R11,7,W,Metricon Stadium,1.16,Y,Gold Coast
+14060,2012,2012-06-17,R12,12,135,70,Away.Team,Brisbane Lions,R11,-65,L,MCG,8.94,N,Hawthorn
+14061,2012,2012-06-17,R12,12,95,57,Home.Team,Western Bulldogs,R11,38,W,Marvel Stadium,1.45,Y,Port Adelaide
+14062,2012,2012-06-22,R13,13,80,74,Home.Team,Sydney,R12,6,W,SCG,1.6,Y,Geelong
+14062,2012,2012-06-22,R13,13,80,74,Away.Team,Geelong,R12,-6,L,SCG,2.3,N,Sydney
+14064,2012,2012-06-23,R13,13,85,82,Home.Team,Collingwood,R12,3,W,MCG,1.4,Y,West Coast
+14065,2012,2012-06-23,R13,13,89,113,Home.Team,Fremantle,R12,-24,L,Domain Stadium,2.2,N,Essendon
+14065,2012,2012-06-23,R13,13,89,113,Away.Team,Essendon,R12,24,W,Domain Stadium,1.65,Y,Fremantle
+14066,2012,2012-06-24,R13,13,135,57,Home.Team,Melbourne,R12,78,W,MCG,1.28,Y,GWS
+14068,2012,2012-06-29,R14,14,70,120,Home.Team,Carlton,R13,-50,L,MCG,3.43,N,Hawthorn
+14068,2012,2012-06-29,R14,14,70,120,Away.Team,Hawthorn,R13,50,W,MCG,1.3,Y,Carlton
+14070,2012,2012-06-30,R14,14,106,87,Away.Team,Richmond,R13,-19,L,AAMI Stadium,2.88,N,Adelaide
+14071,2012,2012-06-30,R14,14,166,40,Away.Team,Gold Coast,R13,-126,L,Domain Stadium,19.42,N,West Coast
+14074,2012,2012-07-01,R14,14,99,61,Away.Team,Port Adelaide,R13,-38,L,GMHBA Stadium,11.25,N,Geelong
+14076,2012,2012-07-01,R14,14,103,136,Home.Team,St Kilda,R13,-33,L,Marvel Stadium,1.38,Y,North Melbourne
+14263,2013,2013-06-14,R12,12,87,102,Away.Team,Hawthorn,R11,15,W,Marvel Stadium,1.23,Y,Carlton
+14264,2013,2013-06-15,R12,12,110,72,Home.Team,Richmond,R11,38,W,MCG,1.36,Y,Adelaide
+14265,2013,2013-06-15,R12,12,86,46,Home.Team,Fremantle,R11,40,W,Domain Stadium,1.06,Y,Brisbane Lions
+14265,2013,2013-06-15,R12,12,86,46,Away.Team,Brisbane Lions,R11,-40,L,Domain Stadium,9.37,N,Fremantle
+14267,2013,2013-06-16,R12,12,50,125,Away.Team,Port Adelaide,R11,75,W,Giants Stadium,1.22,Y,GWS
+14268,2013,2013-06-16,R12,12,99,65,Away.Team,Western Bulldogs,R11,-34,L,Marvel Stadium,6.41,N,Collingwood
+14269,2013,2013-06-21,R13,13,123,103,Away.Team,West Coast,R12,-20,L,Marvel Stadium,5.17,N,Hawthorn
+14270,2013,2013-06-22,R13,13,72,54,Away.Team,Sydney,R12,-18,L,AAMI Stadium,1.1,Y,Port Adelaide
+14271,2013,2013-06-22,R13,13,104,69,Home.Team,St Kilda,R12,35,W,MCG,1.11,Y,Melbourne
+14271,2013,2013-06-22,R13,13,104,69,Away.Team,Melbourne,R12,-35,L,MCG,6.47,N,St Kilda
+14273,2013,2013-06-23,R13,13,67,29,Away.Team,North Melbourne,R12,-38,L,Domain Stadium,3.35,N,Fremantle
+14274,2013,2013-06-23,R13,13,103,98,Away.Team,Geelong,R12,-5,L,Gabba,1.14,Y,Brisbane Lions
+14275,2013,2013-06-27,R14,14,91,98,Away.Team,Essendon,R13,7,W,Domain Stadium,1.73,Y,West Coast
+14276,2013,2013-06-28,R14,14,65,43,Away.Team,Carlton,R13,-22,L,SCG,2.93,N,Sydney
+14277,2013,2013-06-29,R14,14,83,111,Home.Team,Gold Coast,R13,-28,L,Metricon Stadium,2.35,N,Adelaide
+14277,2013,2013-06-29,R14,14,83,111,Away.Team,Adelaide,R13,28,W,Metricon Stadium,1.58,Y,Gold Coast
+14278,2013,2013-06-29,R14,14,86,51,Away.Team,Collingwood,R13,-35,L,AAMI Stadium,1.39,Y,Port Adelaide
+14282,2013,2013-06-30,R14,14,130,44,Away.Team,GWS,R13,-86,L,Marvel Stadium,18.75,N,North Melbourne
+14443,2014,2014-05-15,R9,9,76,55,Home.Team,Adelaide,R8,21,W,Adelaide Oval,2.71,N,Collingwood
+14443,2014,2014-05-15,R9,9,76,55,Away.Team,Collingwood,R8,-21,L,Adelaide Oval,1.45,Y,Adelaide
+14445,2014,2014-05-17,R9,9,74,91,Home.Team,Richmond,R8,-17,L,MCG,1.18,Y,Melbourne
+14446,2014,2014-05-17,R9,9,125,38,Home.Team,North Melbourne,R8,87,W,Marvel Stadium,1.06,Y,Brisbane Lions
+14447,2014,2014-05-17,R9,9,96,64,Away.Team,Geelong,R8,-32,L,Domain Stadium,2,N,Fremantle
+14448,2014,2014-05-18,R9,9,87,125,Away.Team,Gold Coast,R8,38,W,Marvel Stadium,1.24,Y,St Kilda
+14450,2014,2014-05-24,R10,10,41,154,Home.Team,GWS,R9,-113,L,Giants Stadium,3.19,N,Richmond
+14451,2014,2014-05-24,R10,10,109,101,Away.Team,West Coast,R9,-8,L,MCG,3.48,N,Collingwood
+14452,2014,2014-05-24,R10,10,100,86,Home.Team,Port Adelaide,R9,14,W,Adelaide Oval,1.53,Y,Hawthorn
+14452,2014,2014-05-24,R10,10,100,86,Away.Team,Hawthorn,R9,-14,L,Adelaide Oval,2.46,N,Port Adelaide
+14453,2014,2014-05-25,R10,10,119,74,Away.Team,Western Bulldogs,R9,-45,L,Metricon Stadium,4.31,N,Gold Coast
+14454,2014,2014-05-25,R10,10,81,76,Home.Team,Carlton,R9,5,W,MCG,2.25,N,Adelaide
+14455,2014,2014-05-29,R11,11,148,38,Home.Team,Sydney,R10,110,W,SCG,1.39,Y,Geelong
+14456,2014,2014-05-30,R11,11,54,140,Home.Team,St Kilda,R10,-86,L,Marvel Stadium,8.45,N,Collingwood
+14457,2014,2014-05-31,R11,11,75,95,Home.Team,Melbourne,R10,-20,L,Traeger Park,6.04,N,Port Adelaide
+14458,2014,2014-05-31,R11,11,98,91,Home.Team,Brisbane Lions,R10,7,W,Gabba,2.86,N,Carlton
+14459,2014,2014-05-31,R11,11,104,54,Home.Team,Essendon,R10,50,W,MCG,1.68,Y,Richmond
+14461,2014,2014-06-01,R11,11,51,89,Away.Team,Fremantle,R10,38,W,Marvel Stadium,1.15,Y,Western Bulldogs
+14677,2015,2015-06-18,R12,12,85,114,Home.Team,Adelaide,R11,-29,L,Adelaide Oval,2.99,N,Hawthorn
+14677,2015,2015-06-18,R12,12,85,114,Away.Team,Hawthorn,R11,29,W,Adelaide Oval,1.4,Y,Adelaide
+14678,2015,2015-06-19,R12,12,70,90,Home.Team,Richmond,R11,-20,L,MCG,1.88,Y,West Coast
+14679,2015,2015-06-20,R12,12,110,106,Home.Team,Carlton,R11,4,W,MCG,3.21,N,Port Adelaide
+14681,2015,2015-06-20,R12,12,146,74,Home.Team,Western Bulldogs,R11,72,W,Marvel Stadium,1.29,Y,Brisbane Lions
+14681,2015,2015-06-20,R12,12,146,74,Away.Team,Brisbane Lions,R11,-72,L,Marvel Stadium,3.68,N,Western Bulldogs
+14683,2015,2015-06-25,R13,13,80,73,Home.Team,Fremantle,R12,7,W,Domain Stadium,1.33,Y,Collingwood
+14683,2015,2015-06-25,R13,13,80,73,Away.Team,Collingwood,R12,-7,L,Domain Stadium,3.34,N,Fremantle
+14684,2015,2015-06-26,R13,13,77,95,Home.Team,Sydney,R12,-18,L,SCG,1.34,Y,Richmond
+14685,2015,2015-06-27,R13,13,114,76,Away.Team,Essendon,R12,-38,L,MCG,9.26,N,Hawthorn
+14687,2015,2015-06-27,R13,13,56,62,Home.Team,St Kilda,R12,-6,L,Marvel Stadium,2.55,N,Western Bulldogs
+14688,2015,2015-06-28,R13,13,103,69,Away.Team,Gold Coast,R12,-34,L,Marvel Stadium,2.88,N,Carlton
+14689,2015,2015-07-02,R14,14,94,84,Away.Team,Port Adelaide,R13,-10,L,SCG,2.76,N,Sydney
+14691,2015,2015-07-04,R14,14,78,69,Away.Team,GWS,R13,-9,L,MCG,4.87,N,Richmond
+14692,2015,2015-07-04,R14,14,125,70,Away.Team,North Melbourne,R13,-55,L,Metricon Stadium,1.27,Y,Gold Coast
+14694,2015,2015-07-04,R14,14,60,114,Home.Team,Melbourne,R13,-54,L,TIO Stadium,4.53,N,West Coast
+14694,2015,2015-07-04,R14,14,60,114,Away.Team,West Coast,R13,54,W,TIO Stadium,1.2,Y,Melbourne
+14701,2015,2015-07-11,R15,15,120,79,Away.Team,Geelong,R13,-41,L,Marvel Stadium,1.79,Y,North Melbourne
+14901,2016,2016-06-23,R14,14,100,67,Home.Team,Adelaide,R13,33,W,Adelaide Oval,1.27,Y,North Melbourne
+14902,2016,2016-06-24,R14,14,85,37,Home.Team,Collingwood,R13,48,W,MCG,1.83,Y,Fremantle
+14903,2016,2016-06-25,R14,14,117,75,Home.Team,Richmond,R13,42,W,MCG,1.06,Y,Brisbane Lions
+14904,2016,2016-06-25,R14,14,127,65,Away.Team,Carlton,R13,-62,L,Giants Stadium,9.21,N,GWS
+14905,2016,2016-06-25,R14,14,93,90,Home.Team,St Kilda,R13,3,W,Marvel Stadium,5.3,N,Geelong
+14906,2016,2016-06-26,R14,14,86,60,Away.Team,Gold Coast,R13,-26,L,UTAS Stadium,9.61,N,Hawthorn
+14907,2016,2016-06-30,R15,15,130,52,Home.Team,West Coast,R14,78,W,Domain Stadium,1.01,Y,Essendon
+14907,2016,2016-06-30,R15,15,130,52,Away.Team,Essendon,R14,-78,L,Domain Stadium,15.93,N,West Coast
+14908,2016,2016-07-01,R15,15,94,56,Home.Team,Port Adelaide,R14,38,W,Adelaide Oval,1.35,Y,Richmond
+14910,2016,2016-07-02,R15,15,79,83,Home.Team,Sydney,R14,-4,L,SCG,1.39,Y,Western Bulldogs
+14910,2016,2016-07-02,R15,15,79,83,Away.Team,Western Bulldogs,R14,4,W,SCG,2.99,N,Sydney
+14912,2016,2016-07-03,R15,15,98,120,Home.Team,Melbourne,R14,-22,L,MCG,3.59,N,Adelaide
+14913,2016,2016-07-07,R16,16,79,101,Away.Team,Hawthorn,R15,22,W,Adelaide Oval,1.69,Y,Port Adelaide
+14914,2016,2016-07-08,R16,16,60,98,Home.Team,Geelong,R15,-38,L,GMHBA Stadium,1.37,Y,Sydney
+14915,2016,2016-07-09,R16,16,93,125,Home.Team,GWS,R15,-32,L,Giants Stadium,1.1,Y,Collingwood
+14916,2016,2016-07-09,R16,16,139,113,Away.Team,Brisbane Lions,R15,-26,L,Metricon Stadium,4.73,N,Gold Coast
+14918,2016,2016-07-09,R16,16,87,55,Away.Team,Fremantle,R15,-32,L,TIO Stadium,2.53,N,Melbourne
+14920,2016,2016-07-10,R16,16,104,72,Away.Team,North Melbourne,R15,-32,L,Domain Stadium,3.27,N,West Coast
+15074,2017,2017-05-25,R10,10,81,79,Away.Team,Port Adelaide,R9,-2,L,GMHBA Stadium,2.18,N,Geelong
+15077,2017,2017-05-27,R10,10,122,87,Away.Team,Gold Coast,R9,-35,L,Traeger Park,3.1,N,Melbourne
+15089,2017,2017-06-08,R12,12,88,42,Home.Team,Sydney,R11,46,W,SCG,1.74,Y,Western Bulldogs
+15089,2017,2017-06-08,R12,12,88,42,Away.Team,Western Bulldogs,R11,-46,L,SCG,2.07,N,Sydney
+15090,2017,2017-06-09,R12,12,111,54,Away.Team,St Kilda,R11,-57,L,Adelaide Oval,5.65,N,Adelaide
+15092,2017,2017-06-10,R12,12,121,64,Home.Team,Brisbane Lions,R11,57,W,Gabba,2.31,N,Fremantle
+15094,2017,2017-06-11,R12,12,71,70,Home.Team,Carlton,R11,1,W,Marvel Stadium,4.15,N,GWS
+15095,2017,2017-06-12,R12,12,104,100,Home.Team,Melbourne,R11,4,W,MCG,1.57,Y,Collingwood
+15096,2017,2017-06-15,R13,13,83,70,Home.Team,West Coast,R12,13,W,Domain Stadium,2.2,N,Geelong
+15096,2017,2017-06-15,R13,13,83,70,Away.Team,Geelong,R12,-13,L,Domain Stadium,1.67,Y,West Coast
+15097,2017,2017-06-16,R13,13,72,89,Home.Team,North Melbourne,R12,-17,L,Marvel Stadium,1.99,N,St Kilda
+15098,2017,2017-06-17,R13,13,71,80,Home.Team,Richmond,R12,-9,L,MCG,1.95,N,Sydney
+15102,2017,2017-06-22,R14,14,82,96,Home.Team,Adelaide,R13,-14,L,Adelaide Oval,1.08,Y,Hawthorn
+15102,2017,2017-06-22,R14,14,82,96,Away.Team,Hawthorn,R13,14,W,Adelaide Oval,7.48,N,Adelaide
+15103,2017,2017-06-23,R14,14,86,85,Away.Team,Essendon,R13,-1,L,SCG,3.07,N,Sydney
+15104,2017,2017-06-24,R14,14,62,93,Home.Team,Collingwood,R13,-31,L,MCG,1.95,N,Port Adelaide
+15105,2017,2017-06-24,R14,14,86,146,Away.Team,GWS,R13,60,W,Gabba,1.23,Y,Brisbane Lions
+15108,2017,2017-06-25,R14,14,74,72,Away.Team,Fremantle,R13,-2,L,GMHBA Stadium,10.14,N,Geelong
+15292,2018,2018-06-02,R11,11,64,61,Away.Team,Port Adelaide,R10,-3,L,UTAS Stadium,1.81,Y,Hawthorn
+15293,2018,2018-06-02,R11,11,36,121,Home.Team,Gold Coast,R10,-85,L,Metricon Stadium,3.38,N,Geelong
+15306,2018,2018-06-14,R13,13,132,75,Away.Team,Western Bulldogs,R12,-57,L,Adelaide Oval,6.94,N,Port Adelaide
+15307,2018,2018-06-15,R13,13,72,57,Away.Team,West Coast,R12,-15,L,SCG,2.63,N,Sydney
+15308,2018,2018-06-16,R13,13,46,103,Home.Team,Carlton,R12,-57,L,Marvel Stadium,2.09,N,Fremantle
+15310,2018,2018-06-16,R13,13,88,32,Home.Team,Hawthorn,R12,56,W,MCG,1.41,Y,Adelaide
+15312,2018,2018-06-21,R14,14,52,80,Away.Team,Essendon,R13,28,W,Optus Stadium,3.41,N,West Coast
+15313,2018,2018-06-22,R14,14,75,65,Away.Team,Melbourne,R13,-10,L,Adelaide Oval,2.22,N,Port Adelaide
+15315,2018,2018-06-23,R14,14,82,109,Home.Team,Brisbane Lions,R13,-27,L,Gabba,3.46,N,GWS
+15315,2018,2018-06-23,R14,14,82,109,Away.Team,GWS,R13,27,W,Gabba,1.31,Y,Brisbane Lions
+15316,2018,2018-06-23,R14,14,75,77,Away.Team,North Melbourne,R13,2,W,Marvel Stadium,1.26,Y,Western Bulldogs
+15317,2018,2018-06-24,R14,14,79,59,Home.Team,Collingwood,R13,20,W,MCG,1.06,Y,Carlton
+15318,2018,2018-06-28,R15,15,93,67,Home.Team,Richmond,R14,26,W,Marvel Stadium,1.53,Y,Sydney
+15318,2018,2018-06-28,R15,15,93,67,Away.Team,Sydney,R14,-26,L,Marvel Stadium,2.5,N,Richmond
+15319,2018,2018-06-29,R15,15,103,101,Away.Team,Geelong,R14,-2,L,Marvel Stadium,1.16,Y,Western Bulldogs
+15321,2018,2018-06-30,R15,15,88,78,Home.Team,Adelaide,R14,10,W,Adelaide Oval,1.45,Y,West Coast
+15324,2018,2018-07-01,R15,15,117,119,Away.Team,St Kilda,R14,2,W,MCG,6.27,N,Melbourne
+15326,2018,2018-07-01,R15,15,64,119,Home.Team,Fremantle,R14,-55,L,Optus Stadium,1.28,Y,Brisbane Lions
+15514,2019,2019-06-14,R13,13,96,77,Home.Team,Essendon,R12,19,W,Marvel Stadium,1.66,Y,Hawthorn
+15514,2019,2019-06-14,R13,13,96,77,Away.Team,Hawthorn,R12,-19,L,Marvel Stadium,2.21,N,Essendon
+15515,2019,2019-06-15,R13,13,76,80,Away.Team,St Kilda,R12,4,W,Riverway Stadium,1.54,Y,Gold Coast
+15516,2019,2019-06-15,R13,13,100,79,Home.Team,Fremantle,R12,21,W,Optus Stadium,1.82,Y,Port Adelaide
+15516,2019,2019-06-15,R13,13,100,79,Away.Team,Port Adelaide,R12,-21,L,Optus Stadium,1.98,N,Fremantle
+15517,2019,2019-06-15,R13,13,100,103,Away.Team,Western Bulldogs,R12,3,W,Marvel Stadium,1.49,Y,Carlton
+15519,2019,2019-06-20,R14,14,106,71,Home.Team,West Coast,R13,35,W,Optus Stadium,1.38,Y,Essendon
+15520,2019,2019-06-21,R14,14,82,63,Home.Team,Sydney,R13,19,W,SCG,1.51,Y,Hawthorn
+15521,2019,2019-06-22,R14,14,85,71,Home.Team,Melbourne,R13,14,W,MCG,1.57,Y,Fremantle
+15522,2019,2019-06-22,R14,14,59,115,Away.Team,Brisbane Lions,R13,56,W,Marvel Stadium,1.7,Y,St Kilda
+15523,2019,2019-06-22,R14,14,67,56,Away.Team,Geelong,R13,-11,L,Adelaide Oval,1.45,Y,Port Adelaide
+15524,2019,2019-06-23,R14,14,73,82,Away.Team,Collingwood,R13,9,W,Marvel Stadium,1.29,Y,Western Bulldogs
+15525,2019,2019-06-27,R15,15,77,71,Away.Team,GWS,R14,-6,L,Marvel Stadium,1.63,Y,Essendon
+15526,2019,2019-06-28,R15,15,96,69,Away.Team,Adelaide,R14,-27,L,GMHBA Stadium,3.94,N,Geelong
+15528,2019,2019-06-29,R15,15,93,51,Away.Team,Gold Coast,R14,-42,L,SCG,5.67,N,Sydney
+15529,2019,2019-06-29,R15,15,37,81,Away.Team,North Melbourne,R14,44,W,Marvel Stadium,3.25,N,Collingwood
+15531,2019,2019-06-30,R15,15,70,103,Away.Team,Richmond,R14,33,W,Marvel Stadium,1.33,Y,St Kilda
+15533,2019,2019-06-30,R15,15,75,79,Away.Team,Carlton,R14,4,W,Optus Stadium,5.57,N,Fremantle
+15645,2020,2020-06-27,R4,4,51,52,Home.Team,Essendon,R3,-1,L,MCG,1.71,Y,Carlton
+15648,2020,2020-06-28,R4,4,44,47,Home.Team,Melbourne,R3,-3,L,MCG,2.53,N,Geelong
+15704,2020,2020-08-09,R11,11,72,50,Home.Team,West Coast,R10,22,W,Optus Stadium,1.26,Y,Carlton
+15704,2020,2020-08-09,R11,11,72,50,Away.Team,Carlton,R10,-22,L,Optus Stadium,3.88,N,West Coast
+15707,2020,2020-08-10,R11,11,48,32,Home.Team,Fremantle,R10,16,W,Optus Stadium,2.1,N,Hawthorn
+15707,2020,2020-08-10,R11,11,48,32,Away.Team,Hawthorn,R10,-16,L,Optus Stadium,1.72,Y,Fremantle
+15710,2020,2020-08-13,R12,12,66,25,Home.Team,Sydney,R11,41,W,Optus Stadium,4.35,N,GWS
+15710,2020,2020-08-13,R12,12,66,25,Away.Team,GWS,R11,-41,L,Optus Stadium,1.21,Y,Sydney
+15736,2020,2020-09-01,R15,15,48,83,Away.Team,Adelaide,R14,35,W,Adelaide Oval,2.89,N,Hawthorn
+15741,2020,2020-09-04,R15,15,42,34,Home.Team,Brisbane Lions,R14,8,W,Gabba,1.41,Y,Collingwood
+15742,2020,2020-09-05,R16,16,42,78,Home.Team,North Melbourne,R15,-36,L,Metricon Stadium,6.49,N,Port Adelaide
+15742,2020,2020-09-05,R16,16,42,78,Away.Team,Port Adelaide,R15,36,W,Metricon Stadium,1.11,Y,North Melbourne
+15743,2020,2020-09-06,R16,16,80,66,Home.Team,St Kilda,R15,14,W,Metricon Stadium,1.27,Y,Hawthorn
+15744,2020,2020-09-06,R16,16,108,42,Home.Team,Geelong,R15,66,W,Gabba,1.21,Y,Essendon
+15745,2020,2020-09-06,R16,16,49,47,Home.Team,Western Bulldogs,R15,2,W,Metricon Stadium,1.72,N,West Coast
+15749,2020,2020-09-09,R16,16,88,43,Away.Team,Gold Coast,R15,-45,L,Gabba,3.6,N,Brisbane Lions
+15751,2020,2020-09-11,R17,17,31,57,Away.Team,Richmond,R16,26,W,Metricon Stadium,2.11,N,Geelong
+15758,2020,2020-09-14,R17,17,68,46,Home.Team,Collingwood,R16,22,W,Gabba,1.23,Y,Gold Coast
+15882,2021,2021-06-10,R13,13,91,112,Home.Team,Port Adelaide,R12,-21,L,Adelaide Oval,1.99,N,Geelong
+15882,2021,2021-06-10,R13,13,91,112,Away.Team,Geelong,R12,21,W,Adelaide Oval,1.79,Y,Port Adelaide
+15883,2021,2021-06-11,R13,13,51,89,Away.Team,Hawthorn,R12,38,W,SCG,4.91,N,Sydney
+15884,2021,2021-06-12,R13,13,76,49,Away.Team,Gold Coast,R12,-27,L,Optus Stadium,1.95,N,Fremantle
+15886,2021,2021-06-13,R13,13,94,94,Home.Team,North Melbourne,R12,0,D,Blundstone Arena,3.44,N,GWS
+15886,2021,2021-06-13,R13,13,94,94,Away.Team,GWS,R12,0,D,Blundstone Arena,1.29,Y,North Melbourne
+15889,2021,2021-06-18,R14,14,83,78,Away.Team,Western Bulldogs,R13,-5,L,GMHBA Stadium,2.43,N,Geelong
+15891,2021,2021-06-19,R14,14,45,68,Away.Team,Brisbane Lions,R13,23,W,Blundstone Arena,1.14,Y,North Melbourne
+15892,2021,2021-06-19,R14,14,102,66,Away.Team,Carlton,R13,-36,L,Giants Stadium,2.37,N,GWS
+15893,2021,2021-06-20,R14,14,73,86,Away.Team,Essendon,R13,13,W,UTAS Stadium,1.57,Y,Hawthorn
+15895,2021,2021-06-25,R15,15,22,62,Home.Team,Richmond,R14,-40,L,MCG,1.19,Y,St Kilda
+15895,2021,2021-06-25,R15,15,22,62,Away.Team,St Kilda,R14,40,W,MCG,4.52,N,Richmond
+15896,2021,2021-06-26,R15,15,79,91,Home.Team,Collingwood,R14,-12,L,Marvel Stadium,1.6,Y,Fremantle
+15896,2021,2021-06-26,R15,15,79,91,Away.Team,Fremantle,R14,12,W,Marvel Stadium,2.31,N,Collingwood
+15898,2021,2021-06-26,R15,15,81,71,Away.Team,Sydney,R14,-10,L,Adelaide Oval,3.01,N,Port Adelaide
+15899,2021,2021-06-26,R15,15,57,68,Away.Team,Melbourne,R14,11,W,MCG,1.27,Y,Essendon
+15901,2021,2021-06-27,R15,15,43,98,Home.Team,West Coast,R14,-55,L,Optus Stadium,1.71,Y,Western Bulldogs
+15902,2021,2021-06-27,R15,15,83,73,Away.Team,Adelaide,R14,-10,L,Marvel Stadium,2.67,N,Carlton
+16089,2022,2022-06-09,R13,13,77,65,Home.Team,Richmond,R12,12,W,MCG,1.49,Y,Port Adelaide
+16089,2022,2022-06-09,R13,13,77,65,Away.Team,Port Adelaide,R12,-12,L,MCG,2.52,N,Richmond
+16090,2022,2022-06-10,R13,13,54,80,Home.Team,Essendon,R12,-26,L,MCG,2.95,N,Carlton
+16090,2022,2022-06-10,R13,13,54,80,Away.Team,Carlton,R12,26,W,MCG,1.37,Y,Essendon
+16092,2022,2022-06-11,R13,13,78,57,Away.Team,St Kilda,R12,-21,L,Gabba,3.5,N,Brisbane Lions
+16093,2022,2022-06-12,R13,13,53,102,Away.Team,GWS,R12,49,W,Marvel Stadium,1.15,Y,North Melbourne
+16097,2022,2022-06-18,R14,14,82,59,Away.Team,Sydney,R13,-23,L,Adelaide Oval,1.64,Y,Port Adelaide
+16098,2022,2022-06-18,R14,14,63,81,Home.Team,West Coast,R13,-18,L,Optus Stadium,7.7,N,Geelong
+16098,2022,2022-06-18,R14,14,63,81,Away.Team,Geelong,R13,18,W,Optus Stadium,1.08,Y,West Coast
+16099,2022,2022-06-18,R14,14,105,125,Away.Team,Western Bulldogs,R13,20,W,Giants Stadium,1.58,Y,GWS
+16100,2022,2022-06-19,R14,14,116,73,Home.Team,Gold Coast,R13,43,W,Metricon Stadium,1.24,Y,Adelaide
+16100,2022,2022-06-19,R14,14,116,73,Away.Team,Adelaide,R13,-43,L,Metricon Stadium,3.86,N,Gold Coast
+16101,2022,2022-06-23,R15,15,117,53,Home.Team,Melbourne,R14,64,W,MCG,1.56,Y,Brisbane Lions
+16101,2022,2022-06-23,R15,15,117,53,Away.Team,Brisbane Lions,R14,-64,L,MCG,2.35,N,Melbourne
+16102,2022,2022-06-24,R15,15,125,83,Away.Team,Hawthorn,R14,-42,L,Marvel Stadium,3.44,N,Western Bulldogs
+16104,2022,2022-06-25,R15,15,81,50,Away.Team,Fremantle,R14,-31,L,Marvel Stadium,1.67,Y,Carlton
+16107,2022,2022-06-26,R15,15,58,115,Home.Team,North Melbourne,R14,-57,L,Blundstone Arena,3.09,N,Adelaide
+16108,2022,2022-06-26,R15,15,88,77,Home.Team,Collingwood,R14,11,W,MCG,1.42,Y,GWS
+16297,2023,2023-06-08,R13,13,66,80,Home.Team,Sydney,R12,-14,L,SCG,1.55,Y,St Kilda
+16297,2023,2023-06-08,R13,13,66,80,Away.Team,St Kilda,R12,14,W,SCG,2.36,N,Sydney
+16299,2023,2023-06-10,R13,13,98,73,Away.Team,Brisbane Lions,R12,-25,L,MCG,1.25,Y,Hawthorn
+16301,2023,2023-06-10,R13,13,70,85,Home.Team,Fremantle,R12,-15,L,Optus Stadium,1.63,Y,Richmond
+16305,2023,2023-06-15,R14,14,110,72,Away.Team,Geelong,R13,-38,L,Adelaide Oval,2.34,N,Port Adelaide
+16309,2023,2023-06-18,R14,14,120,61,Away.Team,Gold Coast,R13,-59,L,MCG,2.21,N,Carlton
+16311,2023,2023-06-22,R15,15,78,63,Away.Team,Melbourne,R14,-15,L,GMHBA Stadium,1.99,N,Geelong
+16313,2023,2023-06-24,R15,15,205,34,Away.Team,West Coast,R14,-171,L,SCG,12.23,N,Sydney
+16314,2023,2023-06-24,R15,15,93,61,Away.Team,Essendon,R14,-32,L,Optus Stadium,2.16,N,Fremantle
+16315,2023,2023-06-25,R15,15,82,80,Home.Team,Collingwood,R14,2,W,MCG,1.35,Y,Adelaide
+16315,2023,2023-06-25,R15,15,82,80,Away.Team,Adelaide,R14,-2,L,MCG,3.13,N,Collingwood
+16316,2023,2023-06-25,R15,15,101,34,Away.Team,Hawthorn,R14,-67,L,Metricon Stadium,3.61,N,Gold Coast
