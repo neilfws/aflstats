@@ -501,7 +501,7 @@ post_bye_games %>%
     Status == "YW" ~ "Expected win")) %>% 
   ggplot(aes(Season, n)) + 
   geom_col(aes(fill = Status)) + 
-  scale_fill_brewer(palette = 8) +
+  scale_fill_brewer(palette = "OrRd") +
   scale_x_continuous(breaks = seq(2011, current_year, 2)) +
   labs(y = "Count",
        title = "Post-bye results by season and expectation",
@@ -525,7 +525,7 @@ post_bye_games %>%
     Status == "YW" ~ "Expected result")) %>% 
   ggplot(aes(Season, n)) + 
   geom_col(aes(fill = Status)) + 
-  scale_fill_brewer(palette = 8) +
+  scale_fill_brewer(palette = "OrRd") +
   scale_x_continuous(breaks = seq(2011, current_year, 2)) +
   labs(y = "Count",
        title = "Post-bye results by season and expectation",
