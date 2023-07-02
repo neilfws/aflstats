@@ -1,0 +1,683 @@
+---
+title: 'AFL: post-bye results'
+author: "Neil Saunders"
+date: "`r Sys.time()`"
+output:
+  github_document:
+    toc: true
+    fig_width: 9
+    fig_height: 6
+always_allow_html: true
+---
+
+<style type="text/css">
+body {
+  max-width: 80% !important;
+  margin: auto;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE)
+
+library(tidyverse)
+library(readxl)
+library(fitzRoy)
+library(knitr)
+library(kableExtra)
+library(broom)
+
+theme_set(theme_bw())
+
+options(knitr.kable.NA = "")
+
+# current year
+current_year = year(Sys.Date())
+```
+
+# Summary
+Since the introduction in 2012 of mid-season byes to the AFL competition, there has been a lot of discussion in the media and online regarding the so-called "curse of the bye": a perceived tendency to lose the game following a bye round.
+
+A lot of this discussion uses simplistic counts of wins and losses for each team in post-bye games. However, this fails to take three important factors into account.
+
+1. Whether one or both teams in the game came off a bye round
+1. Scheduling - whether the post-bye team played at home or away
+1. Expected result - whether the post-bye team was the favourite to win
+
+When these variables are examined, we see that in general only a small number of post-bye games each season have an unexpected result.
+
+
+# Data
+Our data comes from 3 sources:
+
+- the fitzRoy package for match dates, rounds and results
+- a custom CSV file `afl_byes.csv` containing data about bye rounds derived from AFL Tables
+- historical betting odds data from [Historical AFL Results and Odds Data
+](https://www.aussportsbetting.com/data/historical-afl-results-and-odds-data/)
+
+# Processing
+
+- fetch results from AFL Tables data for season 2011 onwards.
+- read the CSV file `afl_byes.csv`
+- read the `afl.xlsx` file with historical odds
+
+Then:
+
+- pivot the odds data to long form, rename teams and flag the favourites (lowest odds)
+- pivot the results data, rename teams, join with the odds and byes data, add margins and results
+- join with pivoted results data to add the opponent team
+
+```{r fetch-results}
+afldata <- fetch_results_afltables(season = 2011:current_year)
+```
+
+```{r read-byes-data}
+afl_byes <- read_csv("../../../../data/afl_byes.csv")
+```
+
+```{r read-odds-data}
+url <- "https://www.aussportsbetting.com/historical_data/afl.xlsx"
+destfile <- "/tmp/afl.xlsx"
+if(!file.exists(destfile))
+  curl::curl_download(url, destfile)
+
+afl_odds <- read_excel(destfile, skip = 1)
+```
+
+```{r pivot-odds-data}
+afl_odds_long <- afl_odds %>% 
+  select(Date, Venue, `Home Team`, `Away Team`, `Home Odds`, `Away Odds`) %>% 
+  pivot_longer(3:4, names_to = "HA.Name", values_to = "Team") %>% 
+  mutate(Odds = ifelse(HA.Name == "Home Team", `Home Odds`, `Away Odds`), 
+         Date = ymd(Date), 
+         Team = recode(Team, Brisbane = "Brisbane Lions", `GWS Giants` = "GWS")) %>% 
+  select(Date, Venue, Team, Odds) %>% 
+  group_by(Date, Venue) %>% 
+  mutate(Favourite = ifelse(Odds == min(Odds), "Y", "N")) %>% 
+  ungroup()
+```
+
+```{r create-byes-dataset}
+games_teams <- afldata %>% 
+  select(Game, Home.Team, Away.Team) %>% 
+  pivot_longer(2:3, 
+               names_to = "HA.Name", 
+               values_to = "Team") %>% 
+  mutate(Team = recode(Team, Footscray = "Western Bulldogs"))
+
+post_bye_games <- afldata %>% 
+  select(Game, Season, Date, Round, Round.Number, Home.Team, Away.Team, Home.Points, Away.Points) %>%
+  pivot_longer(6:7, names_to = "HA.Name", values_to = "Team") %>% 
+  mutate(Team = ifelse(Team == "Footscray", "Western Bulldogs", Team)) %>% 
+  left_join(afl_byes, by = c("Season", "Round" = "NextRound", "Team")) %>% 
+  mutate(Margin = ifelse(HA.Name == "Home.Team", Home.Points - Away.Points, Away.Points - Home.Points)) %>%
+  filter(!is.na(Round.y)) %>% 
+  rename(ByeRound = Round.y) %>% 
+  mutate(Result = case_when(
+    Margin > 0 ~ "W", 
+    Margin < 0 ~ "L", 
+    TRUE ~ "D")) %>% 
+  left_join(afl_odds_long) %>% 
+  left_join(games_teams, 
+            by = "Game",
+            relationship = "many-to-many") %>% 
+  filter(Team.x != Team.y) %>% 
+  rename(HA.Name = HA.Name.x, 
+         Team = Team.x, 
+         Opponent = Team.y) %>% 
+  select(-HA.Name.y)
+```
+
+The final dataset `post_bye_games` looks like this. It gets written to CSV.
+
+```{r glimpse-byes-dataset-csv}
+post_bye_games %>% 
+  glimpse(width = 160)
+
+post_bye_games %>% 
+  write_csv("../../../../data/post_bye_games.csv")
+```
+
+# Analysis
+
+## Visualization of bye rounds
+
+### Bye rounds by season
+
+In 2011 there was a bye every round, featuring at least one team.
+
+From 2012 onwards the mid-season bye was introduced. Most commonly there are 3 consecutive bye rounds with 6 teams per round.
+
+However, there are variations on the number of bye rounds, teams per round and which rounds are byes.
+
+Note that 2020 was a disrupted season due to COVID. For example, the R3 game was postponed due to a player testing positive.
+
+```{r bye-rounds-by-season}
+seasons_rounds <- expand.grid(Season = 2011:current_year,
+                              Round = paste0("R", 1:24))
+
+afl_byes %>% 
+  count(Season, Round) %>%
+  right_join(seasons_rounds) %>% 
+  mutate(Round = as.numeric(gsub("R", "", Round))) %>% 
+  ggplot(aes(Round, Season)) + 
+  geom_tile(aes(fill = n), color = "black") + 
+  scale_fill_viridis_c(name = "Teams", na.value = "white") + 
+  scale_y_continuous(breaks = 2011:current_year) +
+  coord_equal() +
+  theme(legend.position = "top",
+        panel.grid = element_blank()) +
+  labs(title = "Number of teams on a bye by season and round",
+       subtitle = paste0("2011-", current_year))
+```
+
+### Bye rounds by team
+
+We see the 2011 byes scattered through each round, and more concentrated values for the mid-season byes.
+
+Notably Collingwood's bye has fallen in Round 13 six times.
+
+```{r bye-rounds-by-team}
+teams_rounds <- expand.grid(Team = unique(post_bye_games$Team),
+                            Round = paste0("R", 1:24))
+
+afl_byes %>% 
+  count(Team, Round) %>% 
+  right_join(teams_rounds) %>% 
+  mutate(Round = as.numeric(gsub("R", "", Round))) %>% 
+  ggplot(aes(Round, Team)) + 
+  geom_tile(aes(fill = n), color = "black") + 
+  scale_fill_viridis_c(name = "Count", na.value = "white") + 
+  scale_y_discrete(limits = rev) +
+  coord_equal() +
+  theme(legend.position = "top",
+        panel.grid = element_blank()) +
+  labs(title = "Byes per round by team",
+       subtitle = paste0("2011-", current_year))
+```
+
+### Bye rounds by season and team
+
+Another attempt to visualise the bye rounds. Again we see the difference between the 2011 byes and the mid-season byes.
+
+It's interesting that we see contiguous blocks - is the draw for byes as much alphabetical sometimes as anything else!
+
+```{r bye-rounds-by-season-team}
+afl_byes %>% 
+  count(Season, Team, Round) %>% 
+  mutate(Round = as.numeric(gsub("R", "", Round))) %>% 
+  ggplot(aes(Round, Team)) + 
+  geom_tile(aes(fill = n), color = "black") + 
+  scale_fill_viridis_c(na.value = "white") +
+  scale_y_discrete(limits = rev) +
+  facet_wrap(~Season, ncol = 5) + 
+  guides(fill = "none") + 
+  theme(axis.text.y = element_text(size = 6),
+        legend.position = "top",
+        panel.grid = element_blank()) +
+  labs(title = "Team byes by season and round",
+       subtitle = "2011-2023")
+```
+
+### Post-bye rounds by teams coming off the bye
+
+Post-bye ames might feature one or both teams coming off a bye. If the bye were a factor influencing the post-bye game, we might assume the effect would be stronger when only one team comes off a bye.
+
+In most seasons (disregarding 2011) there are 2-5 games where both teams come off a bye, but the majority involve one post-bye team.
+
+```{r post-bye-one-both}
+post_bye_games %>% 
+  group_by(Season, Game) %>% 
+  summarise(N = n()) %>% 
+  ungroup() %>% 
+  count(Season, N) %>% 
+  mutate(`teams off bye` = ifelse(N == 1, "one", "two")) %>% 
+  ggplot(aes(Season, n, fill = `teams off bye`)) + 
+  geom_col() + 
+  geom_text(aes(label = n), 
+            color = "white",
+            position = position_stack(vjust = 0.5)) +
+  labs(y = "Count",
+       title = "Count of post-bye games by season and number of teams coming off bye",
+       subtitle = paste0("2011-", current_year)) +
+  scale_fill_brewer(palette = "Set1") +
+  scale_x_continuous(breaks = seq(2011, current_year, 2)) +
+  theme(legend.position = "top")
+```
+
+## Wins and losses
+
+Let's start looking at wins and losses in post-bye games. In the following sections we look only at games where one team comes off a bye. We include season 2011 even though byes in that season were not mid-season.
+
+### Distribution of margins by expected result
+
+One important factor missing from many analyses looking at post-bye games is: what was the expected result? For the purposes of this report, expected result means "who was favourite according to the betting odds".
+
+Plotting post-bye game margins versus expected winner shows that on average, favourites win and non-favourites lose. But there are always exceptions!
+
+
+```{r post-bye-margin-odds}
+post_bye_games %>% 
+  group_by(Game) %>% 
+  filter(n() == 1) %>% 
+  ungroup() %>% 
+  mutate(Favourite = recode(Favourite, Y = "Yes", N = "No")) %>% 
+  ggplot(aes(fct_relevel(Favourite, "Yes", "No"), Margin)) + 
+  geom_jitter(width = 0.2) +
+  geom_boxplot(aes(fill = Favourite),
+               outlier.shape = NA,
+               alpha = 0.4) + 
+  geom_hline(yintercept = 0,
+             linetype = "dotted") +
+  scale_fill_brewer(palette = "Set1") +
+  guides(fill = "none") +
+  labs(x = "Favourite",
+       y = "Margin",
+       title = "Margin in post-bye games by expected result",
+       subtitle = paste0("2011-", current_year))
+```
+
+### Overall
+
+A simple count of post-bye results shows that more teams lose coming off a bye then win.
+
+However, this doesn't tell us very much about why this should be the case.
+
+```{r post-bye-win-loss}
+post_bye_games %>% 
+  group_by(Game) %>% 
+  filter(n() == 1) %>% 
+  ungroup() %>% 
+  count(Result) %>% 
+  mutate(Result = recode(Result, W = "Win", L = "Loss")) %>% 
+  ggplot(aes(fct_relevel(Result, "Win", "Loss"), n)) + 
+  geom_col(fill = "#377EB8") + 
+  geom_text(aes(label = n), 
+            color = "white",
+            vjust = 5) +
+  labs(x = "Result", 
+       y = "Count", 
+       title = "Results for AFL teams coming off a bye", 
+       subtitle = paste0("2011-", current_year))
+```
+
+### Overall by home/away
+
+Scheduling plays an important role in influencing post-bye results.
+
+More teams coming off a bye were playing away from home. And away teams are more likely to lose a game.
+
+
+```{r post-bye-home-away}
+post_bye_games %>% 
+  group_by(Game) %>% 
+  filter(n() == 1) %>% 
+  ungroup() %>% 
+  count(HA.Name, Result) %>% 
+  mutate(Result = recode(Result, W = "Win", L = "Loss"),
+         Result = fct_relevel(Result, "Win", "Loss"),
+         HA.Name = fct_relevel(HA.Name, "Home.Team", "Away.Team")) %>% 
+  ggplot(aes(HA.Name, n, fill = Result)) + 
+  geom_col() + 
+  geom_text(aes(label = n), 
+            color = "white",
+            position = position_stack(vjust = 0.5)) +
+  labs(x = "Home/Away", 
+       y = "Count", 
+       title = "Results for AFL teams coming off a bye by home/away", 
+       subtitle = paste0("2011-", current_year)) +
+  scale_fill_brewer(palette = "Set1") +
+  theme(legend.position = "top")
+```
+
+The home/away win/loss difference has p < 0.05 in a Fisher's exact test.
+
+```{r post-bye-home-away-fisher}
+post_bye_games %>% 
+  group_by(Game) %>% 
+  filter(n() == 1) %>% 
+  ungroup() %>% 
+  count(HA.Name, Result) %>% 
+  mutate(Result = recode(Result, W = "Win", L = "Loss"),
+         HA.Name = fct_relevel(HA.Name, "Home.Team", "Away.Team")) %>% 
+  pivot_wider(names_from = "HA.Name", values_from = "n") %>% 
+  kbl() %>% 
+  kable_styling(bootstrap_options = c("striped", "compact"))
+
+ftest <- post_bye_games %>% 
+  group_by(Game) %>% 
+  filter(n() == 1) %>% 
+  ungroup() %>% 
+  count(HA.Name, Result) %>% 
+  mutate(Result = recode(Result, W = "Win", L = "Loss"),
+         HA.Name = fct_relevel(HA.Name, "Home.Team", "Away.Team")) %>% 
+  pivot_wider(names_from = "HA.Name", 
+              values_from = "n") %>% 
+  column_to_rownames("Result") %>% 
+  fisher.test()
+
+ftest %>% 
+  tidy() %>% 
+  kbl() %>% 
+  kable_styling(bootstrap_options = c("striped", "compact"))
+```
+
+### Overall by expected result
+
+When we look at post-bye results by expected result, it's clear that a majority of favourites win, and a majority of non-favourites lose.
+
+```{r post-bye-expected-result}
+post_bye_games %>% 
+  group_by(Game) %>% 
+  filter(n() == 1) %>% 
+  ungroup() %>% 
+  count(Favourite, Result) %>% 
+  mutate(Result = recode(Result, W = "Win", L = "Loss"),
+         Result = fct_relevel(Result, "Win", "Loss"),
+         Favourite = recode(Favourite, Y = "Yes", N = "No"),
+         Favourite = fct_relevel(Favourite, "Yes", "No")) %>% 
+  ggplot(aes(Favourite, n, fill = Result)) + 
+  geom_col() + 
+  geom_text(aes(label = n), 
+            color = "white",
+            position = position_stack(vjust = 0.5)) +
+  labs(x = "Favourite", 
+       y = "Count", 
+       title = "Results for AFL teams coming off a bye by expected result", 
+       subtitle = paste0("2011-", current_year)) +
+  scale_fill_brewer(palette = "Set1") +
+  theme(legend.position = "top")
+```
+
+### By season
+
+If coming off a bye were a consistent disadvantage, we might expect to see post-bye teams losing at a similar rate across seasons.
+
+In fact we see all combinations: seasons where teams in post-bye games have more losses, more wins and equal numbers of losses and wins.
+
+```{r post-bye-season}
+post_bye_games %>% 
+  group_by(Game) %>% 
+  filter(n() == 1) %>% 
+  ungroup() %>% 
+  count(Season, Result) %>% 
+  mutate(Result = recode(Result, W = "Win", L = "Loss")) %>% 
+  ggplot(aes(fct_relevel(Result, "Win", "Loss"), n)) + 
+  geom_col(fill = "#377EB8") + 
+  labs(x = "Result", 
+       y = "Count", 
+       title = "Results for AFL teams coming off a bye by season", 
+       subtitle = paste0("2011-", current_year)) +
+  facet_wrap(~Season, ncol = 5)
+```
+
+### By season and expected result
+
+When we include expected results we see that in a majority of cases, favourites win post-bye games and non-favourites lose them.
+
+```{r post-bye-season-expected-result}
+post_bye_games %>% 
+  group_by(Game) %>% 
+  filter(n() == 1) %>% 
+  ungroup() %>% 
+  count(Season, Favourite, Result) %>% 
+  mutate(Result = recode(Result, W = "Win", L = "Loss"),
+         Result = fct_relevel(Result, "Win", "Loss"),
+         Favourite = recode(Favourite, Y = "Yes", N = "No"),
+         Favourite = fct_relevel(Favourite, "Yes", "No")) %>% 
+  ggplot(aes(Favourite, n)) + 
+  geom_col(aes(fill = Result)) + 
+  labs(x = "Favourite", 
+       y = "Count", 
+       title = "Results for AFL teams coming off a bye by season and expected result", 
+       subtitle = paste0("2011-", current_year)) +
+  scale_fill_brewer(palette = "Set1") +
+  facet_wrap(~Season, ncol = 5) +
+  theme(legend.position = "top")
+```
+
+### By team
+
+Do some teams suffer from "the curse of the bye"?
+
+Certainly, using a simple win-loss count, some teams do seem to lose a lot of post-bye games: notably Geelong and Gold Coast.
+
+```{r post-bye-team}
+post_bye_games %>% 
+  group_by(Game) %>% 
+  filter(n() == 1) %>% 
+  ungroup() %>% 
+  count(Team, Result) %>% 
+  mutate(Result = recode(Result, W = "Win", L = "Loss")) %>% 
+  ggplot(aes(fct_relevel(Result, "Win", "Loss"), n)) + 
+  geom_col(fill = "#377EB8") + 
+  labs(x = "Result", 
+       y = "Count", 
+       title = "Results for AFL teams coming off a bye by team", 
+       subtitle = paste0("2011-", current_year)) +
+  facet_wrap(~Team, ncol = 6)
+```
+
+### By team and expected result
+
+However, once again the introduction of expected result can paint a different picture.
+
+Gold Coast, for example, were not the favourite to win in any of their post-bye losses. In other words they lose a lot of games in general, not just post-bye games.
+
+Geelong on the other hand were favourites in the majority of their post-bye losses.
+
+```{r post-bye-team-expected-result}
+post_bye_games %>% 
+  group_by(Game) %>% 
+  filter(n() == 1) %>% 
+  ungroup() %>% 
+  count(Team, Favourite, Result) %>% 
+  mutate(Result = recode(Result, W = "Win", L = "Loss"),
+         Result = fct_relevel(Result, "Win", "Loss"),
+         Favourite = recode(Favourite, Y = "Yes", N = "No"),
+         Favourite = fct_relevel(Favourite, "Yes", "No")) %>% 
+  ggplot(aes(Favourite, n)) + 
+  geom_col(aes(fill = Result)) + 
+  labs(x = "Favourite", 
+       y = "Count", 
+       title = "Results for AFL teams coming off a bye by team and expected result", 
+       subtitle = paste0("2011-", current_year)) +
+  scale_fill_brewer(palette = "Set1") +
+  facet_wrap(~Team, ncol = 6) +
+  theme(legend.position = "top")
+```
+
+### Unexpected wins and losses by season
+
+Here, we try a few ways to visualise post-bye results by season and expectation.
+
+First: combine expectation and result into a new variable, then plot the proportion of unexpected results by season.
+
+```{r post-bye-unexpected-01}
+post_bye_games %>% 
+  group_by(Game) %>% 
+  filter(n() == 1) %>% 
+  ungroup() %>% 
+  count(Season, Favourite, Result) %>% 
+  mutate(Status = paste0(Favourite, Result)) %>% 
+  mutate(Status = case_when(
+    Status == "NL" ~ "Expected loss", 
+    Status == "NW" ~ "Unexpected win", 
+    Status == "YL" ~ "Unexpected loss", 
+    Status == "YW" ~ "Expected win")) %>% 
+  ggplot(aes(Season, n)) + 
+  geom_col(aes(fill = Status)) + 
+  scale_fill_brewer(palette = 8) +
+  scale_x_continuous(breaks = seq(2011, current_year, 2)) +
+  labs(y = "Count",
+       title = "Post-bye results by season and expectation",
+       subtitle = paste0("2011-", current_year)) +
+  theme(legend.position = "top")
+```
+
+Second - a similar idea but combine expected wins and losses into one "expected result" variable, to show more clearly unexpected wins and losses as a proportion.
+
+```{r post-bye-unexpected-02}
+post_bye_games %>% 
+  group_by(Game) %>% 
+  filter(n() == 1) %>% 
+  ungroup() %>% 
+  count(Season, Favourite, Result) %>% 
+  mutate(Status = paste0(Favourite, Result)) %>% 
+  mutate(Status = case_when(
+    Status == "NL" ~ "Expected result", 
+    Status == "NW" ~ "Unexpected win", 
+    Status == "YL" ~ "Unexpected loss", 
+    Status == "YW" ~ "Expected result")) %>% 
+  ggplot(aes(Season, n)) + 
+  geom_col(aes(fill = Status)) + 
+  scale_fill_brewer(palette = 8) +
+  scale_x_continuous(breaks = seq(2011, current_year, 2)) +
+  labs(y = "Count",
+       title = "Post-bye results by season and expectation",
+       subtitle = paste0("2011-", current_year)) +
+  theme(legend.position = "top")
+```
+
+Third, split the data by expectation and plot the proportion of wins and losses.
+
+```{r post-bye-unexpected-03}
+post_bye_games %>% 
+  group_by(Game) %>% 
+  filter(n() == 1) %>% 
+  ungroup() %>% 
+  count(Season, Favourite, Result) %>% 
+  mutate(Result = recode(Result, W = "Win", L = "Loss"),
+         Result = fct_relevel(Result, "Win", "Loss"),
+         Favourite = recode(Favourite, Y = "Yes", N = "No"),
+         Favourite = fct_relevel(Favourite, "Yes", "No")) %>% 
+  ggplot(aes(Season, n)) + 
+  geom_col(aes(fill = Result)) +
+  facet_grid(Favourite ~ .) +
+  labs(y = "Count",
+       title = "Post-bye results by season and expectation",
+       subtitle = paste0("2011-", current_year)) +
+  scale_fill_brewer(palette = "Set1") +
+  scale_x_continuous(breaks = seq(2011, current_year, 2)) +
+  theme(legend.position = "top")
+```
+
+Fourth, filter for favourite/loss or non-favourite/win and just plot the counts of unexpected wins and losses.
+
+This one shows that unexpected losses are slightly more frequent than unexpected wins.
+
+```{r post-bye-unexpected-04}
+post_bye_games %>% 
+  group_by(Game) %>% 
+  filter(n() == 1) %>% 
+  ungroup() %>% 
+  count(Season, Favourite, Result) %>% 
+  mutate(Expectation = paste0(Favourite, Result),
+         Result = recode(Result, W = "Win", L = "Loss"),
+         Result = fct_relevel(Result, "Win", "Loss")) %>% 
+  filter(Expectation %in% c("NW", "YL")) %>%
+  ggplot(aes(Season, n, fill = Result)) + 
+  geom_col() + 
+  facet_wrap(~Result, ncol = 1) +
+  labs(y = "Count",
+       title = "Unexpected post-bye results by season",
+       subtitle = paste0("2011-", current_year)) +
+  scale_fill_brewer(palette = "Set1") +
+  scale_x_continuous(breaks = seq(2011, current_year, 2)) +
+  guides(fill = "none")
+```
+
+## Comparison to media articles
+
+Now let's look at some media articles about post-bye results and compare.
+
+### SEN June 25 2023
+
+[The numbers that don't bode well for the weekend’s bye teams](https://www.sen.com.au/news/2023/06/25/the-numbers-that-dont-bode-well-for-the-weekends-bye-teams/)
+
+>Who is a fan of the bye?
+So far this year, teams coming off the bye own a pitiful 2-10 win-loss record from 12 matches.
+Of those dozen matches, only two have featured both teams coming off the bye - Sydney v St Kilda in Round 13 and Collingwood v Adelaide in Round 15.
+Let’s take those results out of it and it’s 0-8 for teams coming off the bye playing a non-bye team that week.
+
+All of that is quite correct. However, when we look at the eight post-bye losses, only two of the teams were expected to win, and one of those teams was playing away. 
+
+```{r compare-media-01}
+post_bye_games %>% 
+  filter(Season == 2023,
+         Date <= ymd("2023-06-25")) %>% 
+  group_by(Game) %>% 
+  filter(n() == 1) %>% 
+  ungroup() %>% 
+  select(-c(Game, Season)) %>% 
+  kbl(caption = "Season 2023 post-bye games to R14") %>% 
+  kable_styling(bootstrap_options = c("striped", "compact"))
+```
+
+### AFL June 6 2023
+
+[Beware the bye: How your club fares after its mid-season break](https://www.afl.com.au/news/944914/beware-the-bye-how-your-club-fares-after-its-mid-season-break)
+
+>EVERY team should beware their mid-season bye.
+Statistics show that over the past 10 years not one club has mastered how to come out the other side of their week off with consistent success.
+In fact, just four clubs hold a winning record over that period in their first match after the break, with Fremantle, Hawthorn, Richmond and St Kilda all sporting a 6-4 win-loss mark since 2013.
+
+The AFL article looks at post-bye win-loss records 2013-2022.
+
+We can mostly reproduce their numbers by counting results by team - but they have included games where both teams came off the bye! They also have Sydney at 5-5 (wins-losses), whereas my data has them at 4-6.
+
+Using only games with one team coming off the bye for years 2013-2022 makes quite a difference to the numbers. Brisbane for example move from 5-5 (wins-losses) to 5-1.
+
+```{r compare-media-02}
+post_bye_games_01 <- post_bye_games %>% 
+  filter(between(Season, 2013, 2022)) %>% 
+  count(Team, Result) %>% 
+  pivot_wider(names_from = "Result", 
+              values_from = "n") %>% 
+  select(Team, W, D, L)
+
+post_bye_games_02 <- post_bye_games %>% 
+  filter(between(Season, 2013, 2022)) %>% 
+  group_by(Game) %>% 
+  filter(n() == 1) %>% 
+  ungroup() %>% 
+  count(Team, Result) %>% 
+  pivot_wider(names_from = "Result", 
+              values_from = "n") %>% 
+  select(Team, W, L)
+
+post_bye_games_01 %>% 
+  left_join(post_bye_games_02,
+            by = "Team") %>% 
+  kbl(col.names = c("Team", "Win", "Draw", "Loss", "Win", "Loss"),
+      caption = "Post-bye win-loss count 2011-2022") %>% 
+  kable_styling(bootstrap_options = c("striped", "compact")) %>% 
+  add_header_above(c(" ", "Count (SMH)" = 3, "Count (1 team off bye)" = 2))
+```
+
+### The Age 
+
+The Age [Beveridge’s Bulldogs have eye on high-flying Pies after bucking bye curse](https://www.theage.com.au/sport/afl/western-bulldogs-buck-bye-curse-with-a-bang-against-slow-firing-fremantle-dockers-20230701-p5dl00.html)
+
+It's not clear what the "bye curse" refers to in this article, since it makes no mention of the Western Bulldogs post-bye record.
+
+However, it does say:
+
+>Western Bulldogs coach Luke Beveridge has credited the mindset of his team to bounce back from the bye and buck the mid-season trend of teams losing upon their return
+
+So let's focus on only mid-season byes (2012-2023), where the Bulldogs were the only team coming off the bye.
+
+Their record is 4-4 (wins-losses) and they were not favourites to win in any of the four losses.
+
+```{r compare-media-03}
+post_bye_games %>% 
+  group_by(Game) %>% 
+  filter(n() == 1) %>% 
+  ungroup() %>% 
+  filter(between(Season, 2012, 2023), 
+         Team == "Western Bulldogs") %>% 
+  kbl(caption = "Post-bye result Western Bulldogs 2012-2023") %>% 
+  kable_styling(bootstrap_options = c("striped", "compact"))
+```
+
