@@ -603,7 +603,7 @@ post_bye_games %>%
   group_by(Game) %>% 
   filter(n() == 1) %>% 
   ungroup() %>% 
-  select(-c(Game, Season)) %>% 
+  select(Season, Round, Team, HA.Name, Opponent, Margin, Result, Odds, Favourite) %>%  
   kbl(caption = "Season 2023 post-bye games to R14") %>% 
   kable_styling(bootstrap_options = c("striped", "compact"))
 ```
@@ -670,6 +670,7 @@ post_bye_games %>%
   ungroup() %>% 
   filter(between(Season, 2012, 2023), 
          Team == "Western Bulldogs") %>% 
+  select(Season, Round, Team, HA.Name, Opponent, Margin, Result, Odds, Favourite) %>%  
   kbl(caption = "Post-bye result Western Bulldogs 2012-2023") %>% 
   kable_styling(bootstrap_options = c("striped", "compact"))
 ```

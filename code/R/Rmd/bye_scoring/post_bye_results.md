@@ -1,7 +1,7 @@
 AFL: post-bye results
 ================
 Neil Saunders
-2023-07-02 13:57:12.487974
+2023-07-02 14:47:55.742315
 
 - [Summary](#summary)
 - [Data](#data)
@@ -373,29 +373,20 @@ Season 2023 post-bye games to R14
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;">
-Date
+<th style="text-align:right;">
+Season
 </th>
 <th style="text-align:left;">
 Round
-</th>
-<th style="text-align:right;">
-Round.Number
-</th>
-<th style="text-align:right;">
-Home.Points
-</th>
-<th style="text-align:right;">
-Away.Points
-</th>
-<th style="text-align:left;">
-HA.Name
 </th>
 <th style="text-align:left;">
 Team
 </th>
 <th style="text-align:left;">
-ByeRound
+HA.Name
+</th>
+<th style="text-align:left;">
+Opponent
 </th>
 <th style="text-align:right;">
 Margin
@@ -403,45 +394,30 @@ Margin
 <th style="text-align:left;">
 Result
 </th>
-<th style="text-align:left;">
-Venue
-</th>
 <th style="text-align:right;">
 Odds
 </th>
 <th style="text-align:left;">
 Favourite
 </th>
-<th style="text-align:left;">
-Opponent
-</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
-2023-06-10
+<td style="text-align:right;">
+2023
 </td>
 <td style="text-align:left;">
 R13
-</td>
-<td style="text-align:right;">
-13
-</td>
-<td style="text-align:right;">
-98
-</td>
-<td style="text-align:right;">
-73
-</td>
-<td style="text-align:left;">
-Away.Team
 </td>
 <td style="text-align:left;">
 Brisbane Lions
 </td>
 <td style="text-align:left;">
-R12
+Away.Team
+</td>
+<td style="text-align:left;">
+Hawthorn
 </td>
 <td style="text-align:right;">
 -25
@@ -449,52 +425,34 @@ R12
 <td style="text-align:left;">
 L
 </td>
-<td style="text-align:left;">
-MCG
-</td>
 <td style="text-align:right;">
 1.25
 </td>
 <td style="text-align:left;">
 Y
 </td>
-<td style="text-align:left;">
-Hawthorn
-</td>
 </tr>
 <tr>
-<td style="text-align:left;">
-2023-06-10
+<td style="text-align:right;">
+2023
 </td>
 <td style="text-align:left;">
 R13
-</td>
-<td style="text-align:right;">
-13
-</td>
-<td style="text-align:right;">
-70
-</td>
-<td style="text-align:right;">
-85
-</td>
-<td style="text-align:left;">
-Home.Team
 </td>
 <td style="text-align:left;">
 Fremantle
 </td>
 <td style="text-align:left;">
-R12
+Home.Team
+</td>
+<td style="text-align:left;">
+Richmond
 </td>
 <td style="text-align:right;">
 -15
 </td>
 <td style="text-align:left;">
 L
-</td>
-<td style="text-align:left;">
-Optus Stadium
 </td>
 <td style="text-align:right;">
 1.63
@@ -502,34 +460,22 @@ Optus Stadium
 <td style="text-align:left;">
 Y
 </td>
-<td style="text-align:left;">
-Richmond
-</td>
 </tr>
 <tr>
-<td style="text-align:left;">
-2023-06-15
+<td style="text-align:right;">
+2023
 </td>
 <td style="text-align:left;">
 R14
-</td>
-<td style="text-align:right;">
-14
-</td>
-<td style="text-align:right;">
-110
-</td>
-<td style="text-align:right;">
-72
-</td>
-<td style="text-align:left;">
-Away.Team
 </td>
 <td style="text-align:left;">
 Geelong
 </td>
 <td style="text-align:left;">
-R13
+Away.Team
+</td>
+<td style="text-align:left;">
+Port Adelaide
 </td>
 <td style="text-align:right;">
 -38
@@ -537,43 +483,28 @@ R13
 <td style="text-align:left;">
 L
 </td>
-<td style="text-align:left;">
-Adelaide Oval
-</td>
 <td style="text-align:right;">
 2.34
 </td>
 <td style="text-align:left;">
 N
 </td>
-<td style="text-align:left;">
-Port Adelaide
-</td>
 </tr>
 <tr>
-<td style="text-align:left;">
-2023-06-18
+<td style="text-align:right;">
+2023
 </td>
 <td style="text-align:left;">
 R14
-</td>
-<td style="text-align:right;">
-14
-</td>
-<td style="text-align:right;">
-120
-</td>
-<td style="text-align:right;">
-61
-</td>
-<td style="text-align:left;">
-Away.Team
 </td>
 <td style="text-align:left;">
 Gold Coast
 </td>
 <td style="text-align:left;">
-R13
+Away.Team
+</td>
+<td style="text-align:left;">
+Carlton
 </td>
 <td style="text-align:right;">
 -59
@@ -581,43 +512,28 @@ R13
 <td style="text-align:left;">
 L
 </td>
-<td style="text-align:left;">
-MCG
-</td>
 <td style="text-align:right;">
 2.21
 </td>
 <td style="text-align:left;">
 N
 </td>
-<td style="text-align:left;">
-Carlton
-</td>
 </tr>
 <tr>
-<td style="text-align:left;">
-2023-06-22
+<td style="text-align:right;">
+2023
 </td>
 <td style="text-align:left;">
 R15
-</td>
-<td style="text-align:right;">
-15
-</td>
-<td style="text-align:right;">
-78
-</td>
-<td style="text-align:right;">
-63
-</td>
-<td style="text-align:left;">
-Away.Team
 </td>
 <td style="text-align:left;">
 Melbourne
 </td>
 <td style="text-align:left;">
-R14
+Away.Team
+</td>
+<td style="text-align:left;">
+Geelong
 </td>
 <td style="text-align:right;">
 -15
@@ -625,43 +541,28 @@ R14
 <td style="text-align:left;">
 L
 </td>
-<td style="text-align:left;">
-GMHBA Stadium
-</td>
 <td style="text-align:right;">
 1.99
 </td>
 <td style="text-align:left;">
 N
 </td>
-<td style="text-align:left;">
-Geelong
-</td>
 </tr>
 <tr>
-<td style="text-align:left;">
-2023-06-24
+<td style="text-align:right;">
+2023
 </td>
 <td style="text-align:left;">
 R15
-</td>
-<td style="text-align:right;">
-15
-</td>
-<td style="text-align:right;">
-205
-</td>
-<td style="text-align:right;">
-34
-</td>
-<td style="text-align:left;">
-Away.Team
 </td>
 <td style="text-align:left;">
 West Coast
 </td>
 <td style="text-align:left;">
-R14
+Away.Team
+</td>
+<td style="text-align:left;">
+Sydney
 </td>
 <td style="text-align:right;">
 -171
@@ -669,43 +570,28 @@ R14
 <td style="text-align:left;">
 L
 </td>
-<td style="text-align:left;">
-SCG
-</td>
 <td style="text-align:right;">
 12.23
 </td>
 <td style="text-align:left;">
 N
 </td>
-<td style="text-align:left;">
-Sydney
-</td>
 </tr>
 <tr>
-<td style="text-align:left;">
-2023-06-24
+<td style="text-align:right;">
+2023
 </td>
 <td style="text-align:left;">
 R15
-</td>
-<td style="text-align:right;">
-15
-</td>
-<td style="text-align:right;">
-93
-</td>
-<td style="text-align:right;">
-61
-</td>
-<td style="text-align:left;">
-Away.Team
 </td>
 <td style="text-align:left;">
 Essendon
 </td>
 <td style="text-align:left;">
-R14
+Away.Team
+</td>
+<td style="text-align:left;">
+Fremantle
 </td>
 <td style="text-align:right;">
 -32
@@ -713,43 +599,28 @@ R14
 <td style="text-align:left;">
 L
 </td>
-<td style="text-align:left;">
-Optus Stadium
-</td>
 <td style="text-align:right;">
 2.16
 </td>
 <td style="text-align:left;">
 N
 </td>
-<td style="text-align:left;">
-Fremantle
-</td>
 </tr>
 <tr>
-<td style="text-align:left;">
-2023-06-25
+<td style="text-align:right;">
+2023
 </td>
 <td style="text-align:left;">
 R15
-</td>
-<td style="text-align:right;">
-15
-</td>
-<td style="text-align:right;">
-101
-</td>
-<td style="text-align:right;">
-34
-</td>
-<td style="text-align:left;">
-Away.Team
 </td>
 <td style="text-align:left;">
 Hawthorn
 </td>
 <td style="text-align:left;">
-R14
+Away.Team
+</td>
+<td style="text-align:left;">
+Gold Coast
 </td>
 <td style="text-align:right;">
 -67
@@ -757,17 +628,11 @@ R14
 <td style="text-align:left;">
 L
 </td>
-<td style="text-align:left;">
-Metricon Stadium
-</td>
 <td style="text-align:right;">
 3.61
 </td>
 <td style="text-align:left;">
 N
-</td>
-<td style="text-align:left;">
-Gold Coast
 </td>
 </tr>
 </tbody>
@@ -1219,34 +1084,19 @@ Post-bye result Western Bulldogs 2012-2023
 <thead>
 <tr>
 <th style="text-align:right;">
-Game
-</th>
-<th style="text-align:right;">
 Season
 </th>
 <th style="text-align:left;">
-Date
-</th>
-<th style="text-align:left;">
 Round
-</th>
-<th style="text-align:right;">
-Round.Number
-</th>
-<th style="text-align:right;">
-Home.Points
-</th>
-<th style="text-align:right;">
-Away.Points
-</th>
-<th style="text-align:left;">
-HA.Name
 </th>
 <th style="text-align:left;">
 Team
 </th>
 <th style="text-align:left;">
-ByeRound
+HA.Name
+</th>
+<th style="text-align:left;">
+Opponent
 </th>
 <th style="text-align:right;">
 Margin
@@ -1254,51 +1104,30 @@ Margin
 <th style="text-align:left;">
 Result
 </th>
-<th style="text-align:left;">
-Venue
-</th>
 <th style="text-align:right;">
 Odds
 </th>
 <th style="text-align:left;">
 Favourite
 </th>
-<th style="text-align:left;">
-Opponent
-</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:right;">
-14061
-</td>
-<td style="text-align:right;">
 2012
 </td>
 <td style="text-align:left;">
-2012-06-17
-</td>
-<td style="text-align:left;">
 R12
-</td>
-<td style="text-align:right;">
-12
-</td>
-<td style="text-align:right;">
-95
-</td>
-<td style="text-align:right;">
-57
-</td>
-<td style="text-align:left;">
-Home.Team
 </td>
 <td style="text-align:left;">
 Western Bulldogs
 </td>
 <td style="text-align:left;">
-R11
+Home.Team
+</td>
+<td style="text-align:left;">
+Port Adelaide
 </td>
 <td style="text-align:right;">
 38
@@ -1306,49 +1135,28 @@ R11
 <td style="text-align:left;">
 W
 </td>
-<td style="text-align:left;">
-Marvel Stadium
-</td>
 <td style="text-align:right;">
 1.45
 </td>
 <td style="text-align:left;">
 Y
 </td>
-<td style="text-align:left;">
-Port Adelaide
-</td>
 </tr>
 <tr>
-<td style="text-align:right;">
-14268
-</td>
 <td style="text-align:right;">
 2013
 </td>
 <td style="text-align:left;">
-2013-06-16
-</td>
-<td style="text-align:left;">
 R12
-</td>
-<td style="text-align:right;">
-12
-</td>
-<td style="text-align:right;">
-99
-</td>
-<td style="text-align:right;">
-65
-</td>
-<td style="text-align:left;">
-Away.Team
 </td>
 <td style="text-align:left;">
 Western Bulldogs
 </td>
 <td style="text-align:left;">
-R11
+Away.Team
+</td>
+<td style="text-align:left;">
+Collingwood
 </td>
 <td style="text-align:right;">
 -34
@@ -1356,49 +1164,28 @@ R11
 <td style="text-align:left;">
 L
 </td>
-<td style="text-align:left;">
-Marvel Stadium
-</td>
 <td style="text-align:right;">
 6.41
 </td>
 <td style="text-align:left;">
 N
 </td>
-<td style="text-align:left;">
-Collingwood
-</td>
 </tr>
 <tr>
-<td style="text-align:right;">
-14453
-</td>
 <td style="text-align:right;">
 2014
 </td>
 <td style="text-align:left;">
-2014-05-25
-</td>
-<td style="text-align:left;">
 R10
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-119
-</td>
-<td style="text-align:right;">
-74
-</td>
-<td style="text-align:left;">
-Away.Team
 </td>
 <td style="text-align:left;">
 Western Bulldogs
 </td>
 <td style="text-align:left;">
-R9
+Away.Team
+</td>
+<td style="text-align:left;">
+Gold Coast
 </td>
 <td style="text-align:right;">
 -45
@@ -1406,49 +1193,28 @@ R9
 <td style="text-align:left;">
 L
 </td>
-<td style="text-align:left;">
-Metricon Stadium
-</td>
 <td style="text-align:right;">
 4.31
 </td>
 <td style="text-align:left;">
 N
 </td>
-<td style="text-align:left;">
-Gold Coast
-</td>
 </tr>
 <tr>
-<td style="text-align:right;">
-15306
-</td>
 <td style="text-align:right;">
 2018
 </td>
 <td style="text-align:left;">
-2018-06-14
-</td>
-<td style="text-align:left;">
 R13
-</td>
-<td style="text-align:right;">
-13
-</td>
-<td style="text-align:right;">
-132
-</td>
-<td style="text-align:right;">
-75
-</td>
-<td style="text-align:left;">
-Away.Team
 </td>
 <td style="text-align:left;">
 Western Bulldogs
 </td>
 <td style="text-align:left;">
-R12
+Away.Team
+</td>
+<td style="text-align:left;">
+Port Adelaide
 </td>
 <td style="text-align:right;">
 -57
@@ -1456,49 +1222,28 @@ R12
 <td style="text-align:left;">
 L
 </td>
-<td style="text-align:left;">
-Adelaide Oval
-</td>
 <td style="text-align:right;">
 6.94
 </td>
 <td style="text-align:left;">
 N
 </td>
-<td style="text-align:left;">
-Port Adelaide
-</td>
 </tr>
 <tr>
-<td style="text-align:right;">
-15517
-</td>
 <td style="text-align:right;">
 2019
 </td>
 <td style="text-align:left;">
-2019-06-15
-</td>
-<td style="text-align:left;">
 R13
-</td>
-<td style="text-align:right;">
-13
-</td>
-<td style="text-align:right;">
-100
-</td>
-<td style="text-align:right;">
-103
-</td>
-<td style="text-align:left;">
-Away.Team
 </td>
 <td style="text-align:left;">
 Western Bulldogs
 </td>
 <td style="text-align:left;">
-R12
+Away.Team
+</td>
+<td style="text-align:left;">
+Carlton
 </td>
 <td style="text-align:right;">
 3
@@ -1506,49 +1251,28 @@ R12
 <td style="text-align:left;">
 W
 </td>
-<td style="text-align:left;">
-Marvel Stadium
-</td>
 <td style="text-align:right;">
 1.49
 </td>
 <td style="text-align:left;">
 Y
 </td>
-<td style="text-align:left;">
-Carlton
-</td>
 </tr>
 <tr>
-<td style="text-align:right;">
-15745
-</td>
 <td style="text-align:right;">
 2020
 </td>
 <td style="text-align:left;">
-2020-09-06
-</td>
-<td style="text-align:left;">
 R16
-</td>
-<td style="text-align:right;">
-16
-</td>
-<td style="text-align:right;">
-49
-</td>
-<td style="text-align:right;">
-47
-</td>
-<td style="text-align:left;">
-Home.Team
 </td>
 <td style="text-align:left;">
 Western Bulldogs
 </td>
 <td style="text-align:left;">
-R15
+Home.Team
+</td>
+<td style="text-align:left;">
+West Coast
 </td>
 <td style="text-align:right;">
 2
@@ -1556,49 +1280,28 @@ R15
 <td style="text-align:left;">
 W
 </td>
-<td style="text-align:left;">
-Metricon Stadium
-</td>
 <td style="text-align:right;">
 1.72
 </td>
 <td style="text-align:left;">
 N
 </td>
-<td style="text-align:left;">
-West Coast
-</td>
 </tr>
 <tr>
-<td style="text-align:right;">
-15889
-</td>
 <td style="text-align:right;">
 2021
 </td>
 <td style="text-align:left;">
-2021-06-18
-</td>
-<td style="text-align:left;">
 R14
-</td>
-<td style="text-align:right;">
-14
-</td>
-<td style="text-align:right;">
-83
-</td>
-<td style="text-align:right;">
-78
-</td>
-<td style="text-align:left;">
-Away.Team
 </td>
 <td style="text-align:left;">
 Western Bulldogs
 </td>
 <td style="text-align:left;">
-R13
+Away.Team
+</td>
+<td style="text-align:left;">
+Geelong
 </td>
 <td style="text-align:right;">
 -5
@@ -1606,49 +1309,28 @@ R13
 <td style="text-align:left;">
 L
 </td>
-<td style="text-align:left;">
-GMHBA Stadium
-</td>
 <td style="text-align:right;">
 2.43
 </td>
 <td style="text-align:left;">
 N
 </td>
-<td style="text-align:left;">
-Geelong
-</td>
 </tr>
 <tr>
-<td style="text-align:right;">
-16099
-</td>
 <td style="text-align:right;">
 2022
 </td>
 <td style="text-align:left;">
-2022-06-18
-</td>
-<td style="text-align:left;">
 R14
-</td>
-<td style="text-align:right;">
-14
-</td>
-<td style="text-align:right;">
-105
-</td>
-<td style="text-align:right;">
-125
-</td>
-<td style="text-align:left;">
-Away.Team
 </td>
 <td style="text-align:left;">
 Western Bulldogs
 </td>
 <td style="text-align:left;">
-R13
+Away.Team
+</td>
+<td style="text-align:left;">
+GWS
 </td>
 <td style="text-align:right;">
 20
@@ -1656,17 +1338,11 @@ R13
 <td style="text-align:left;">
 W
 </td>
-<td style="text-align:left;">
-Giants Stadium
-</td>
 <td style="text-align:right;">
 1.58
 </td>
 <td style="text-align:left;">
 Y
-</td>
-<td style="text-align:left;">
-GWS
 </td>
 </tr>
 </tbody>
