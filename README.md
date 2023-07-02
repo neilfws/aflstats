@@ -14,6 +14,7 @@ Located in `code/R/Rmd`.
 1. [Sydney Swans/South Melbourne greatest (and worst) Q4 turnarounds](https://github.com/neilfws/aflstats/blob/master/code/R/Rmd/swans_turnarounds/turnaround.md)
 1. [Sydney Swans versus the rest](https://github.com/neilfws/aflstats/blob/master/code/R/Rmd/swans_versus_x/swans_versus_x.md)
 1. [Geelong and the bye](https://github.com/neilfws/aflstats/blob/master/code/R/Rmd/bye_scoring/bye_scoring.md)
+1. [Post-bye games visualisation and analysis](https://github.com/neilfws/aflstats/blob/master/code/R/Rmd/bye_scoring/post_bye_results.md)
 1. [Returning coaches](https://github.com/neilfws/aflstats/blob/master/code/R/Rmd/returning_coaches/returning_coaches.md)
 
 ## Scripts
