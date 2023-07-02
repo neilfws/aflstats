@@ -1,7 +1,7 @@
 AFL: post-bye results
 ================
 Neil Saunders
-2023-07-02 12:32:39.292147
+2023-07-02 13:00:11.434911
 
 - [Summary](#summary)
 - [Data](#data)
@@ -29,13 +29,6 @@ Neil Saunders
     - [SEN June 25 2023](#sen-june-25-2023)
     - [AFL June 6 2023](#afl-june-6-2023)
     - [The Age](#the-age)
-
-<style type="text/css">
-body {
-  max-width: 80% !important;
-  margin: auto;
-}
-</style>
 
 # Summary
 
