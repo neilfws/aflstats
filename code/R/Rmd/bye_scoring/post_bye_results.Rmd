@@ -81,14 +81,19 @@ afl_odds <- read_excel(destfile, skip = 1)
 ```{r pivot-odds-data}
 afl_odds_long <- afl_odds %>% 
   select(Date, Venue, `Home Team`, `Away Team`, `Home Odds`, `Away Odds`) %>% 
+  mutate(Favourite = case_when(
+    `Home Odds` < `Away Odds` ~ `Home Team`, 
+    `Away Odds` < `Home Odds` ~ `Away Team`, 
+    TRUE ~ NA_character_)) %>% 
   pivot_longer(3:4, names_to = "HA.Name", values_to = "Team") %>% 
-  mutate(Odds = ifelse(HA.Name == "Home Team", `Home Odds`, `Away Odds`), 
+  mutate(Odds = ifelse(HA.Name == "Home Team", `Home Odds`, `Away Odds`),
+         Favourite = case_when(
+           Team == Favourite ~ "Y",
+           Team != Favourite ~ "N",
+           TRUE ~ NA_character_),
          Date = ymd(Date), 
          Team = recode(Team, Brisbane = "Brisbane Lions", `GWS Giants` = "GWS")) %>% 
-  select(Date, Venue, Team, Odds) %>% 
-  group_by(Date, Venue) %>% 
-  mutate(Favourite = ifelse(Odds == min(Odds), "Y", "N")) %>% 
-  ungroup()
+  select(Date, Venue, Team, Odds, Favourite)
 ```
 
 ```{r create-byes-dataset}
@@ -580,6 +585,18 @@ post_bye_games %>%
   scale_x_continuous(breaks = seq(2011, current_year, 2)) +
   guides(fill = "none")
 ```
+
+## Comparison of expected results with other games
+
+We might ask: is the proportion of post-bye games with unexpected results very different to other games?
+
+The question then is: with which "other games" should we compare? Some ideas are:
+
+- all of the games that were not post-bye over the same period
+- all of the games that were not post-bye in the same rounds
+- all of the games that were not post-bye on the same dates
+
+
 
 ## Comparison to media articles
 

@@ -1,7 +1,7 @@
 AFL: post-bye results
 ================
 Neil Saunders
-2023-07-02 14:47:55.742315
+2023-07-03 21:26:23.71594
 
 - [Summary](#summary)
 - [Data](#data)
@@ -25,6 +25,8 @@ Neil Saunders
     - [By team and expected result](#by-team-and-expected-result)
     - [Unexpected wins and losses by
       season](#unexpected-wins-and-losses-by-season)
+  - [Comparison of expected results with other
+    games](#comparison-of-expected-results-with-other-games)
   - [Comparison to media articles](#comparison-to-media-articles)
     - [SEN June 25 2023](#sen-june-25-2023)
     - [AFL June 6 2023](#afl-june-6-2023)
@@ -75,7 +77,7 @@ Then:
 The final dataset `post_bye_games` looks like this. It gets written to
 CSV.
 
-    ## Rows: 244
+    ## Rows: 250
     ## Columns: 16
     ## $ Game         <dbl> 13775, 13782, 13794, 13795, 13795, 13800, 13802, 13802, 13803, 13809, 13811, 13812, 13817, 13825, 13836, 13841, 13854, 13864, 13868, 1388…
     ## $ Season       <dbl> 2011, 2011, 2011, 2011, 2011, 2011, 2011, 2011, 2011, 2011, 2011, 2011, 2011, 2011, 2011, 2011, 2011, 2011, 2011, 2011, 2011, 2011, 2011,…
@@ -204,7 +206,7 @@ Home.Team
 Loss
 </td>
 <td style="text-align:right;">
-67
+69
 </td>
 <td style="text-align:right;">
 34
@@ -215,10 +217,10 @@ Loss
 Win
 </td>
 <td style="text-align:right;">
-31
+34
 </td>
 <td style="text-align:right;">
-36
+37
 </td>
 </tr>
 </tbody>
@@ -249,16 +251,16 @@ alternative
 <tbody>
 <tr>
 <td style="text-align:right;">
-2.276744
+2.198086
 </td>
 <td style="text-align:right;">
-0.0110489
+0.0127839
 </td>
 <td style="text-align:right;">
-1.157719
+1.133005
 </td>
 <td style="text-align:right;">
-4.52575
+4.305763
 </td>
 <td style="text-align:left;">
 Fisher’s Exact Test for Count Data
@@ -345,6 +347,18 @@ This one shows that unexpected losses are slightly more frequent than
 unexpected wins.
 
 ![](post_bye_results_files/figure-gfm/post-bye-unexpected-04-1.png)<!-- -->
+
+## Comparison of expected results with other games
+
+We might ask: is the proportion of post-bye games with unexpected
+results very different to other games?
+
+The question then is: with which “other games” should we compare? Some
+ideas are:
+
+- all of the games that were not post-bye over the same period
+- all of the games that were not post-bye in the same rounds
+- all of the games that were not post-bye on the same dates
 
 ## Comparison to media articles
 
@@ -1284,7 +1298,7 @@ W
 1.72
 </td>
 <td style="text-align:left;">
-N
+Y
 </td>
 </tr>
 <tr>
@@ -1343,6 +1357,33 @@ W
 </td>
 <td style="text-align:left;">
 Y
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2023
+</td>
+<td style="text-align:left;">
+R16
+</td>
+<td style="text-align:left;">
+Western Bulldogs
+</td>
+<td style="text-align:left;">
+Home.Team
+</td>
+<td style="text-align:left;">
+Fremantle
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:left;">
+W
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:left;">
 </td>
 </tr>
 </tbody>

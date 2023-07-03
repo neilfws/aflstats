@@ -191,7 +191,7 @@ Game,Season,Date,Round,Round.Number,Home.Points,Away.Points,HA.Name,Team,ByeRoun
 15742,2020,2020-09-05,R16,16,42,78,Away.Team,Port Adelaide,R15,36,W,Metricon Stadium,1.11,Y,North Melbourne
 15743,2020,2020-09-06,R16,16,80,66,Home.Team,St Kilda,R15,14,W,Metricon Stadium,1.27,Y,Hawthorn
 15744,2020,2020-09-06,R16,16,108,42,Home.Team,Geelong,R15,66,W,Gabba,1.21,Y,Essendon
-15745,2020,2020-09-06,R16,16,49,47,Home.Team,Western Bulldogs,R15,2,W,Metricon Stadium,1.72,N,West Coast
+15745,2020,2020-09-06,R16,16,49,47,Home.Team,Western Bulldogs,R15,2,W,Metricon Stadium,1.72,Y,West Coast
 15749,2020,2020-09-09,R16,16,88,43,Away.Team,Gold Coast,R15,-45,L,Gabba,3.6,N,Brisbane Lions
 15751,2020,2020-09-11,R17,17,31,57,Away.Team,Richmond,R16,26,W,Metricon Stadium,2.11,N,Geelong
 15758,2020,2020-09-14,R17,17,68,46,Home.Team,Collingwood,R16,22,W,Gabba,1.23,Y,Gold Coast
@@ -243,3 +243,9 @@ Game,Season,Date,Round,Round.Number,Home.Points,Away.Points,HA.Name,Team,ByeRoun
 16315,2023,2023-06-25,R15,15,82,80,Home.Team,Collingwood,R14,2,W,MCG,1.35,Y,Adelaide
 16315,2023,2023-06-25,R15,15,82,80,Away.Team,Adelaide,R14,-2,L,MCG,3.13,N,Collingwood
 16316,2023,2023-06-25,R15,15,101,34,Away.Team,Hawthorn,R14,-67,L,Metricon Stadium,3.61,N,Gold Coast
+16317,2023,2023-06-29,R16,16,134,53,Away.Team,Richmond,R15,-81,L,NA,NA,NA,Brisbane Lions
+16319,2023,2023-07-01,R16,16,138,72,Away.Team,North Melbourne,R15,-66,L,NA,NA,NA,Adelaide
+16320,2023,2023-07-01,R16,16,102,73,Home.Team,Western Bulldogs,R15,29,W,NA,NA,NA,Fremantle
+16322,2023,2023-07-01,R16,16,74,78,Away.Team,Port Adelaide,R15,4,W,NA,NA,NA,Essendon
+16323,2023,2023-07-02,R16,16,52,112,Away.Team,Carlton,R15,60,W,NA,NA,NA,Hawthorn
+16324,2023,2023-07-02,R16,16,45,47,Away.Team,GWS,R15,2,W,NA,NA,NA,Melbourne
