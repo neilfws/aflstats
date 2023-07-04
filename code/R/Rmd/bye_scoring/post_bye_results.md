@@ -1,7 +1,7 @@
 AFL: post-bye results
 ================
 Neil Saunders
-2023-07-04 11:39:12.535057
+2023-07-04 12:42:57.469503
 
 - [Summary](#summary)
 - [Data](#data)
@@ -350,7 +350,7 @@ unexpected wins.
 
 ## Comparison of expected results with other games
 
-IN PROGRESS
+This section is somewhat experimental.
 
 We might ask: is the proportion of post-bye games with unexpected
 results very different to other games?
@@ -361,6 +361,158 @@ ideas are:
 - all of the games that were not post-bye over the same period
 - all of the games that were not post-bye in the same rounds
 - all of the games that were not post-bye on the same dates
+
+To address this, we generate 3 new datasets corresponding to each set in
+the list, and combine Favourite and Result into a new variable. Then we
+can count expected results (favourite wins or non-favourite loses) and
+unexpected results (favourite loses, non-favourite wins).
+
+Some notes:
+
+In these datasets games are from the perspective of the home team
+(clearly if one team loses the other wins and if one is the favourite,
+the other is not, so we only need one row per game).
+
+Drawn games are omitted. There are 20 drawn games in this time period.
+
+Games with no favourite (equal odds) are omitted. There are 3 such games
+in this time period.
+
+**Summary** - we see:
+
+- a slightly *higher* percentage of unexpected results in post-bye games
+  compared with non-post-bye games played in the same rounds, or on the
+  same dates
+- a slightly *lower* percentage of unexpected results in post-bye games
+  compared with all non-post-bye games in the same time period
+
+It’s probably best not to over-interpret here, until we have a clearer
+idea about what makes a good comparison.
+
+<table>
+<caption>
+Game results by favourite 2011-2023
+</caption>
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+
+Favourite/Result
+
+</div>
+
+</th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+dataset
+</th>
+<th style="text-align:right;">
+Yes/Win
+</th>
+<th style="text-align:right;">
+No/Loss
+</th>
+<th style="text-align:right;">
+Yes/Loss
+</th>
+<th style="text-align:right;">
+No/Win
+</th>
+<th style="text-align:right;">
+% unexpected
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Post-bye games 2011-2023
+</td>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:right;">
+73
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+26.44
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+All non-post-bye games 2011-2023
+</td>
+<td style="text-align:right;">
+1015
+</td>
+<td style="text-align:right;">
+634
+</td>
+<td style="text-align:right;">
+382
+</td>
+<td style="text-align:right;">
+297
+</td>
+<td style="text-align:right;">
+29.17
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Same round non-post-bye games 2011-2023
+</td>
+<td style="text-align:right;">
+133
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+39
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+23.93
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Same date non-post-bye games 2011-2023
+</td>
+<td style="text-align:right;">
+61
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+19.49
+</td>
+</tr>
+</tbody>
+</table>
 
 ## Comparison to media articles
 

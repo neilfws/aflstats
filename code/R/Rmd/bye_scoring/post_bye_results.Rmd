@@ -588,7 +588,17 @@ post_bye_games %>%
 
 ## Comparison of expected results with other games
 
-IN PROGRESS
+```{r calculate-special}
+# do some calculations here because inline backtick issues
+
+games_drawn <- afldata %>% 
+  filter(Margin == 0)
+
+games_no_favourite <- afl_odds %>% 
+  filter(`Home Odds` == `Away Odds`)
+```
+
+This section is somewhat experimental.
 
 We might ask: is the proportion of post-bye games with unexpected results very different to other games?
 
@@ -598,8 +608,24 @@ The question then is: with which "other games" should we compare? Some ideas are
 - all of the games that were not post-bye in the same rounds
 - all of the games that were not post-bye on the same dates
 
+To address this, we generate 3 new datasets corresponding to each set in the list, and combine Favourite and Result into a new variable. Then we can count expected results (favourite wins or non-favourite loses) and unexpected results (favourite loses, non-favourite wins).
 
-```{r}
+Some notes:
+
+In these datasets games are from the perspective of the home team (clearly if one team loses the other wins and if one is the favourite, the other is not, so we only need one row per game).
+
+Drawn games are omitted. There are `r nrow(games_drawn)` drawn games in this time period.
+
+Games with no favourite (equal odds) are omitted. There are `r nrow(games_no_favourite)` such games in this time period.
+
+**Summary** - we see:
+
+- a slightly _higher_ percentage of unexpected results in post-bye games compared with non-post-bye games played in the same rounds, or on the same dates
+- a slightly _lower_ percentage of unexpected results in post-bye games compared with all non-post-bye games in the same time period
+
+It's probably best not to over-interpret here, until we have a clearer idea about what makes a good comparison.
+
+```{r count-expected}
 # all non-post-bye games
 non_post_bye_games_all <- afldata %>% 
   filter(!Game %in% post_bye_games$Game) %>% 
@@ -654,7 +680,6 @@ filter(Date %in% unique(post_bye_games$Date),
   filter(HA.Name == "Home.Team")
 
 # now count Expected and combine with post-bye games
-
 expected_counts <- list(
   `Post-bye games 2011-2023` = post_bye_games %>% 
     group_by(Game) %>% 
@@ -669,6 +694,21 @@ expected_counts <- list(
   `Same date non-post-bye games 2011-2023` = non_post_bye_games_date %>% 
     count(Expected)) %>% 
   bind_rows(.id = "dataset")
+
+# tabulate
+expected_counts %>% 
+  filter(Expected %in% c("YW", "YL", "NW", "NL")) %>% 
+  mutate(Expected = recode(Expected, 
+                           NL = "No/Loss", 
+                           NW = "No/Win", 
+                           YL = "Yes/Loss", 
+                           YW = "Yes/Win")) %>% 
+  pivot_wider(names_from = "Expected", 
+              values_from = "n") %>% 
+  select(dataset, `Yes/Win`, `No/Loss`, `Yes/Loss`, `No/Win`) %>% 
+  mutate(`% unexpected` = 100 * (`Yes/Loss` + `No/Win`) / (`Yes/Win` + `No/Loss` + `Yes/Loss` + `No/Win`)) %>% 
+  kbl(caption = "Game results by favourite 2011-2023", digits = 2) %>%  
+  add_header_above(c(" ", "Favourite/Result" = 4, " "))
 ```
 
 
