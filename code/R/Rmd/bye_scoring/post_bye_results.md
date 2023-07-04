@@ -1,7 +1,7 @@
 AFL: post-bye results
 ================
 Neil Saunders
-2023-07-04 11:16:30.954477
+2023-07-04 11:30:42.06497
 
 - [Summary](#summary)
 - [Data](#data)
@@ -1088,7 +1088,7 @@ However, it does say:
 So let’s focus on only mid-season byes (2012-2023), where the Bulldogs
 were the only team coming off the bye.
 
-Their record is 4-4 (wins-losses) and they were not favourites to win in
+Their record is 5-4 (wins-losses) and they were not favourites to win in
 any of the four losses.
 
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
