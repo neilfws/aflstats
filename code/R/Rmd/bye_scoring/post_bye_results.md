@@ -1,7 +1,7 @@
 AFL: post-bye results
 ================
 Neil Saunders
-2023-07-03 21:26:23.71594
+2023-07-04 11:16:30.954477
 
 - [Summary](#summary)
 - [Data](#data)
@@ -1382,8 +1382,10 @@ Fremantle
 W
 </td>
 <td style="text-align:right;">
+1.52
 </td>
 <td style="text-align:left;">
+Y
 </td>
 </tr>
 </tbody>

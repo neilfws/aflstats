@@ -243,9 +243,9 @@ Game,Season,Date,Round,Round.Number,Home.Points,Away.Points,HA.Name,Team,ByeRoun
 16315,2023,2023-06-25,R15,15,82,80,Home.Team,Collingwood,R14,2,W,MCG,1.35,Y,Adelaide
 16315,2023,2023-06-25,R15,15,82,80,Away.Team,Adelaide,R14,-2,L,MCG,3.13,N,Collingwood
 16316,2023,2023-06-25,R15,15,101,34,Away.Team,Hawthorn,R14,-67,L,Metricon Stadium,3.61,N,Gold Coast
-16317,2023,2023-06-29,R16,16,134,53,Away.Team,Richmond,R15,-81,L,NA,NA,NA,Brisbane Lions
-16319,2023,2023-07-01,R16,16,138,72,Away.Team,North Melbourne,R15,-66,L,NA,NA,NA,Adelaide
-16320,2023,2023-07-01,R16,16,102,73,Home.Team,Western Bulldogs,R15,29,W,NA,NA,NA,Fremantle
-16322,2023,2023-07-01,R16,16,74,78,Away.Team,Port Adelaide,R15,4,W,NA,NA,NA,Essendon
-16323,2023,2023-07-02,R16,16,52,112,Away.Team,Carlton,R15,60,W,NA,NA,NA,Hawthorn
-16324,2023,2023-07-02,R16,16,45,47,Away.Team,GWS,R15,2,W,NA,NA,NA,Melbourne
+16317,2023,2023-06-29,R16,16,134,53,Away.Team,Richmond,R15,-81,L,Gabba,3.21,N,Brisbane Lions
+16319,2023,2023-07-01,R16,16,138,72,Away.Team,North Melbourne,R15,-66,L,Adelaide Oval,8.22,N,Adelaide
+16320,2023,2023-07-01,R16,16,102,73,Home.Team,Western Bulldogs,R15,29,W,Marvel Stadium,1.52,Y,Fremantle
+16322,2023,2023-07-01,R16,16,74,78,Away.Team,Port Adelaide,R15,4,W,MCG,1.44,Y,Essendon
+16323,2023,2023-07-02,R16,16,52,112,Away.Team,Carlton,R15,60,W,MCG,1.34,Y,Hawthorn
+16324,2023,2023-07-02,R16,16,45,47,Away.Team,GWS,R15,2,W,Traeger Park,2.88,N,Melbourne

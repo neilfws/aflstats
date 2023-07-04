@@ -72,8 +72,8 @@ afl_byes <- read_csv("../../../../data/afl_byes.csv")
 ```{r read-odds-data}
 url <- "https://www.aussportsbetting.com/historical_data/afl.xlsx"
 destfile <- "/tmp/afl.xlsx"
-if(!file.exists(destfile))
-  curl::curl_download(url, destfile)
+# if(!file.exists(destfile))
+curl::curl_download(url, destfile)
 
 afl_odds <- read_excel(destfile, skip = 1)
 ```
@@ -595,6 +595,79 @@ The question then is: with which "other games" should we compare? Some ideas are
 - all of the games that were not post-bye over the same period
 - all of the games that were not post-bye in the same rounds
 - all of the games that were not post-bye on the same dates
+
+
+```{r}
+# all non-post-bye games
+non_post_bye_games_all <- afldata %>% 
+  filter(!Game %in% post_bye_games$Game) %>% 
+  select(Game, Season, Date, Round, Round.Number, Home.Team, Away.Team, Home.Points, Away.Points) %>%
+  pivot_longer(6:7, 
+               names_to = "HA.Name", 
+               values_to = "Team") %>% 
+  mutate(Team = ifelse(Team == "Footscray", "Western Bulldogs", Team),
+         Margin = ifelse(HA.Name == "Home.Team", Home.Points - Away.Points, Away.Points - Home.Points),
+         Result = case_when(
+           Margin > 0 ~ "W", 
+           Margin < 0 ~ "L", 
+           TRUE ~ "D")) %>% 
+  left_join(afl_odds_long) %>% 
+  mutate(Expected = paste0(Favourite, Result)) %>% 
+  filter(HA.Name == "Home.Team")
+
+# non-post-bye games in the same rounds:
+non_post_bye_games_round <- afldata %>% 
+  filter(paste0(Season, Round) %in% paste0(post_bye_games$Season, post_bye_games$Round), 
+         !Game %in% post_bye_games$Game) %>% 
+  select(Game, Season, Date, Round, Round.Number, Home.Team, Away.Team, Home.Points, Away.Points) %>%
+  pivot_longer(6:7, 
+               names_to = "HA.Name", 
+               values_to = "Team") %>% 
+  mutate(Team = ifelse(Team == "Footscray", "Western Bulldogs", Team),
+         Margin = ifelse(HA.Name == "Home.Team", Home.Points - Away.Points, Away.Points - Home.Points),
+         Result = case_when(
+           Margin > 0 ~ "W", 
+           Margin < 0 ~ "L", 
+           TRUE ~ "D")) %>% 
+  left_join(afl_odds_long) %>% 
+  mutate(Expected = paste0(Favourite, Result)) %>% 
+  filter(HA.Name == "Home.Team")
+
+# non-post-bye games on the same date:
+non_post_bye_games_date <- afldata %>% 
+filter(Date %in% unique(post_bye_games$Date), 
+       !Game %in% post_bye_games$Game) %>% 
+  select(Game, Season, Date, Round, Round.Number, Home.Team, Away.Team, Home.Points, Away.Points) %>%
+  pivot_longer(6:7, 
+               names_to = "HA.Name", 
+               values_to = "Team") %>% 
+  mutate(Team = ifelse(Team == "Footscray", "Western Bulldogs", Team),
+         Margin = ifelse(HA.Name == "Home.Team", Home.Points - Away.Points, Away.Points - Home.Points),
+         Result = case_when(
+           Margin > 0 ~ "W", 
+           Margin < 0 ~ "L", 
+           TRUE ~ "D")) %>% 
+  left_join(afl_odds_long) %>% 
+  mutate(Expected = paste0(Favourite, Result)) %>% 
+  filter(HA.Name == "Home.Team")
+
+# now count Expected and combine with post-bye games
+
+expected_counts <- list(
+  `Post-bye games 2011-2023` = post_bye_games %>% 
+    group_by(Game) %>% 
+    filter(n() == 1) %>% 
+    ungroup() %>% 
+    mutate(Expected = paste0(Favourite, Result)) %>% 
+    count(Expected),
+  `All non-post-bye games 2011-2023` = non_post_bye_games_all %>% 
+    count(Expected),
+  `Same round non-post-bye games 2011-2023` = non_post_bye_games_round %>% 
+    count(Expected),
+  `Same date non-post-bye games 2011-2023` = non_post_bye_games_date %>% 
+    count(Expected)) %>% 
+  bind_rows(.id = "dataset")
+```
 
 
 
