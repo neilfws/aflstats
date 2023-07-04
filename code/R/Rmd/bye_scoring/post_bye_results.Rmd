@@ -167,7 +167,7 @@ afl_byes %>%
   theme(legend.position = "top",
         panel.grid = element_blank()) +
   labs(title = "Number of teams on a bye by season and round",
-       subtitle = paste0("2011-", current_year))
+       subtitle = paste0("2012-", current_year))
 ```
 
 ### Bye rounds by team
@@ -192,7 +192,7 @@ afl_byes %>%
   theme(legend.position = "top",
         panel.grid = element_blank()) +
   labs(title = "Byes per round by team",
-       subtitle = paste0("2011-", current_year))
+       subtitle = paste0("2012-", current_year))
 ```
 
 ### Bye rounds by season and team
@@ -215,7 +215,7 @@ afl_byes %>%
         legend.position = "top",
         panel.grid = element_blank()) +
   labs(title = "Team byes by season and round",
-       subtitle = "2011-2023")
+       subtitle = paste0("2012-", current_year))
 ```
 
 ### Post-bye rounds by teams coming off the bye
@@ -238,7 +238,7 @@ post_bye_games %>%
             position = position_stack(vjust = 0.5)) +
   labs(y = "Count",
        title = "Count of post-bye games by season and number of teams coming off bye",
-       subtitle = paste0("2011-", current_year)) +
+       subtitle = paste0("2012-", current_year)) +
   scale_fill_brewer(palette = "Set1") +
   scale_x_continuous(breaks = seq(2011, current_year, 2)) +
   theme(legend.position = "top")
@@ -246,7 +246,11 @@ post_bye_games %>%
 
 ## Wins and losses
 
-Let's start looking at wins and losses in post-bye games. In the following sections we look only at games where one team comes off a bye. We include season 2011 even though byes in that season were not mid-season.
+Let's start looking at wins and losses in post-bye games. 
+
+In the following sections we look only at games where one team comes off a bye. 
+
+We also omit season 2011 so as to keep the focus on mid-season byes with 18 teams.
 
 ### Distribution of margins by expected result
 
@@ -257,6 +261,7 @@ Plotting post-bye game margins versus expected winner shows that on average, fav
 
 ```{r post-bye-margin-odds}
 post_bye_games %>% 
+  filter(Season > 2011) %>% 
   group_by(Game) %>% 
   filter(n() == 1) %>% 
   ungroup() %>% 
@@ -273,7 +278,7 @@ post_bye_games %>%
   labs(x = "Favourite",
        y = "Margin",
        title = "Margin in post-bye games by expected result",
-       subtitle = paste0("2011-", current_year))
+       subtitle = paste0("2012-", current_year))
 ```
 
 ### Overall
@@ -284,6 +289,7 @@ However, this doesn't tell us very much about why this should be the case.
 
 ```{r post-bye-win-loss}
 post_bye_games %>% 
+  filter(Season > 2011) %>% 
   group_by(Game) %>% 
   filter(n() == 1) %>% 
   ungroup() %>% 
@@ -297,7 +303,7 @@ post_bye_games %>%
   labs(x = "Result", 
        y = "Count", 
        title = "Results for AFL teams coming off a bye", 
-       subtitle = paste0("2011-", current_year))
+       subtitle = paste0("2012-", current_year))
 ```
 
 ### Overall by home/away
@@ -309,6 +315,7 @@ More teams coming off a bye were playing away from home. And away teams are more
 
 ```{r post-bye-home-away}
 post_bye_games %>% 
+  filter(Season > 2011) %>% 
   group_by(Game) %>% 
   filter(n() == 1) %>% 
   ungroup() %>% 
@@ -324,7 +331,7 @@ post_bye_games %>%
   labs(x = "Home/Away", 
        y = "Count", 
        title = "Results for AFL teams coming off a bye by home/away", 
-       subtitle = paste0("2011-", current_year)) +
+       subtitle = paste0("2012-", current_year)) +
   scale_fill_brewer(palette = "Set1") +
   theme(legend.position = "top")
 ```
@@ -333,6 +340,7 @@ The home/away win/loss difference has p < 0.05 in a Fisher's exact test.
 
 ```{r post-bye-home-away-fisher}
 post_bye_games %>% 
+  filter(Season > 2011) %>% 
   group_by(Game) %>% 
   filter(n() == 1) %>% 
   ungroup() %>% 
@@ -344,6 +352,7 @@ post_bye_games %>%
   kable_styling(bootstrap_options = c("striped", "compact"))
 
 ftest <- post_bye_games %>% 
+  filter(Season > 2011) %>% 
   group_by(Game) %>% 
   filter(n() == 1) %>% 
   ungroup() %>% 
@@ -367,25 +376,26 @@ When we look at post-bye results by expected result, it's clear that a majority 
 
 ```{r post-bye-expected-result}
 post_bye_games %>% 
-    group_by(Game) %>% 
-    filter(n() == 1) %>% 
-    ungroup() %>% 
-    count(Favourite, Result) %>% 
-    mutate(Result = recode(Result, W = "Win", L = "Loss"),
-           Result = fct_relevel(Result, "Win", "Loss"),
-           Favourite = recode(Favourite, Y = "Yes", N = "No"),
-           Favourite = fct_relevel(Favourite, "Yes", "No")) %>% 
-    ggplot(aes(Result, n, fill = Favourite)) + 
-    geom_col() + 
-    geom_text(aes(label = n), 
-              color = "white",
-              position = position_stack(vjust = 0.5)) +
-    labs(x = "Result", 
-         y = "Count", 
-         title = "Results for AFL teams coming off a bye by expected result", 
-         subtitle = paste0("2011-", current_year)) +
-    scale_fill_brewer(palette = "Set1") +
-    theme(legend.position = "top")
+  filter(Season > 2011) %>% 
+  group_by(Game) %>% 
+  filter(n() == 1) %>% 
+  ungroup() %>% 
+  count(Favourite, Result) %>% 
+  mutate(Result = recode(Result, W = "Win", L = "Loss"),
+         Result = fct_relevel(Result, "Win", "Loss"),
+         Favourite = recode(Favourite, Y = "Yes", N = "No"),
+         Favourite = fct_relevel(Favourite, "Yes", "No")) %>% 
+  ggplot(aes(Result, n, fill = Favourite)) + 
+  geom_col() + 
+  geom_text(aes(label = n), 
+            color = "white",
+            position = position_stack(vjust = 0.5)) +
+  labs(x = "Result", 
+       y = "Count", 
+       title = "Results for AFL teams coming off a bye by expected result", 
+       subtitle = paste0("2012-", current_year)) +
+  scale_fill_brewer(palette = "Set1") +
+  theme(legend.position = "top")
 ```
 
 ### By season
@@ -396,6 +406,7 @@ In fact we see all combinations: seasons where teams in post-bye games have more
 
 ```{r post-bye-season}
 post_bye_games %>% 
+  filter(Season > 2011) %>% 
   group_by(Game) %>% 
   filter(n() == 1) %>% 
   ungroup() %>% 
@@ -406,7 +417,8 @@ post_bye_games %>%
   labs(x = "Result", 
        y = "Count", 
        title = "Results for AFL teams coming off a bye by season", 
-       subtitle = paste0("2011-", current_year)) +
+       subtitle = paste0("2012-", current_year)) +
+  scale_y_continuous(breaks = scales::pretty_breaks()) +
   facet_wrap(~Season, ncol = 5)
 ```
 
@@ -416,6 +428,7 @@ When we include expected results we see that in a majority of cases, favourites 
 
 ```{r post-bye-season-expected-result}
 post_bye_games %>% 
+  filter(Season > 2011) %>% 
   group_by(Game) %>% 
   filter(n() == 1) %>% 
   ungroup() %>% 
@@ -429,8 +442,9 @@ post_bye_games %>%
   labs(x = "Result", 
        y = "Count", 
        title = "Results for AFL teams coming off a bye by season and expected result", 
-       subtitle = paste0("2011-", current_year)) +
+       subtitle = paste0("2012-", current_year)) +
   scale_fill_brewer(palette = "Set1") +
+  scale_y_continuous(breaks = scales::pretty_breaks()) +
   facet_wrap(~Season, ncol = 5) +
   theme(legend.position = "top")
 ```
@@ -443,6 +457,7 @@ Certainly, using a simple win-loss count, some teams do seem to lose a lot of po
 
 ```{r post-bye-team}
 post_bye_games %>% 
+  filter(Season > 2011) %>% 
   group_by(Game) %>% 
   filter(n() == 1) %>% 
   ungroup() %>% 
@@ -453,7 +468,8 @@ post_bye_games %>%
   labs(x = "Result", 
        y = "Count", 
        title = "Results for AFL teams coming off a bye by team", 
-       subtitle = paste0("2011-", current_year)) +
+       subtitle = paste0("2012-", current_year)) +
+  scale_y_continuous(breaks = scales::pretty_breaks()) +
   facet_wrap(~Team, ncol = 6)
 ```
 
@@ -467,6 +483,7 @@ Geelong on the other hand were favourites in the majority of their post-bye loss
 
 ```{r post-bye-team-expected-result}
 post_bye_games %>% 
+  filter(Season > 2011) %>% 
   group_by(Game) %>% 
   filter(n() == 1) %>% 
   ungroup() %>% 
@@ -480,8 +497,9 @@ post_bye_games %>%
   labs(x = "Result", 
        y = "Count", 
        title = "Results for AFL teams coming off a bye by team and expected result", 
-       subtitle = paste0("2011-", current_year)) +
+       subtitle = paste0("2012-", current_year)) +
   scale_fill_brewer(palette = "Set1") +
+  scale_y_continuous(breaks = scales::pretty_breaks()) +
   facet_wrap(~Team, ncol = 6) +
   theme(legend.position = "top")
 ```
@@ -494,6 +512,7 @@ First: combine expectation and result into a new variable, then plot the proport
 
 ```{r post-bye-unexpected-01}
 post_bye_games %>% 
+  filter(Season > 2011) %>% 
   group_by(Game) %>% 
   filter(n() == 1) %>% 
   ungroup() %>% 
@@ -510,7 +529,7 @@ post_bye_games %>%
   scale_x_continuous(breaks = seq(2011, current_year, 2)) +
   labs(y = "Count",
        title = "Post-bye results by season and expectation",
-       subtitle = paste0("2011-", current_year)) +
+       subtitle = paste0("2012-", current_year)) +
   theme(legend.position = "top")
 ```
 
@@ -518,6 +537,7 @@ Second - a similar idea but combine expected wins and losses into one "expected 
 
 ```{r post-bye-unexpected-02}
 post_bye_games %>% 
+  filter(Season > 2011) %>% 
   group_by(Game) %>% 
   filter(n() == 1) %>% 
   ungroup() %>% 
@@ -534,7 +554,7 @@ post_bye_games %>%
   scale_x_continuous(breaks = seq(2011, current_year, 2)) +
   labs(y = "Count",
        title = "Post-bye results by season and expectation",
-       subtitle = paste0("2011-", current_year)) +
+       subtitle = paste0("2012-", current_year)) +
   theme(legend.position = "top")
 ```
 
@@ -542,6 +562,7 @@ Third, split the data by expectation and plot the proportion of wins and losses.
 
 ```{r post-bye-unexpected-03}
 post_bye_games %>% 
+  filter(Season > 2011) %>% 
   group_by(Game) %>% 
   filter(n() == 1) %>% 
   ungroup() %>% 
@@ -555,9 +576,10 @@ post_bye_games %>%
   facet_grid(Favourite ~ .) +
   labs(y = "Count",
        title = "Post-bye results by season and expectation",
-       subtitle = paste0("2011-", current_year)) +
+       subtitle = paste0("2012-", current_year)) +
   scale_fill_brewer(palette = "Set1") +
   scale_x_continuous(breaks = seq(2011, current_year, 2)) +
+  scale_y_continuous(breaks = scales::pretty_breaks()) +
   theme(legend.position = "top")
 ```
 
@@ -567,6 +589,7 @@ This one shows that unexpected losses are slightly more frequent than unexpected
 
 ```{r post-bye-unexpected-04}
 post_bye_games %>% 
+  filter(Season > 2011) %>% 
   group_by(Game) %>% 
   filter(n() == 1) %>% 
   ungroup() %>% 
@@ -580,7 +603,7 @@ post_bye_games %>%
   facet_wrap(~Result, ncol = 1) +
   labs(y = "Count",
        title = "Unexpected post-bye results by season",
-       subtitle = paste0("2011-", current_year)) +
+       subtitle = paste0("2012-", current_year)) +
   scale_fill_brewer(palette = "Set1") +
   scale_x_continuous(breaks = seq(2011, current_year, 2)) +
   guides(fill = "none")
@@ -620,8 +643,8 @@ Games with no favourite (equal odds) are omitted. There are `r nrow(games_no_fav
 
 **Summary** - we see:
 
-- a slightly _higher_ percentage of unexpected results in post-bye games compared with non-post-bye games played in the same rounds, or on the same dates
-- a slightly _lower_ percentage of unexpected results in post-bye games compared with all non-post-bye games in the same time period
+- a slightly _higher_ percentage of unexpected results in post-bye games compared with non-post-bye games played on the same dates
+- a slightly _lower_ percentage of unexpected results in post-bye games compared with all non-post-bye games in the same time period, or in the same rounds
 
 It's probably best not to over-interpret here, until we have a clearer idea about what makes a good comparison.
 
@@ -681,17 +704,21 @@ filter(Date %in% unique(post_bye_games$Date),
 
 # now count Expected and combine with post-bye games
 expected_counts <- list(
-  `Post-bye games 2011-2023` = post_bye_games %>% 
+  `Post-bye games 2012-2023` = post_bye_games %>% 
+    filter(Season > 2011) %>% 
     group_by(Game) %>% 
     filter(n() == 1) %>% 
     ungroup() %>% 
     mutate(Expected = paste0(Favourite, Result)) %>% 
     count(Expected),
-  `All non-post-bye games 2011-2023` = non_post_bye_games_all %>% 
+  `All non-post-bye games 2012-2023` = non_post_bye_games_all %>% 
+    filter(Season > 2011) %>% 
     count(Expected),
-  `Same round non-post-bye games 2011-2023` = non_post_bye_games_round %>% 
+  `Same round non-post-bye games 2012-2023` = non_post_bye_games_round %>% 
+    filter(Season > 2011) %>% 
     count(Expected),
-  `Same date non-post-bye games 2011-2023` = non_post_bye_games_date %>% 
+  `Same date non-post-bye games 2012-2023` = non_post_bye_games_date %>% 
+    filter(Season > 2011) %>% 
     count(Expected)) %>% 
   bind_rows(.id = "dataset")
 
@@ -707,7 +734,7 @@ expected_counts %>%
               values_from = "n") %>% 
   select(dataset, `Yes/Win`, `No/Loss`, `Yes/Loss`, `No/Win`) %>% 
   mutate(`% unexpected` = 100 * (`Yes/Loss` + `No/Win`) / (`Yes/Win` + `No/Loss` + `Yes/Loss` + `No/Win`)) %>% 
-  kbl(caption = "Game results by favourite 2011-2023", digits = 2) %>%  
+  kbl(caption = paste0("Game results by favourite 2012-", 2023), digits = 2) %>%  
   add_header_above(c(" ", "Favourite/Result" = 4, " "))
 ```
 
@@ -782,7 +809,7 @@ post_bye_games_01 %>%
   left_join(post_bye_games_02,
             by = "Team") %>% 
   kbl(col.names = c("Team", "Win", "Draw", "Loss", "Win", "Loss"),
-      caption = "Post-bye win-loss count 2011-2022") %>% 
+      caption = "Post-bye win-loss count 2012-2022") %>% 
   kable_styling(bootstrap_options = c("striped", "compact")) %>% 
   add_header_above(c(" ", "Count (SMH)" = 3, "Count (1 team off bye)" = 2))
 ```

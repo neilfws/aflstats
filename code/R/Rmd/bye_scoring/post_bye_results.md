@@ -1,7 +1,7 @@
 AFL: post-bye results
 ================
 Neil Saunders
-2023-07-04 14:45:28
+2023-07-04 15:57:19
 
 - [Summary](#summary)
 - [Data](#data)
@@ -137,7 +137,7 @@ much alphabetical sometimes as anything else!
 
 ### Post-bye rounds by teams coming off the bye
 
-Post-bye ames might feature one or both teams coming off a bye. If the
+Post-bye games might feature one or both teams coming off a bye. If the
 bye were a factor influencing the post-bye game, we might assume the
 effect would be stronger when only one team comes off a bye.
 
@@ -148,10 +148,13 @@ come off a bye, but the majority involve one post-bye team.
 
 ## Wins and losses
 
-Let’s start looking at wins and losses in post-bye games. In the
-following sections we look only at games where one team comes off a bye.
-We include season 2011 even though byes in that season were not
-mid-season.
+Let’s start looking at wins and losses in post-bye games.
+
+In the following sections we look only at games where one team comes off
+a bye.
+
+We also omit season 2011 so as to keep the focus on mid-season byes with
+18 teams.
 
 ### Distribution of margins by expected result
 
@@ -207,10 +210,10 @@ Home.Team
 Loss
 </td>
 <td style="text-align:right;">
-69
+59
 </td>
 <td style="text-align:right;">
-34
+23
 </td>
 </tr>
 <tr>
@@ -218,10 +221,10 @@ Loss
 Win
 </td>
 <td style="text-align:right;">
-34
+29
 </td>
 <td style="text-align:right;">
-37
+33
 </td>
 </tr>
 </tbody>
@@ -252,16 +255,16 @@ alternative
 <tbody>
 <tr>
 <td style="text-align:right;">
-2.198086
+2.896154
 </td>
 <td style="text-align:right;">
-0.0127839
+0.0031984
 </td>
 <td style="text-align:right;">
-1.133005
+1.379455
 </td>
 <td style="text-align:right;">
-4.305763
+6.197092
 </td>
 <td style="text-align:left;">
 Fisher’s Exact Test for Count Data
@@ -382,17 +385,17 @@ in this time period.
 **Summary** - we see:
 
 - a slightly *higher* percentage of unexpected results in post-bye games
-  compared with non-post-bye games played in the same rounds, or on the
-  same dates
+  compared with non-post-bye games played on the same dates
 - a slightly *lower* percentage of unexpected results in post-bye games
-  compared with all non-post-bye games in the same time period
+  compared with all non-post-bye games in the same time period, or in
+  the same rounds
 
 It’s probably best not to over-interpret here, until we have a clearer
 idea about what makes a good comparison.
 
 <table>
 <caption>
-Game results by favourite 2011-2023
+Game results by favourite 2012-2023
 </caption>
 <thead>
 <tr>
@@ -434,82 +437,82 @@ No/Win
 <tbody>
 <tr>
 <td style="text-align:left;">
-Post-bye games 2011-2023
+Post-bye games 2012-2023
 </td>
 <td style="text-align:right;">
-55
+48
 </td>
 <td style="text-align:right;">
-73
+60
 </td>
 <td style="text-align:right;">
-30
+22
 </td>
 <td style="text-align:right;">
-16
+14
 </td>
 <td style="text-align:right;">
-26.44
+25.00
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-All non-post-bye games 2011-2023
+All non-post-bye games 2012-2023
 </td>
 <td style="text-align:right;">
-1015
+937
 </td>
 <td style="text-align:right;">
-634
+584
 </td>
 <td style="text-align:right;">
-382
+365
 </td>
 <td style="text-align:right;">
-297
+281
 </td>
 <td style="text-align:right;">
-29.17
+29.81
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Same round non-post-bye games 2011-2023
+Same round non-post-bye games 2012-2023
 </td>
 <td style="text-align:right;">
-133
+64
 </td>
 <td style="text-align:right;">
-80
+32
 </td>
 <td style="text-align:right;">
-39
+22
 </td>
 <td style="text-align:right;">
-28
+15
 </td>
 <td style="text-align:right;">
-23.93
+27.82
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Same date non-post-bye games 2011-2023
+Same date non-post-bye games 2012-2023
 </td>
 <td style="text-align:right;">
-61
+38
 </td>
 <td style="text-align:right;">
-34
+18
 </td>
 <td style="text-align:right;">
-13
+7
 </td>
 <td style="text-align:right;">
-10
+8
 </td>
 <td style="text-align:right;">
-19.49
+21.13
 </td>
 </tr>
 </tbody>
@@ -1017,7 +1020,7 @@ makes quite a difference to the numbers. Brisbane for example move from
 
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <caption>
-Post-bye win-loss count 2011-2022
+Post-bye win-loss count 2012-2022
 </caption>
 <thead>
 <tr>
