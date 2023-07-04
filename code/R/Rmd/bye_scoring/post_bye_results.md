@@ -1,7 +1,7 @@
 AFL: post-bye results
 ================
 Neil Saunders
-2023-07-04 11:30:42.06497
+2023-07-04 11:39:12.535057
 
 - [Summary](#summary)
 - [Data](#data)
@@ -350,6 +350,8 @@ unexpected wins.
 
 ## Comparison of expected results with other games
 
+IN PROGRESS
+
 We might ask: is the proportion of post-bye games with unexpected
 results very different to other games?
 
@@ -378,12 +380,16 @@ teams](https://www.sen.com.au/news/2023/06/25/the-numbers-that-dont-bode-well-fo
 > playing a non-bye team that week.
 
 All of that is quite correct. However, when we look at the eight
-post-bye losses, only two of the teams were expected to win, and one of
-those teams was playing away.
+post-bye losses to R14, only two of the teams were expected to win, and
+one of those teams was playing away.
+
+The bye rounds for 2023 have since completed: of 14 teams coming off the
+bye, there were ten losses and four wins. The final tally is two
+unexpected losses and one unexpected win.
 
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <caption>
-Season 2023 post-bye games to R14
+Season 2023 post-bye games
 </caption>
 <thead>
 <tr>
@@ -644,6 +650,180 @@ L
 </td>
 <td style="text-align:right;">
 3.61
+</td>
+<td style="text-align:left;">
+N
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2023
+</td>
+<td style="text-align:left;">
+R16
+</td>
+<td style="text-align:left;">
+Richmond
+</td>
+<td style="text-align:left;">
+Away.Team
+</td>
+<td style="text-align:left;">
+Brisbane Lions
+</td>
+<td style="text-align:right;">
+-81
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:right;">
+3.21
+</td>
+<td style="text-align:left;">
+N
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2023
+</td>
+<td style="text-align:left;">
+R16
+</td>
+<td style="text-align:left;">
+North Melbourne
+</td>
+<td style="text-align:left;">
+Away.Team
+</td>
+<td style="text-align:left;">
+Adelaide
+</td>
+<td style="text-align:right;">
+-66
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:right;">
+8.22
+</td>
+<td style="text-align:left;">
+N
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2023
+</td>
+<td style="text-align:left;">
+R16
+</td>
+<td style="text-align:left;">
+Western Bulldogs
+</td>
+<td style="text-align:left;">
+Home.Team
+</td>
+<td style="text-align:left;">
+Fremantle
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:left;">
+W
+</td>
+<td style="text-align:right;">
+1.52
+</td>
+<td style="text-align:left;">
+Y
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2023
+</td>
+<td style="text-align:left;">
+R16
+</td>
+<td style="text-align:left;">
+Port Adelaide
+</td>
+<td style="text-align:left;">
+Away.Team
+</td>
+<td style="text-align:left;">
+Essendon
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+W
+</td>
+<td style="text-align:right;">
+1.44
+</td>
+<td style="text-align:left;">
+Y
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2023
+</td>
+<td style="text-align:left;">
+R16
+</td>
+<td style="text-align:left;">
+Carlton
+</td>
+<td style="text-align:left;">
+Away.Team
+</td>
+<td style="text-align:left;">
+Hawthorn
+</td>
+<td style="text-align:right;">
+60
+</td>
+<td style="text-align:left;">
+W
+</td>
+<td style="text-align:right;">
+1.34
+</td>
+<td style="text-align:left;">
+Y
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2023
+</td>
+<td style="text-align:left;">
+R16
+</td>
+<td style="text-align:left;">
+GWS
+</td>
+<td style="text-align:left;">
+Away.Team
+</td>
+<td style="text-align:left;">
+Melbourne
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+W
+</td>
+<td style="text-align:right;">
+2.88
 </td>
 <td style="text-align:left;">
 N

@@ -588,6 +588,8 @@ post_bye_games %>%
 
 ## Comparison of expected results with other games
 
+IN PROGRESS
+
 We might ask: is the proportion of post-bye games with unexpected results very different to other games?
 
 The question then is: with which "other games" should we compare? Some ideas are:
@@ -684,17 +686,18 @@ So far this year, teams coming off the bye own a pitiful 2-10 win-loss record fr
 Of those dozen matches, only two have featured both teams coming off the bye - Sydney v St Kilda in Round 13 and Collingwood v Adelaide in Round 15.
 Let’s take those results out of it and it’s 0-8 for teams coming off the bye playing a non-bye team that week.
 
-All of that is quite correct. However, when we look at the eight post-bye losses, only two of the teams were expected to win, and one of those teams was playing away. 
+All of that is quite correct. However, when we look at the eight post-bye losses to R14, only two of the teams were expected to win, and one of those teams was playing away.
+
+The bye rounds for 2023 have since completed: of 14 teams coming off the bye, there were ten losses and four wins. The final tally is two unexpected losses and one unexpected win.
 
 ```{r compare-media-01}
 post_bye_games %>% 
-  filter(Season == 2023,
-         Date <= ymd("2023-06-25")) %>% 
+  filter(Season == 2023) %>% 
   group_by(Game) %>% 
   filter(n() == 1) %>% 
   ungroup() %>% 
   select(Season, Round, Team, HA.Name, Opponent, Margin, Result, Odds, Favourite) %>%  
-  kbl(caption = "Season 2023 post-bye games to R14") %>% 
+  kbl(caption = "Season 2023 post-bye games") %>% 
   kable_styling(bootstrap_options = c("striped", "compact"))
 ```
 
