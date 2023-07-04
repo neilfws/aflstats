@@ -367,25 +367,25 @@ When we look at post-bye results by expected result, it's clear that a majority 
 
 ```{r post-bye-expected-result}
 post_bye_games %>% 
-  group_by(Game) %>% 
-  filter(n() == 1) %>% 
-  ungroup() %>% 
-  count(Favourite, Result) %>% 
-  mutate(Result = recode(Result, W = "Win", L = "Loss"),
-         Result = fct_relevel(Result, "Win", "Loss"),
-         Favourite = recode(Favourite, Y = "Yes", N = "No"),
-         Favourite = fct_relevel(Favourite, "Yes", "No")) %>% 
-  ggplot(aes(Favourite, n, fill = Result)) + 
-  geom_col() + 
-  geom_text(aes(label = n), 
-            color = "white",
-            position = position_stack(vjust = 0.5)) +
-  labs(x = "Favourite", 
-       y = "Count", 
-       title = "Results for AFL teams coming off a bye by expected result", 
-       subtitle = paste0("2011-", current_year)) +
-  scale_fill_brewer(palette = "Set1") +
-  theme(legend.position = "top")
+    group_by(Game) %>% 
+    filter(n() == 1) %>% 
+    ungroup() %>% 
+    count(Favourite, Result) %>% 
+    mutate(Result = recode(Result, W = "Win", L = "Loss"),
+           Result = fct_relevel(Result, "Win", "Loss"),
+           Favourite = recode(Favourite, Y = "Yes", N = "No"),
+           Favourite = fct_relevel(Favourite, "Yes", "No")) %>% 
+    ggplot(aes(Result, n, fill = Favourite)) + 
+    geom_col() + 
+    geom_text(aes(label = n), 
+              color = "white",
+              position = position_stack(vjust = 0.5)) +
+    labs(x = "Result", 
+         y = "Count", 
+         title = "Results for AFL teams coming off a bye by expected result", 
+         subtitle = paste0("2011-", current_year)) +
+    scale_fill_brewer(palette = "Set1") +
+    theme(legend.position = "top")
 ```
 
 ### By season
@@ -424,9 +424,9 @@ post_bye_games %>%
          Result = fct_relevel(Result, "Win", "Loss"),
          Favourite = recode(Favourite, Y = "Yes", N = "No"),
          Favourite = fct_relevel(Favourite, "Yes", "No")) %>% 
-  ggplot(aes(Favourite, n)) + 
-  geom_col(aes(fill = Result)) + 
-  labs(x = "Favourite", 
+  ggplot(aes(Result, n, fill = Favourite)) + 
+  geom_col() + 
+  labs(x = "Result", 
        y = "Count", 
        title = "Results for AFL teams coming off a bye by season and expected result", 
        subtitle = paste0("2011-", current_year)) +
@@ -475,9 +475,9 @@ post_bye_games %>%
          Result = fct_relevel(Result, "Win", "Loss"),
          Favourite = recode(Favourite, Y = "Yes", N = "No"),
          Favourite = fct_relevel(Favourite, "Yes", "No")) %>% 
-  ggplot(aes(Favourite, n)) + 
-  geom_col(aes(fill = Result)) + 
-  labs(x = "Favourite", 
+  ggplot(aes(Result, n, fill = Favourite)) + 
+  geom_col() + 
+  labs(x = "Result", 
        y = "Count", 
        title = "Results for AFL teams coming off a bye by team and expected result", 
        subtitle = paste0("2011-", current_year)) +
