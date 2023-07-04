@@ -1,7 +1,7 @@
 ---
 title: 'AFL: post-bye results'
 author: "Neil Saunders"
-date: "`r Sys.time()`"
+date: "`r format(Sys.time(), '%Y-%m-%d %H:%M:%S')`"
 output:
   github_document:
     toc: true
