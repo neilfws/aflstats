@@ -220,7 +220,7 @@ afl_byes %>%
 
 ### Post-bye rounds by teams coming off the bye
 
-Post-bye ames might feature one or both teams coming off a bye. If the bye were a factor influencing the post-bye game, we might assume the effect would be stronger when only one team comes off a bye.
+Post-bye games might feature one or both teams coming off a bye. If the bye were a factor influencing the post-bye game, we might assume the effect would be stronger when only one team comes off a bye.
 
 In most seasons (disregarding 2011) there are 2-5 games where both teams come off a bye, but the majority involve one post-bye team.
 
