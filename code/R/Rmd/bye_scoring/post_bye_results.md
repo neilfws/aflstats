@@ -1,7 +1,7 @@
 AFL: post-bye results
 ================
 Neil Saunders
-2023-07-04 12:46:10
+2023-07-04 12:57:51
 
 - [Summary](#summary)
 - [Data](#data)
@@ -74,8 +74,8 @@ Then:
   data, add margins and results
 - join with pivoted results data to add the opponent team
 
-The final dataset `post_bye_games` looks like this. It gets written to
-CSV.
+The final dataset `post_bye_games` looks like this. It gets [written to
+CSV](https://github.com/neilfws/aflstats/blob/master/data/afl_byes.csv).
 
     ## Rows: 250
     ## Columns: 16

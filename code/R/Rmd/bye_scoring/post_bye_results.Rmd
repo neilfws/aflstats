@@ -127,7 +127,7 @@ post_bye_games <- afldata %>%
   select(-HA.Name.y)
 ```
 
-The final dataset `post_bye_games` looks like this. It gets written to CSV.
+The final dataset `post_bye_games` looks like this. It gets [written to CSV](https://github.com/neilfws/aflstats/blob/master/data/afl_byes.csv).
 
 ```{r glimpse-byes-dataset-csv}
 post_bye_games %>% 
