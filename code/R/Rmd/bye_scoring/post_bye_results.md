@@ -1,7 +1,7 @@
 AFL: post-bye results
 ================
 Neil Saunders
-2023-07-04 12:57:51
+2023-07-04 14:24:32
 
 - [Summary](#summary)
 - [Data](#data)
@@ -30,7 +30,8 @@ Neil Saunders
   - [Comparison to media articles](#comparison-to-media-articles)
     - [SEN June 25 2023](#sen-june-25-2023)
     - [AFL June 6 2023](#afl-june-6-2023)
-    - [The Age](#the-age)
+    - [The Age July 1 2023](#the-age-july-1-2023)
+    - [AFL July 3 2023](#afl-july-3-2023)
 
 # Summary
 
@@ -524,12 +525,17 @@ compare.
 [The numbers that don’t bode well for the weekend’s bye
 teams](https://www.sen.com.au/news/2023/06/25/the-numbers-that-dont-bode-well-for-the-weekends-bye-teams/)
 
-> Who is a fan of the bye? So far this year, teams coming off the bye
-> own a pitiful 2-10 win-loss record from 12 matches. Of those dozen
-> matches, only two have featured both teams coming off the bye - Sydney
-> v St Kilda in Round 13 and Collingwood v Adelaide in Round 15. Let’s
-> take those results out of it and it’s 0-8 for teams coming off the bye
-> playing a non-bye team that week.
+> Who is a fan of the bye?
+>
+> So far this year, teams coming off the bye own a pitiful 2-10 win-loss
+> record from 12 matches.
+>
+> Of those dozen matches, only two have featured both teams coming off
+> the bye - Sydney v St Kilda in Round 13 and Collingwood v Adelaide in
+> Round 15.
+>
+> Let’s take those results out of it and it’s 0-8 for teams coming off
+> the bye playing a non-bye team that week.
 
 All of that is quite correct. However, when we look at the eight
 post-bye losses to R14, only two of the teams were expected to win, and
@@ -989,12 +995,15 @@ N
 [Beware the bye: How your club fares after its mid-season
 break](https://www.afl.com.au/news/944914/beware-the-bye-how-your-club-fares-after-its-mid-season-break)
 
-> EVERY team should beware their mid-season bye. Statistics show that
-> over the past 10 years not one club has mastered how to come out the
-> other side of their week off with consistent success. In fact, just
-> four clubs hold a winning record over that period in their first match
-> after the break, with Fremantle, Hawthorn, Richmond and St Kilda all
-> sporting a 6-4 win-loss mark since 2013.
+> EVERY team should beware their mid-season bye.
+>
+> Statistics show that over the past 10 years not one club has mastered
+> how to come out the other side of their week off with consistent
+> success.
+>
+> In fact, just four clubs hold a winning record over that period in
+> their first match after the break, with Fremantle, Hawthorn, Richmond
+> and St Kilda all sporting a 6-4 win-loss mark since 2013.
 
 The AFL article looks at post-bye win-loss records 2013-2022.
 
@@ -1402,10 +1411,9 @@ Western Bulldogs
 </tbody>
 </table>
 
-### The Age
+### The Age July 1 2023
 
-The Age [Beveridge’s Bulldogs have eye on high-flying Pies after bucking
-bye
+[Beveridge’s Bulldogs have eye on high-flying Pies after bucking bye
 curse](https://www.theage.com.au/sport/afl/western-bulldogs-buck-bye-curse-with-a-bang-against-slow-firing-fremantle-dockers-20230701-p5dl00.html)
 
 It’s not clear what the “bye curse” refers to in this article, since it
@@ -1722,3 +1730,40 @@ Y
 </tr>
 </tbody>
 </table>
+
+### AFL July 3 2023
+
+[The verdict is in: How the post-bye blues affected your team in
+2023](https://www.afl.com.au/news/962645/the-verdict-is-in-how-the-post-bye-blues-affected-your-team-in-2023)
+
+The AFL website is back for another try.
+
+> NO MATTER which way you cut the numbers, playing after the mid-season
+> bye proved a disadvantage in 2023.
+>
+> From the moment Hawthorn ran the legs off Brisbane at the MCG in round
+> 13, by-and-large the teams that were rested, were indeed rusty the
+> following week.
+>
+> Of the 14 occasions in which a team coming off the bye played a team
+> that had competing the week before, the latter won 10 times.
+>
+> Digging a little deeper, and the numbers were not skewed to
+> ‘favourites’ losing after their break.
+>
+> In fact, of the 10 losses, five of them were by teams ranked higher
+> entering the round.
+
+Well, at least this time they are only looking at the games where one
+team came off a bye.
+
+“Numbers not skewed to ‘favourites’ losing” is confusing: why is
+favourites in quotes, and wouldn’t the more relevant skew be due to
+non-favourites losing?
+
+Using teams ladder ranking (presumably) as a measure of the favourite
+rather than odds seems questionable and only results in a 5-5 win-loss
+split, so is not very informative.
+
+We have already summarise the results for 2023 in the section “SEN June
+25 2023”, above.
