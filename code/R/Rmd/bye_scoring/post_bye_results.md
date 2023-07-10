@@ -1,7 +1,7 @@
 AFL: post-bye results
 ================
 Neil Saunders
-2023-07-04 15:57:19
+2023-07-10 12:07:08
 
 - [Summary](#summary)
 - [Data](#data)
@@ -153,8 +153,8 @@ Let’s start looking at wins and losses in post-bye games.
 In the following sections we look only at games where one team comes off
 a bye.
 
-We also omit season 2011 so as to keep the focus on mid-season byes with
-18 teams.
+We also omit season 2011 and COVID-affected season 2020, so as to keep
+the focus on mid-season byes with 18 teams.
 
 ### Distribution of margins by expected result
 
@@ -210,10 +210,10 @@ Home.Team
 Loss
 </td>
 <td style="text-align:right;">
-59
+58
 </td>
 <td style="text-align:right;">
-23
+21
 </td>
 </tr>
 <tr>
@@ -221,10 +221,10 @@ Loss
 Win
 </td>
 <td style="text-align:right;">
-29
+27
 </td>
 <td style="text-align:right;">
-33
+28
 </td>
 </tr>
 </tbody>
@@ -255,16 +255,16 @@ alternative
 <tbody>
 <tr>
 <td style="text-align:right;">
-2.896154
+2.840623
 </td>
 <td style="text-align:right;">
-0.0031984
+0.0060125
 </td>
 <td style="text-align:right;">
-1.379455
+1.301022
 </td>
 <td style="text-align:right;">
-6.197092
+6.321085
 </td>
 <td style="text-align:left;">
 Fisher’s Exact Test for Count Data
@@ -395,7 +395,7 @@ idea about what makes a good comparison.
 
 <table>
 <caption>
-Game results by favourite 2012-2023
+Game results by favourite 2012-2023 (2020 omitted)
 </caption>
 <thead>
 <tr>
@@ -437,82 +437,82 @@ No/Win
 <tbody>
 <tr>
 <td style="text-align:left;">
-Post-bye games 2012-2023
+Post-bye games
+</td>
+<td style="text-align:right;">
+43
+</td>
+<td style="text-align:right;">
+58
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+24.63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+All non-post-bye games
+</td>
+<td style="text-align:right;">
+879
+</td>
+<td style="text-align:right;">
+543
+</td>
+<td style="text-align:right;">
+345
+</td>
+<td style="text-align:right;">
+263
+</td>
+<td style="text-align:right;">
+29.95
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Same round non-post-bye games
 </td>
 <td style="text-align:right;">
 48
 </td>
 <td style="text-align:right;">
-60
+26
 </td>
 <td style="text-align:right;">
-22
+16
 </td>
 <td style="text-align:right;">
-14
+9
 </td>
 <td style="text-align:right;">
-25.00
+25.25
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-All non-post-bye games 2012-2023
-</td>
-<td style="text-align:right;">
-937
-</td>
-<td style="text-align:right;">
-584
-</td>
-<td style="text-align:right;">
-365
-</td>
-<td style="text-align:right;">
-281
-</td>
-<td style="text-align:right;">
-29.81
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Same round non-post-bye games 2012-2023
-</td>
-<td style="text-align:right;">
-64
+Same date non-post-bye games
 </td>
 <td style="text-align:right;">
 32
 </td>
 <td style="text-align:right;">
-22
-</td>
-<td style="text-align:right;">
-15
-</td>
-<td style="text-align:right;">
-27.82
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Same date non-post-bye games 2012-2023
-</td>
-<td style="text-align:right;">
-38
-</td>
-<td style="text-align:right;">
-18
+17
 </td>
 <td style="text-align:right;">
 7
 </td>
 <td style="text-align:right;">
-8
+7
 </td>
 <td style="text-align:right;">
-21.13
+22.22
 </td>
 </tr>
 </tbody>
@@ -1428,10 +1428,10 @@ However, it does say:
 > team to bounce back from the bye and buck the mid-season trend of
 > teams losing upon their return
 
-So let’s focus on only mid-season byes (2012-2023), where the Bulldogs
-were the only team coming off the bye.
+So let’s focus on only mid-season byes (2012-2023, not 2020), where the
+Bulldogs were the only team coming off the bye.
 
-Their record is 5-4 (wins-losses) and they were not favourites to win in
+Their record is 4-4 (wins-losses) and they were not favourites to win in
 any of the four losses.
 
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
@@ -1610,35 +1610,6 @@ W
 </td>
 <td style="text-align:right;">
 1.49
-</td>
-<td style="text-align:left;">
-Y
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2020
-</td>
-<td style="text-align:left;">
-R16
-</td>
-<td style="text-align:left;">
-Western Bulldogs
-</td>
-<td style="text-align:left;">
-Home.Team
-</td>
-<td style="text-align:left;">
-West Coast
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-W
-</td>
-<td style="text-align:right;">
-1.72
 </td>
 <td style="text-align:left;">
 Y
