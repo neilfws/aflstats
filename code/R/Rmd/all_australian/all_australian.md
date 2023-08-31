@@ -2,7 +2,7 @@ All-Australian Team Statistics
 ================
 Neil Saunders
   
-compiled 2023-08-31 20:50:09
+compiled 2023-08-31 21:07:08
 
 # Summary
 
@@ -4056,7 +4056,7 @@ Adelaide Crows
 
 Any obvious trends in age, height or weight?
 
-More AA recent players (2005 onwards) are taller on average, though
+More recent AA players (2005 onwards) are taller on average, though
 there has been a small decline in the most recent years.
 
 ![](figures/plot-variables-1.png)<!-- -->

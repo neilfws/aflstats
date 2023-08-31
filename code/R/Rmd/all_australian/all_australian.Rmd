@@ -248,7 +248,7 @@ all_australian_players %>%
 
 Any obvious trends in age, height or weight?
 
-More AA recent players (2005 onwards) are taller on average, though there has been a small decline in the most recent years.
+More recent AA players (2005 onwards) are taller on average, though there has been a small decline in the most recent years.
 
 ```{r plot-variables}
 all_australian_players %>% 
