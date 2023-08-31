@@ -1,0 +1,380 @@
+---
+title: "All-Australian Team Statistics"
+author: "Neil Saunders"
+date: "\\\ncompiled `r format(Sys.time(), '%Y-%m-%d %H:%M:%S')`"
+output: 
+  github_document:
+    fig_width: 9
+    fig_height: 6
+always_allow_html: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.path = "figures/")
+
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+theme_set(theme_bw())
+```
+
+# Summary
+A look at some of the numbers around All-Australian (AA) AFL teams.
+
+# Data
+We start from the CSV file `all_australian_players.csv`. See the Appendix for how it was generated.
+
+We do some additional processing to extract the team name and unique player name from the `href`.
+
+Ages are calculated at the end of the year in which AA status was awarded.
+
+```{r read-data}
+all_australian_players <- read_csv("../../../../data/all_australian_players.csv")
+
+all_australian_players <- all_australian_players %>% 
+  mutate(team = str_match(href, "pp-(.*?)--")[, 2],
+         player = str_match(href, "--(.*?)$")[, 2])
+
+all_australian_players %>% 
+  glimpse(width = 160)
+```
+
+# Analysis
+
+## Most Awards
+
+### By team
+
+This count includes players awarded AA for the team in multiple years.
+
+```{r count-team}
+all_australian_players %>% 
+  count(team, sort = TRUE) %>% 
+  mutate(team = str_to_title(team) %>% str_replace_all(., "-", " ")) %>% 
+  ggplot(aes(reorder(team, n), n)) +
+  geom_col(fill = "skyblue4") +
+  coord_flip() +
+  labs(x = "Team",
+       y = "Count",
+       title = "Total AA players by team",
+       subtitle = "includes multiple award winners")
+```
+
+This count only counts one AA award per player per team.
+
+```{r count-distinct-team}
+all_australian_players %>%
+  distinct(team, player) %>% 
+  count(team, sort = TRUE) %>% 
+  mutate(team = str_to_title(team) %>% str_replace_all(., "-", " ")) %>% 
+  ggplot(aes(reorder(team, n), n)) +
+  geom_col(fill = "skyblue4") +
+  coord_flip() +
+  labs(x = "Team",
+       y = "Count",
+       title = "Total AA players by team",
+       subtitle = "distinct player and team")
+```
+
+### By team and season
+
+Geelong's dominance in the late 2000s is apparent.
+
+```{r count-team-season}
+all_australian_players %>% 
+  count(season, team, sort = TRUE) %>% 
+  mutate(team = str_to_title(team) %>% 
+           str_replace_all(., "-", " ")) %>% 
+  ggplot(aes(season, fct_relevel(team, rev))) +
+  geom_tile(aes(fill = n)) +
+  coord_equal() +
+  scale_fill_viridis_c(breaks = seq(1,9,2)) +
+  labs(x = "Season",
+       y = "Team",
+       title = "AA player count by season and team")
+```
+
+### By player
+
+Players with 5+ AA awards.
+
+```{r count-player}
+all_australian_players %>% 
+  count(player, sort = TRUE) %>% 
+  filter(n > 4) %>% 
+  mutate(player = str_to_title(player) %>% str_replace_all(., "-", " ")) %>% 
+  ggplot(aes(reorder(player, n), n)) +
+  geom_col(fill = "skyblue4") +
+  coord_flip() +
+  labs(x = "Count",
+       y = "Player",
+       title = "AA awards by player",
+       subtitle = "Players with 5+ awards")
+```
+
+### By player and team
+
+Players with 5+ AA awards for one team. This drops some prominent players _e.g._ Gary Ablett Jnr. and Lance Franklin, who each had 4 awards at 2 different clubs for 8 total. 
+
+```{r count-player-team}
+all_australian_players %>% 
+  count(player, team, sort = TRUE) %>% 
+  filter(n > 4) %>% 
+  mutate(player = str_to_title(player) %>% str_replace_all(., "-", " ")) %>% 
+  ggplot(aes(reorder(player, n), n)) +
+  geom_col(fill = "skyblue4") +
+  coord_flip() +
+  labs(x = "Count",
+       y = "Player",
+       title = "AA awards by player per team",
+       subtitle = "Players with 5+ awards for one or more teams")
+```
+
+
+## Player selection
+
+### Youngest
+
+The top 20 youngest AA players.
+
+```{r sort-age-youngest}
+all_australian_players %>% 
+  group_by(player) %>% 
+  filter(age_year_end_days == min(age_year_end_days)) %>% 
+  ungroup() %>% 
+  arrange(age_year_end_days) %>% 
+  slice(1:20) %>% 
+  select(-c(href, player)) %>% 
+  mutate(team = str_to_title(team) %>% str_replace_all(., "-", " ")) %>% 
+  kbl(caption = "20 youngest AA players by year first selected",
+      digits = 2) %>%
+  kable_styling(bootstrap_options = c("striped", "condensed"))
+```
+
+### Youngest by team
+
+The all-time youngest AA player by team.
+
+```{r sort-age-team-youngest}
+all_australian_players %>% 
+  group_by(team) %>% 
+  filter(age_year_end_days == min(age_year_end_days)) %>% 
+  ungroup() %>% 
+  select(-c(href, player)) %>% 
+  mutate(team = str_to_title(team) %>% str_replace_all(., "-", " ")) %>%
+  arrange(team) %>% 
+  kbl(caption = "Youngest AA player by team",
+      digits = 2) %>%
+  kable_styling(bootstrap_options = c("striped", "condensed"))
+```
+
+### Youngest by season
+
+The youngest AA player each season.
+
+```{r sort-age-season-youngest}
+all_australian_players %>% 
+  group_by(season) %>% 
+  filter(age_year_end_days == min(age_year_end_days)) %>% 
+  ungroup() %>% 
+  select(-c(href, player)) %>% 
+  mutate(team = str_to_title(team) %>% str_replace_all(., "-", " ")) %>%
+  arrange(season) %>% 
+  kbl(caption = "Youngest AA player by season",
+      digits = 2) %>%
+  kable_styling(bootstrap_options = c("striped", "condensed"))
+```
+
+
+### Oldest
+
+The top 20 oldest AA players.
+
+```{r sort-age-oldest}
+all_australian_players %>% 
+  group_by(player) %>% 
+  filter(age_year_end_days == max(age_year_end_days)) %>% 
+  ungroup() %>% 
+  arrange(desc(age_year_end_days)) %>% 
+  slice(1:20) %>% 
+  select(-c(href, player)) %>% 
+  mutate(team = str_to_title(team) %>% str_replace_all(., "-", " ")) %>% 
+  kbl(caption = "20 oldest AA players by year last selected",
+      digits = 2) %>%
+  kable_styling(bootstrap_options = c("striped", "condensed"))
+```
+
+### Oldest by team
+
+The all-time oldest AA player by team.
+
+```{r sort-age-team-oldest}
+all_australian_players %>% 
+  group_by(team) %>% 
+  filter(age_year_end_days == max(age_year_end_days)) %>% 
+  ungroup() %>% 
+  select(-c(href, player)) %>% 
+  mutate(team = str_to_title(team) %>% str_replace_all(., "-", " ")) %>%
+  arrange(team) %>% 
+  kbl(caption = "Oldest AA player by team",
+      digits = 2) %>%
+  kable_styling(bootstrap_options = c("striped", "condensed"))
+```
+
+
+### Oldest by season
+
+The oldest AA player each season.
+
+```{r sort-age-season-oldest}
+all_australian_players %>% 
+  group_by(season) %>% 
+  filter(age_year_end_days == max(age_year_end_days)) %>% 
+  ungroup() %>% 
+  select(-c(href, player)) %>% 
+  mutate(team = str_to_title(team) %>% str_replace_all(., "-", " ")) %>%
+  arrange(season) %>% 
+  kbl(caption = "Oldest AA player by season",
+      digits = 2) %>%
+  kable_styling(bootstrap_options = c("striped", "condensed"))
+```
+
+
+## Trends
+
+Any obvious trends in age, height or weight?
+
+More AA recent players (2005 onwards) are taller on average, though there has been a small decline in the most recent years.
+
+```{r plot-variables}
+all_australian_players %>% 
+  select(season, age_year_end_years, height, weight) %>% 
+  pivot_longer(-season) %>% 
+  ggplot(aes(season, value)) +
+  geom_jitter(aes(group = season),
+              size = 1,
+              color = "grey80",
+              width = 0.2) +
+  stat_summary(geom = "crossbar",
+               color = "red",
+               fun = mean) +
+  facet_grid(name ~ ., scales = "free_y")
+```
+
+
+```{r mean-min-variables}
+all_australian_players %>% 
+  group_by(season) %>% 
+  summarise(mean_age = mean(age_year_end_years), 
+            mean_height = mean(height), 
+            mean_weight = mean(weight)) %>% 
+  ungroup() %>% 
+  pivot_longer(-season) %>% 
+  group_by(name) %>% 
+  filter(value == min(value)) %>% 
+  ungroup() %>% 
+  arrange(name) %>% 
+  kbl(caption = "Season with the youngest, shortest and lightest AA team",
+      digits = 2) %>% 
+  kable_styling(bootstrap_options = c("striped", "condensed"))
+```
+
+
+```{r mean-max-variables}
+all_australian_players %>% 
+  group_by(season) %>% 
+  summarise(mean_age = mean(age_year_end_years), 
+            mean_height = mean(height), 
+            mean_weight = mean(weight)) %>% 
+  ungroup() %>% 
+  pivot_longer(-season) %>% 
+  group_by(name) %>% 
+  filter(value == max(value)) %>% 
+  ungroup() %>% 
+  arrange(name) %>% 
+  kbl(caption = "Season with the oldest, tallest, heaviest AA team",
+      digits = 2) %>% 
+  kable_styling(bootstrap_options = c("striped", "condensed"))
+```
+
+## Sydney Swans
+
+Special interest :)
+
+All Swans AA players.
+
+```{r sydney-swans}
+all_australian_players %>% 
+  filter(str_detect(team, "sydney-swans")) %>%
+  select(-c(href, player, team)) %>% 
+  arrange(season) %>% 
+  kbl(caption = "All Sydney Swans AA players",
+      digits = 2) %>%
+  kable_styling(bootstrap_options = c("striped", "condensed"))
+```
+
+# Appendix
+
+Creating the AA players dataset.
+
+```{r echo=TRUE, eval=FALSE}
+## get Footywire AA players by season
+get_aa <- function(season) {
+  aa <- read_html(paste0("https://www.footywire.com/afl/footy/all_australian_selection?year=", season))
+  
+  n <- case_when(
+    season > 1997 ~ 22,
+    between(season, 1994, 1997) ~ 21,
+    between(season, 1991, 1993) ~ 20
+  )
+  
+  aa_df <- tibble(
+    season = season,
+    href = aa %>%
+      html_nodes("a") %>% 
+      html_attr("href") %>% 
+      .[str_detect(., "^pp")] %>% 
+      .[1:n])
+  
+  aa_df
+}
+
+## get player Footywire data using an href
+get_player_data <- function(href) {
+  print(href)
+  u <- paste0("https://www.footywire.com/afl/footy/", href)
+  p <- read_html(u)
+  
+  player <- tibble(
+    name = p %>% html_node("#playerProfileName") %>% html_text(),
+    dob = p %>% html_node("#playerProfileData1") %>% html_text() %>% str_match(., "Born: (.*?\\d{4}) ") %>% .[, 2] %>% mdy(),
+    height = p %>% html_node("#playerProfileData2") %>% html_text() %>% str_match(., "Height: (.*?)cm") %>% .[, 2] %>% as.numeric(),
+    weight = p %>% html_node("#playerProfileData2") %>% html_text() %>% str_match(., "Weight: (.*?)kg") %>% .[, 2] %>% as.numeric(),
+  )
+  
+  player
+}
+
+# start by creating a data frame with seasons and the AA team nested
+# then unnest to get 2 columns: season and href (link to the players)
+all_australian_players <- tibble(
+  season = 1991:2022
+) %>% 
+  mutate(aa = map(season, get_aa)) %>% 
+  select(-season) %>% 
+  unnest(aa)
+
+# then use href to get player data nested
+# and unnest again
+# finally calculate the ages from dob and season
+# can then write to all_australian_players.csv
+all_australian_players <- all_australian_players %>% 
+  mutate(data = map(href, get_player_data)) %>% 
+  unnest(data) %>% 
+  mutate(age_year_end_days = as.numeric(ymd(paste(season, 12, 31)) - dob), 
+         age_year_end_years = age_year_end_days / 365)
+```
