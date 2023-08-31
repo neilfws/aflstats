@@ -16,6 +16,7 @@ Located in `code/R/Rmd`.
 1. [Geelong and the bye](https://github.com/neilfws/aflstats/blob/master/code/R/Rmd/bye_scoring/bye_scoring.md)
 1. [Post-bye games visualisation and analysis](https://github.com/neilfws/aflstats/blob/master/code/R/Rmd/bye_scoring/post_bye_results.md)
 1. [Returning coaches](https://github.com/neilfws/aflstats/blob/master/code/R/Rmd/returning_coaches/returning_coaches.md)
+1. [All-Australian][https://github.com/neilfws/aflstats/blob/master/code/R/Rmd/all_australian/all_australian.md]
 
 ## Scripts
 Located in `code/R/scripts`.
