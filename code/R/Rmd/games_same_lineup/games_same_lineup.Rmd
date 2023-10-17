@@ -17,7 +17,7 @@ library(knitr)
 library(kableExtra)
 
 # get data
-afldata <- fitzRoy::get_fryzigg_stats()
+afldata <- fitzRoy::fetch_player_stats_fryzigg(1897:2023)
 
 join_teams <- function(first_team, last_team) {
 
@@ -143,7 +143,7 @@ If two teams of the same players play each other, then the match ID appears twic
 
 If those teams play more than one game against each other then an ordered string composed of all players from both teams should be counted more than once.
 
-If we got this correct: it seems that 99 games have involved two teams of players which have played in other games, but never more than once against each other. In other words the same two opposing lineups have never played each other more than once.
+If we got this correct: it seems that 102 games have involved two teams of players which have played in other games, but never more than once against each other. In other words the same two opposing lineups have never played each other more than once.
 
 ```{r}
 games_same_lineup %>% 

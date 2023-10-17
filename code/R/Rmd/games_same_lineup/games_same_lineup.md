@@ -1,7 +1,7 @@
 How often has the same team lineup played a game of V/AFL?
 ================
 Neil Saunders
-compiled 2022-03-28 12:09:07
+compiled 2023-10-17 22:07:10.668476
 
 # Summary
 
@@ -10,7 +10,7 @@ made up of the same players played in a game?
 
 # Generate and count the lineups
 
-We start with a dataset of 15992 V/AFL games, obtained using
+We start with a dataset of 16406 V/AFL games, obtained using
 `fitzRoy::get_fryzigg_stats()` (which is deprecated but does what we
 want - gets all games in one call).
 
@@ -45,7 +45,7 @@ games_same_lineup <- afldata %>%
   inner_join(lineup_multiple_games)
 ```
 
-There are 2408 games featuring the same lineup at least twice.
+There are 2474 games featuring the same lineup at least twice.
 
 # Analysis
 
@@ -322,7 +322,7 @@ games
 23
 </td>
 <td style="text-align:right;">
-23
+89
 </td>
 </tr>
 </tbody>
@@ -844,7 +844,7 @@ If those teams play more than one game against each other then an
 ordered string composed of all players from both teams should be counted
 more than once.
 
-If we got this correct: it seems that 99 games have involved two teams
+If we got this correct: it seems that 102 games have involved two teams
 of players which have played in other games, but never more than once
 against each other. In other words the same two opposing lineups have
 never played each other more than once.
@@ -878,7 +878,7 @@ n
 1
 </td>
 <td style="text-align:right;">
-99
+102
 </td>
 </tr>
 </tbody>
