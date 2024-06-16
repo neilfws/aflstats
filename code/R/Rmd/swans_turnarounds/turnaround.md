@@ -1,14 +1,14 @@
 Sydney Swans/South Melbourne greatest (and worst) Q4 turnarounds
 ================
 Neil Saunders
-compiled 2021-12-16 15:29:12
+compiled 2024-06-17 08:18:52.520478
 
--   [Introduction](#introduction)
--   [Getting the data](#getting-the-data)
--   [Analysis](#analysis)
-    -   [Come from behind at Q3 to win](#come-from-behind-at-q3-to-win)
-    -   [Slip from in front at Q3 to
-        lose](#slip-from-in-front-at-q3-to-lose)
+- [Introduction](#introduction)
+- [Getting the data](#getting-the-data)
+- [Analysis](#analysis)
+  - [Come from behind at Q3 to win](#come-from-behind-at-q3-to-win)
+  - [Slip from in front at Q3 to
+    lose](#slip-from-in-front-at-q3-to-lose)
 
 # Introduction
 
@@ -21,7 +21,7 @@ case, what were the biggest swings in the scoreline?
 We download and process Swans game data from [AFL
 Tables](http://afltables.com).
 
-There are currently 2492 of them.
+There are currently 2554 of them.
 
 # Analysis
 
@@ -37,6 +37,7 @@ The top 10:
 |:-------------------:|:---:|:----:|:--------------:|:--------:|:------:|
 | 1995-04-30 14:15:00 | R5  |  H   |    Adelaide    |   -17    |   57   |
 | 2002-08-10 19:10:00 | R19 |  A   |   Kangaroos    |   -11    |   47   |
+| 2022-04-25 12:30:00 | R6  |  A   |    Hawthorn    |    -9    |   41   |
 | 1915-06-12 15:00:00 | R8  |  H   |    Geelong     |   -29    |   18   |
 | 2015-04-04 16:35:00 | R1  |  H   |    Essendon    |   -34    |   12   |
 | 1987-04-25 14:10:00 | R5  |  A   |    Richmond    |   -26    |   20   |
@@ -47,7 +48,7 @@ The top 10:
 | 1958-07-19 14:15:00 | R13 |  H   |    Fitzroy     |   -12    |   32   |
 | 1933-09-16 14:30:00 | SF  |  F   |    Richmond    |   -26    |   18   |
 
-They’ve come from behind in Q3 to win 181 times.
+They’ve come from behind in Q3 to win 186 times.
 
 ## Slip from in front at Q3 to lose
 
@@ -67,4 +68,4 @@ margin is positive at the end of Q3, but the result is a loss.
 | 2004-08-07 19:10:00 | R19 |  H   |    Kangaroos    |    40    |   -6   |
 | 1937-06-05 14:30:00 | R7  |  A   |    Essendon     |    12    |  -32   |
 
-They’ve thrown it away in the last quarter 163 times.
+They’ve thrown it away in the last quarter 169 times.
