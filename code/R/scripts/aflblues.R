@@ -1,32 +1,28 @@
 library(tidyverse)
 library(fitzRoy)
 
-match_results <- lapply(2003:2021, function(x) fetch_results_afltables(x)) %>% 
-  bind_rows()
+afldata <- fetch_player_stats_afltables(season = 2003:year(Sys.Date()))
+
+match_results <- afldata %>% 
+  distinct(Season, Date, Round, Venue, Home.team, Home.score, Away.team, Away.score, Playing.for, Coach) %>% 
+  mutate(Margin = Home.score - Away.score,
+         Round.Type = ifelse(grepl("F", Round), "Finals", "Regular"))
 
 blues <- match_results %>% 
-  filter(Home.Team == "Carlton" | Away.Team == "Carlton",
-         Season > 2002,
+  filter(Playing.for == "Carlton",
          Round.Type == "Regular") %>% 
-  mutate(Percent = ifelse(Home.Team == "Carlton", 
-                          100 * (Home.Points/Away.Points), 
-                          100 * (Away.Points/Home.Points)),
-         Margin = ifelse(Home.Team == "Carlton",
+  mutate(Percent = ifelse(Home.team == "Carlton", 
+                          100 * (Home.score/Away.score), 
+                          100 * (Away.score/Home.score)),
+         Margin = ifelse(Home.team == "Carlton",
                          Margin,
-                         -Margin),
-         Coach = case_when(
-           between(Date, as.Date("2003-03-29"), as.Date("2007-07-22")) ~ "Pagan",
-           between(Date, as.Date("2007-07-28"), as.Date("2012-09-02")) ~ "Ratten",
-           between(Date, as.Date("2013-03-28"), as.Date("2015-05-22")) ~ "Malthouse",
-           between(Date, as.Date("2015-05-29"), as.Date("2015-09-05")) ~ "Barker",
-           between(Date, as.Date("2016-03-24"), as.Date("2019-06-02")) ~ "Bolton",
-           between(Date, as.Date("2019-06-08"), Sys.Date()) ~ "Teague"
-         )) %>% 
-  mutate(Coach = factor(Coach, levels = c("Pagan", "Ratten", "Malthouse", "Barker", "Bolton", "Teague")))
+                         -Margin))
 
+# doesn't fill as may be > 1 coach/season
 blues %>% 
-  ggplot(aes(factor(Season), Percent)) + 
-    geom_boxplot(aes(fill = Coach))  + 
+  ggplot(aes(Season, Percent)) + 
+    geom_boxplot(aes(fill = Coach,
+                     group = Season))  + 
     geom_hline(aes(yintercept = median(Percent))) + 
     scale_fill_brewer(palette = "Set2") + 
     labs(x = "Year", 
@@ -34,14 +30,55 @@ blues %>%
          title = "Carlton game percentages by season under different coaches") +
   theme_bw()
 
+# better
 blues %>% 
   ggplot(aes(Date, Margin)) + 
-  geom_point(aes(color = Coach)) + 
-  geom_hline(yintercept = 0, linetype = "dashed") + 
+  geom_point(
+    aes(color = Coach)
+    ) + 
+  geom_hline(
+    yintercept = 0, 
+    linetype = "dashed") +
   scale_color_brewer(palette = "Set2") + 
   labs(x = "Date", 
        y = "Margin", 
-       title = "Carlton game margins by coach 2003 - 2021", 
-       subtitle = "H&A season only, round 1 2003 - round 23 2021") +
+       title = "Carlton game margins by coach",
+       subtitle = paste0("2003 - ", year(Sys.Date()))) +
   theme_bw()
 
+# jitter
+blues %>% 
+  ggplot(aes(Season, Margin)) + 
+  geom_jitter(
+    aes(color = Coach),
+    width = 0.2
+  ) +
+  stat_summary(
+#    fun.y = mean,
+#    fun.ymin = mean,
+#    fun.ymax = mean,
+    fun.data = mean_cl_normal,
+    geom = "crossbar",
+    width = 0.5,
+    aes(color = Coach)
+  ) + 
+  geom_hline(
+    yintercept = 0, 
+    linetype = "dashed") +
+  scale_color_brewer(palette = "Set2") + 
+  labs(x = "Date", 
+       y = "Margin", 
+       title = "Carlton game margins by coach",
+       subtitle = paste0("2003 - ", year(Sys.Date()))) +
+  theme_bw()
+
+
++
+  stat_summary(
+    fun.y = mean,
+    fun.ymin = mean,
+    fun.ymax = mean,
+    geom = "crossbar",
+    width = 0.5,
+    aes(color = Coach)
+  )
