@@ -18,7 +18,7 @@ blues <- match_results %>%
          Margin = ifelse(Home.team == "Carlton",
                          Margin,
                          -Margin),
-         Coach = factor(Coach, levels = unique(blues$Coach)))
+         Coach = factor(Coach, levels = unique(.$Coach)))
 
 # doesn't fill as may be > 1 coach/season
 blues %>% 
