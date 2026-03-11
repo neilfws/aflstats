@@ -1,7 +1,7 @@
 library(tidyverse)
 library(fitzRoy)
 
-afldata <- fetch_player_stats_afltables(season = 2003:year(Sys.Date()))
+afldata <- fetch_player_stats_afltables(season = 1897:year(Sys.Date()))
 
 match_results <- afldata %>% 
   distinct(Season, Date, Round, Venue, Home.team, Home.score, Away.team, Away.score, Playing.for, Coach) %>% 
@@ -9,7 +9,8 @@ match_results <- afldata %>%
          Round.Type = ifelse(grepl("F", Round), "Finals", "Regular"))
 
 blues <- match_results %>% 
-  filter(Playing.for == "Carlton",
+  filter(Season > 1999,
+         Playing.for == "Carlton",
          Round.Type == "Regular") %>% 
   mutate(Percent = ifelse(Home.team == "Carlton", 
                           100 * (Home.score/Away.score), 
@@ -24,7 +25,7 @@ blues %>%
     geom_boxplot(aes(fill = Coach,
                      group = Season))  + 
     geom_hline(aes(yintercept = median(Percent))) + 
-    scale_fill_brewer(palette = "Set2") + 
+    scale_fill_viridis_d(option = "turbo") + 
     labs(x = "Year", 
          y = "Percentage", 
          title = "Carlton game percentages by season under different coaches") +
@@ -39,11 +40,11 @@ blues %>%
   geom_hline(
     yintercept = 0, 
     linetype = "dashed") +
-  scale_color_brewer(palette = "Set2") + 
+  scale_color_viridis_d(option = "turbo") + 
   labs(x = "Date", 
        y = "Margin", 
        title = "Carlton game margins by coach",
-       subtitle = paste0("2003 - ", year(Sys.Date()))) +
+       subtitle = paste0("2000 - ", year(Sys.Date()))) +
   theme_bw()
 
 # jitter
@@ -54,9 +55,6 @@ blues %>%
     width = 0.2
   ) +
   stat_summary(
-#    fun.y = mean,
-#    fun.ymin = mean,
-#    fun.ymax = mean,
     fun.data = mean_cl_normal,
     geom = "crossbar",
     width = 0.5,
@@ -65,20 +63,9 @@ blues %>%
   geom_hline(
     yintercept = 0, 
     linetype = "dashed") +
-  scale_color_brewer(palette = "Set2") + 
+  scale_color_viridis_d(option = "turbo") + 
   labs(x = "Date", 
        y = "Margin", 
        title = "Carlton game margins by coach",
-       subtitle = paste0("2003 - ", year(Sys.Date()))) +
+       subtitle = paste0("2000 - ", year(Sys.Date()))) +
   theme_bw()
-
-
-+
-  stat_summary(
-    fun.y = mean,
-    fun.ymin = mean,
-    fun.ymax = mean,
-    geom = "crossbar",
-    width = 0.5,
-    aes(color = Coach)
-  )
